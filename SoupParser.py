@@ -20,6 +20,11 @@ class parser:
         f.close()
 
     def print_pretty(self, file_name, file_ext):
+        """
+        pretty prints the html as (name)_pretty.(ext)
+        :param file_name: name
+        :param file_ext: extention
+        """
         orig_stdout = sys.stdout
         new_file = file_name + "_pretty" + file_ext
         f = open(new_file, 'w')
@@ -31,14 +36,14 @@ class parser:
         self.soup = BeautifulSoup(f.read())
         f.close()
 
-    def get_links(self):
-        orig_stdout = sys.stdout
-        f = open('links.txt', 'w')
-        sys.stdout = f
-        for link in self.soup.find_all('a'):
-            print(link.get('href'))
-        sys.stdout = orig_stdout
-        f.close()
+    # def get_links(self):
+    #     orig_stdout = sys.stdout
+    #     f = open('links.txt', 'w')
+    #     sys.stdout = f
+    #     for link in self.soup.find_all('a'):
+    #         print(link.get('href'))
+    #     sys.stdout = orig_stdout
+    #     f.close()
 
     def get_course(self):
         # orig_stdout = sys.stdout
@@ -64,56 +69,61 @@ class parser:
             prereq = descendants[2]
             print prereq.contents[0].strip()
         except:
-            print "Not Found"
+            print "Course Not Found"
 
-        # try:
-        #      misc = subject_infos[1].find_all("p", class_="portlet-padtop10")
-        #      descendants = subject_infos[1].find_all("p", class_="portlet-padtop10")
-        #      print misc
-        # except:
-        #     print "Misc Not Found"
-        #
-        # try:
-        #     extra = subject_infos[1].find_next_sibling("p", class_="portlet-padtop10")
-        #     print extra
-        # except:
-        #     print "Extra Not Found"
+        try:
+             misc = subject_infos[1].find_all("p", class_="portlet-padtop10")
+             descendants = subject_infos[1].find_all("p", class_="portlet-padtop10")
+             print misc[0].contents[0].strip()
+        except:
+            print "Misc Not Found"
 
-        table_struct = subject_infos[1].find_next_sibling("div", class_="portlet-container-flex")
-        table = table_struct.find_all("tbody")
-        # (table-item[^ ]*) ([^ ]+) (.*)
-        # doesnt match on space?
-        table_entrys = table[0].find_all("tr", class_=re.compile(r"^table-item$"))
-        table_entrys_info = table[0].find_all("tr", class_=re.compile(r"^table-item-detail"))
-        assert len(table_entrys) == len(table_entrys_info)
-        # print len(table_entrys)
-        # print len(table_entrys_info)
-        # length of the 2 should be the same
-        for entry, info in izip(table_entrys, table_entrys_info):
-            icon0 = entry.find_all("td", class_="w50")[0]
-            crn = entry.find_all("td", class_="w50")[1]
-            print crn.contents[1].contents[0].strip()
-            type = entry.find_all("td", class_="w80")[0]
-            print type.contents[1].contents[0].strip()
-            section = entry.find_all("td", class_="w55")[0]
-            print section.contents[2].strip()
-            days = entry.find_all("td", class_="w55")[1]
-            print days.contents[1].contents[0].strip()
-            time = entry.find_all("td", class_="w75")[0]
-            print time.contents[1].contents[0].strip()
-            location = entry.find_all("td", class_="w120")[0]
-            print location.contents[1].contents[0].strip()
+        try:
+            extra = subject_infos[1].find_next_sibling("p", class_="portlet-padtop10")
+            print extra.contents[1].contents[0].strip()
+            print extra.contents[1].contents[1].contents[0].strip()
+            print extra.contents[4].strip()
+        except:
+            print "Extra Not Found"
+
+        try:
+            table_struct = subject_infos[1].find_next_sibling("div", class_="portlet-container-flex")
+            table = table_struct.find_all("tbody")
+            # (table-item[^ ]*) ([^ ]+) (.*)
+            # doesnt match on space?
+            table_entrys = table[0].find_all("tr", class_=re.compile(r"^table-item$"))
+            table_entrys_info = table[0].find_all("tr", class_=re.compile(r"^table-item-detail"))
+            assert len(table_entrys) == len(table_entrys_info)
+            # print len(table_entrys)
+            # print len(table_entrys_info)
+            # length of the 2 should be the same
+            for entry, info in izip(table_entrys, table_entrys_info):
+                icon0 = entry.find_all("td", class_="w50")[0]
+                crn = entry.find_all("td", class_="w50")[1]
+                print crn.contents[1].contents[0].strip()
+                type = entry.find_all("td", class_="w80")[0]
+                print type.contents[1].contents[0].strip()
+                section = entry.find_all("td", class_="w55")[0]
+                print section.contents[2].strip()
+                days = entry.find_all("td", class_="w55")[1]
+                print days.contents[1].contents[0].strip()
+                time = entry.find_all("td", class_="w75")[0]
+                print time.contents[1].contents[0].strip()
+                location = entry.find_all("td", class_="w120")[0]
+                print location.contents[1].contents[0].strip()
+        except:
+            print "Course Details Not Found"
 
         # sys.stdout = orig_stdout
         # f.close()
 
-    def get_text(self, find):
-        orig_stdout = sys.stdout
-        f = open('text_find.txt', 'w')
-        sys.stdout = f
-        print self.soup.find_all(text=find)
-        sys.stdout = orig_stdout
-        f.close()
+    # def get_text(self, find):
+    #     orig_stdout = sys.stdout
+    #     f = open('text_find.txt', 'w')
+    #     sys.stdout = f
+    #     print self.soup.find_all(text=find)
+    #     sys.stdout = orig_stdout
+    #     f.close()
 
     # def print_data(self):
     #     orig_stdout = sys.stdout
@@ -123,11 +133,11 @@ class parser:
     #     sys.stdout = orig_stdout
     #     f.close()
 
-    def print_text(self):
-        orig_stdout = sys.stdout
-        f = open('text.txt', 'w')
-        sys.stdout = f
-        print self.soup.get_text().encode('utf-8')
-        sys.stdout = orig_stdout
-        f.close()
+    # def print_text(self):
+    #     orig_stdout = sys.stdout
+    #     f = open('text.txt', 'w')
+    #     sys.stdout = f
+    #     print self.soup.get_text().encode('utf-8')
+    #     sys.stdout = orig_stdout
+    #     f.close()
 # <p class="cis-section-title">CS 411</p>

@@ -6,7 +6,7 @@ import sys
 # python -c "import bs4 as bs; print(bs.__version__)"
 
 def main():
-    file = "cs411.html"
+    file = "cs125.html"
     scrap = SoupParser.parser(file)
 
     # scrap.get_links()
