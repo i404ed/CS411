@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html id = "loginHtml">
     <head>
+              <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
         <title>iCouSchelper! | Login</title>
         <meta name="generator" content="Bootply" />
@@ -8,6 +10,7 @@
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
         <link href="customize.css" rel="stylesheet">
         
+
         <style type="text/css">
             .modal-footer {   border-top: 0px; border-bottom: 0px}
         </style>
@@ -38,13 +41,14 @@
             <div class="modal-body">
                 <form class="form col-md-12 center-block">
                   <div class="form-group">
-                    <input type="text" class="form-control input-lg" placeholder="Email">
+                    <input type="text" class="form-control input-lg" placeholder="Email" id = "inputEmail">
                   </div>
                   <div class="form-group">
-                    <input type="password" class="form-control input-lg" placeholder="Password">
+                    <input type="password" class="form-control input-lg" placeholder="Password" id = "inputPassword">
                   </div>
                   <div class="form-group">
-                    <button class="btn btn-primary btn-lg btn-block">Sign In</button>
+                    <button class="btn btn-primary btn-lg btn-block" id = "signIn">Sign In</button>
+                    <script type="text/javascript" src="login.js"></script>
                     <span class="pull-right"><a href="signup.html">Register</a></span><span><a href="#">Need help?</a></span>
                   </div>
                 </form>
@@ -55,8 +59,7 @@
         </div>
       </div>
         
-        <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
         
     </body>
 </html>
