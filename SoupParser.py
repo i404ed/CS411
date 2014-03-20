@@ -17,6 +17,7 @@ class parser:
         self.soup = BeautifulSoup(f.read())
         file_name, file_ext = os.path.splitext(file)
         self.print_pretty(file_name, file_ext)
+        self.get_course(file_name, file_ext)
         f.close()
 
     def print_pretty(self, file_name, file_ext):
@@ -36,19 +37,12 @@ class parser:
         self.soup = BeautifulSoup(f.read())
         f.close()
 
-    # def get_links(self):
-    #     orig_stdout = sys.stdout
-    #     f = open('links.txt', 'w')
-    #     sys.stdout = f
-    #     for link in self.soup.find_all('a'):
-    #         print(link.get('href'))
-    #     sys.stdout = orig_stdout
-    #     f.close()
-
-    def get_course(self):
+    def get_course(self, file_name, file_ext):
         # orig_stdout = sys.stdout
-        # f = open('course.txt', 'w')
+        # new_file = file_name + "_parsed" + ".txt"
+        # f = open(new_file, 'w')
         # sys.stdout = f
+
         root = self.soup.find("div", class_="portlet-content-inner")
         # print root
         # title = root.find_all("p", class_="cis-section-title")
@@ -116,6 +110,15 @@ class parser:
 
         # sys.stdout = orig_stdout
         # f.close()
+
+    # def get_links(self):
+    #     orig_stdout = sys.stdout
+    #     f = open('links.txt', 'w')
+    #     sys.stdout = f
+    #     for link in self.soup.find_all('a'):
+    #         print(link.get('href'))
+    #     sys.stdout = orig_stdout
+    #     f.close()
 
     # def get_text(self, find):
     #     orig_stdout = sys.stdout

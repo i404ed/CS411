@@ -10,7 +10,7 @@ def main():
     scrap = SoupParser.parser(file)
 
     # scrap.get_links()
-    scrap.get_course()
+    # scrap.get_course()
     # scrap.get_text("CS 411")
     # scrap.print_data()
     # scrap.print_text()
