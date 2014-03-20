@@ -7,7 +7,7 @@ import sys
 # python -c "import bs4 as bs; print(bs.__version__)"
 
 def main():
-    file = "cs125.html"
+    file = "cs411.html"
     # file_name, file_ext = os.path.splitext(file)
     # orig_stdout = sys.stdout
     # new_file = file_name + "_parsed" + ".txt"
