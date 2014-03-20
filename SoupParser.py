@@ -39,10 +39,10 @@ class parser:
         f.close()
 
     def get_course(self, file_name, file_ext):
-        # orig_stdout = sys.stdout
-        # new_file = file_name + "_parsed" + ".txt"
-        # f = open(new_file, 'w')
-        # sys.stdout = f
+        orig_stdout = sys.stdout
+        new_file = file_name + "_parsed" + ".txt"
+        f = open(new_file, 'w')
+        sys.stdout = f
 
         root = self.soup.find("div", class_="portlet-content-inner")
         # print root
@@ -91,6 +91,7 @@ class parser:
             # print "Extra Not Found"
 
         # the schedule
+        # only crn is guaranteed to be single
         try:
             table_struct = subject_infos[1].find_next_sibling("div", class_="portlet-container-flex")
             table = table_struct.find_all("tbody")
@@ -98,8 +99,9 @@ class parser:
             # doesnt match on space?
             table_entrys = table[0].find_all("tr", class_=re.compile(r"^table-item$"))
             table_entrys_info = table[0].find_all("tr", class_=re.compile(r"^table-item-detail"))
-            assert len(table_entrys) == len(table_entrys_info)
+            # assert len(table_entrys) == len(table_entrys_info)
             # length of the 2 should be the same
+            # begin deciphering
             for entry, info in izip(table_entrys, table_entrys_info):
                 icon0 = entry.find_all("td", class_="w50")[0]
                 crn = entry.find_all("td", class_="w50")[1]
@@ -111,41 +113,72 @@ class parser:
                 days = entry.find_all("td", class_="w55")[1]
                 location = entry.find_all("td", class_="w120")[0]
                 instructors = entry.find_all("td", class_=re.compile(r"ie-table-width"))[0]
+                # print len(types)
+                # print len(section)
+                # print len(time)
+                # print len(days)
+                # print len(location)
+                # print len(instructors)
+                # they should all have the same length
 
+                # more pretty version of below i think
                 # takes care of paired classes like cs398
+                # types, sections, times, days, locations, teachers
                 try:
-                    print types.contents[1].contents[0].strip().encode('utf-8')
-                    print section.contents[2].strip().encode('utf-8')
-                    print time.contents[1].contents[0].strip().encode('utf-8')
-                    print days.contents[1].contents[0].strip().encode('utf-8')
-                    print location.contents[1].contents[0].strip().encode('utf-8')
-                    # takes care of multiple teachers
-                    for n in xrange(len(instructors.contents[1].contents)):
-                        if n % 2 == 0:
-                            try:
-                                if instructors.contents[1].contents[n].strip() != "":
-                                    print instructors.contents[1].contents[n].strip()
-                            except:
-                                pass
-                    try:
-                        print types.contents[3].contents[0].strip().encode('utf-8')
-                        print section.contents[4].strip().encode('utf-8')
-                        print time.contents[3].contents[0].strip().encode('utf-8')
-                        print days.contents[3].contents[0].strip().encode('utf-8')
-                        print location.contents[3].contents[0].strip().encode('utf-8')
-                        # takes care of multiple teachers
-                        for n in xrange(len(instructors.contents[1].contents)):
-                            if n % 2 == 0:
-                                try:
-                                    if instructors.contents[1].contents[n].strip() != "":
-                                        print instructors.contents[1].contents[n].strip()
-                                except:
-                                    pass
-                    except:
-                        pass
+                    for blocks in xrange(len(types)):
+                        if blocks % 2 == 0:
+                            print types.contents[blocks+1].contents[0].strip().encode('utf-8')
+                            print section.contents[blocks+2].strip().encode('utf-8')
+                            print time.contents[blocks+1].contents[0].strip().encode('utf-8')
+                            print days.contents[blocks+1].contents[0].strip().encode('utf-8')
+                            print location.contents[blocks+1].contents[0].strip().encode('utf-8')
+                            # takes care of multiple teachers
+                            for n in xrange(len(instructors.contents[blocks+1].contents)):
+                                if n % 2 == 0:
+                                    try:
+                                        # ignore blank lines
+                                        if instructors.contents[1].contents[n].strip() != "":
+                                            print instructors.contents[1].contents[n].strip()
+                                    except:
+                                        pass
                 except:
                     pass
 
+                # takes care of paired classes like cs398
+                # try:
+                #     print types.contents[1].contents[0].strip().encode('utf-8')
+                #     print section.contents[2].strip().encode('utf-8')
+                #     print time.contents[1].contents[0].strip().encode('utf-8')
+                #     print days.contents[1].contents[0].strip().encode('utf-8')
+                #     print location.contents[1].contents[0].strip().encode('utf-8')
+                #     # takes care of multiple teachers
+                #     for n in xrange(len(instructors.contents[1].contents)):
+                #         if n % 2 == 0:
+                #             try:
+                #                 if instructors.contents[1].contents[n].strip() != "":
+                #                     print instructors.contents[1].contents[n].strip()
+                #             except:
+                #                 pass
+                #     try:
+                #         print types.contents[3].contents[0].strip().encode('utf-8')
+                #         print section.contents[4].strip().encode('utf-8')
+                #         print time.contents[3].contents[0].strip().encode('utf-8')
+                #         print days.contents[3].contents[0].strip().encode('utf-8')
+                #         print location.contents[3].contents[0].strip().encode('utf-8')
+                #         # takes care of multiple teachers
+                #         for n in xrange(len(instructors.contents[1].contents)):
+                #             if n % 2 == 0:
+                #                 try:
+                #                     if instructors.contents[1].contents[n].strip() != "":
+                #                         print instructors.contents[1].contents[n].strip()
+                #                 except:
+                #                     pass
+                #     except:
+                #         pass
+                # except:
+                #     pass
+
+                # prototye of above
                 # for block in section:
                 #     print block.contents[1].contents[0].strip().encode('utf-8')
                 #     try:
@@ -153,16 +186,22 @@ class parser:
                 #     except:
                 #         pass
 
-            details_list = info.find_all("div", class_="yui3-g")
-            for details in details_list:
-                print details.contents[1].contents[0].strip().encode('utf-8')
-                print details.contents[3].contents[0].strip().encode('utf-8')
+                # details always comes in pairs
+                # Availability: Open
+                # Section Title: Computer Architecture
+                # Part of Term: 1
+                # Section Info: Lab sections meets in 0218 Siebel Center
+                details_list = info.find_all("div", class_="yui3-g")
+                for details in details_list:
+                    print details.contents[1].contents[0].strip().encode('utf-8')
+                    print details.contents[3].contents[0].strip().encode('utf-8')
+            # for loop ends here
         except:
             pass
             # print "Course Details Not Found"
 
-            # sys.stdout = orig_stdout
-            # f.close()
+            sys.stdout = orig_stdout
+            f.close()
 
             # def get_links(self):
             #     orig_stdout = sys.stdout
