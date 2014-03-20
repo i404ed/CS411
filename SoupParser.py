@@ -38,10 +38,10 @@ class parser:
         f.close()
 
     def get_course(self, file_name, file_ext):
-        orig_stdout = sys.stdout
-        new_file = file_name + "_parsed" + ".txt"
-        f = open(new_file, 'w')
-        sys.stdout = f
+        # orig_stdout = sys.stdout
+        # new_file = file_name + "_parsed" + ".txt"
+        # f = open(new_file, 'w')
+        # sys.stdout = f
 
         root = self.soup.find("div", class_="portlet-content-inner")
         # print root
@@ -51,21 +51,21 @@ class parser:
         # course title, course name, credit hrs, description, same as, prereqs
         try:
             title = root.find_all("p", class_="cis-section-title")
-            print title[0].contents[0].strip().encode('utf-8')
+            # print title[0].contents[0].strip().encode('utf-8')
             course = root.find_all("p", class_="cis-section-course")
-            print course[0].contents[0].strip().encode('utf-8')
+            # print course[0].contents[0].strip().encode('utf-8')
             subject_infos = root.find_all("div", id=re.compile("^subject-info"))
             descendants = subject_infos[0].find_all("p", class_="portlet-padtop10")
             credit_hr = descendants[0]
-            print credit_hr.contents[1].contents[0].strip().encode('utf-8')
-            print credit_hr.contents[2].strip().encode('utf-8')
+            # print credit_hr.contents[1].contents[0].strip().encode('utf-8')
+            # print credit_hr.contents[2].strip().encode('utf-8')
             descript = descendants[1]
-            print descript.contents[0].strip().encode('utf-8')
+            # print descript.contents[0].strip().encode('utf-8')
             # descendants 2 doesnt exist? template is sort of messed up. 373 vs 125 + 473
             # sometimes prereq is build into description
             # cross list is built into description
             prereq = descendants[2]
-            print prereq.contents[0].strip().encode('utf-8')
+            # print prereq.contents[0].strip().encode('utf-8')
         except:
             pass
             # print "Course Not Found"
@@ -75,7 +75,7 @@ class parser:
         try:
             misc = subject_infos[1].find_all("p", class_="portlet-padtop10")
             descendants = subject_infos[1].find_all("p", class_="portlet-padtop10")
-            print misc[0].contents[0].strip().encode('utf-8')
+            # print misc[0].contents[0].strip().encode('utf-8')
         except:
             pass
             # print "Misc Not Found"
@@ -84,9 +84,9 @@ class parser:
         # UIUC: Quant Reasoning II course
         try:
             extra = subject_infos[1].find_next_sibling("p", class_="portlet-padtop10")
-            print extra.contents[1].contents[0].strip().encode('utf-8')
-            print extra.contents[1].contents[1].contents[0].strip().encode('utf-8')
-            print extra.contents[4].strip().encode('utf-8')
+            # print extra.contents[1].contents[0].strip().encode('utf-8')
+            # print extra.contents[1].contents[1].contents[0].strip().encode('utf-8')
+            # print extra.contents[4].strip().encode('utf-8')
         except:
             pass
             # print "Extra Not Found"
@@ -107,22 +107,71 @@ class parser:
                 icon0 = entry.find_all("td", class_="w50")[0]
                 crn = entry.find_all("td", class_="w50")[1]
                 print crn.contents[1].contents[0].strip().encode('utf-8')
-                type = entry.find_all("td", class_="w80")[0]
-                print type.contents[1].contents[0].strip().encode('utf-8')
+
+                types = entry.find_all("td", class_="w80")[0]
+                # type = entry.find_all("td", class_="w80")
+                # print type.contents[1].contents[0].strip().encode('utf-8')
                 section = entry.find_all("td", class_="w55")[0]
-                print section.contents[2].strip().encode('utf-8')
-                days = entry.find_all("td", class_="w55")[1]
-                print days.contents[1].contents[0].strip().encode('utf-8')
+                # print section.contents[2].strip().encode('utf-8')
                 time = entry.find_all("td", class_="w75")[0]
-                print time.contents[1].contents[0].strip().encode('utf-8')
+                # print time.contents[1].contents[0].strip().encode('utf-8')
+                days = entry.find_all("td", class_="w55")[1]
+                # print days.contents[1].contents[0].strip().encode('utf-8')
                 location = entry.find_all("td", class_="w120")[0]
-                print location.contents[1].contents[0].strip().encode('utf-8')
+                # print location.contents[1].contents[0].strip().encode('utf-8')
+                instructors = entry.find_all("td", class_=re.compile(r"ie-table-width"))[0]
+
+                # takes care of paired classes like cs398
+                try:
+                    print types.contents[1].contents[0].strip().encode('utf-8')
+                    print section.contents[2].strip().encode('utf-8')
+                    print time.contents[1].contents[0].strip().encode('utf-8')
+                    print days.contents[1].contents[0].strip().encode('utf-8')
+                    print location.contents[1].contents[0].strip().encode('utf-8')
+                    # takes care of multiple teachers
+                    for n in xrange(len(instructors.contents[1].contents)):
+                        if n % 2 == 0:
+                            try:
+                                if instructors.contents[1].contents[n].strip() != "":
+                                    print instructors.contents[1].contents[n].strip()
+                            except:
+                                pass
+                    try:
+                        print types.contents[3].contents[0].strip().encode('utf-8')
+                        print section.contents[4].strip().encode('utf-8')
+                        print time.contents[3].contents[0].strip().encode('utf-8')
+                        print days.contents[3].contents[0].strip().encode('utf-8')
+                        print location.contents[3].contents[0].strip().encode('utf-8')
+                        # takes care of multiple teachers
+                        for n in xrange(len(instructors.contents[1].contents)):
+                            if n % 2 == 0:
+                                try:
+                                    if instructors.contents[1].contents[n].strip() != "":
+                                        print instructors.contents[1].contents[n].strip()
+                                except:
+                                    pass
+                    except:
+                        pass
+                except:
+                    pass
+
+                # for block in section:
+                #     print block.contents[1].contents[0].strip().encode('utf-8')
+                #     try:
+                #         print block.contents[3].contents[0].strip().encode('utf-8')
+                #     except:
+                #         pass
+
+            # details_list = info.find_all("div", class_="yui3-g")
+            # for details in details_list:
+            # print details.contents[1].contents[0].strip().encode('utf-8')
+            # print details.contents[3].contents[0].strip().encode('utf-8')
         except:
             pass
             # print "Course Details Not Found"
 
-        sys.stdout = orig_stdout
-        f.close()
+            # sys.stdout = orig_stdout
+            # f.close()
 
             # def get_links(self):
             #     orig_stdout = sys.stdout
