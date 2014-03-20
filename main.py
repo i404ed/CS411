@@ -1,3 +1,4 @@
+import os
 import bs4
 
 __author__ = 'ext'
@@ -7,7 +8,14 @@ import sys
 
 def main():
     file = "cs373.html"
+    # file_name, file_ext = os.path.splitext(file)
+    # orig_stdout = sys.stdout
+    # new_file = file_name + "_parsed" + ".txt"
+    # p = open(new_file, 'w')
+    # sys.stdout = p
     scrap = SoupParser.parser(file)
+    # sys.stdout = orig_stdout
+    # p.close()
 
     # scrap.get_links()
     # scrap.get_course()
