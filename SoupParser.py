@@ -153,10 +153,10 @@ class parser:
                 #     except:
                 #         pass
 
-            # details_list = info.find_all("div", class_="yui3-g")
-            # for details in details_list:
-            # print details.contents[1].contents[0].strip().encode('utf-8')
-            # print details.contents[3].contents[0].strip().encode('utf-8')
+            details_list = info.find_all("div", class_="yui3-g")
+            for details in details_list:
+                print details.contents[1].contents[0].strip().encode('utf-8')
+                print details.contents[3].contents[0].strip().encode('utf-8')
         except:
             pass
             # print "Course Details Not Found"
