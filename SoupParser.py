@@ -48,6 +48,7 @@ class parser:
         # title = root.find_all("p", class_="cis-section-title")
         # print title[0].contents[0].strip()
 
+        # course title, course name, credit hrs, description, same as, prereqs
         try:
             title = root.find_all("p", class_="cis-section-title")
             print title[0].contents[0].strip()
@@ -60,26 +61,37 @@ class parser:
             print credit_hr.contents[2].strip()
             descript = descendants[1]
             print descript.contents[0].strip()
+            # descendants 2 doesnt exist? template is sort of messed up. 373 vs 125 + 473
+                # sometimes prereq is build into description
+            # cross list is built into description
             prereq = descendants[2]
             print prereq.contents[0].strip()
         except:
-            print "Course Not Found"
+            pass
+            # print "Course Not Found"
 
+        # might not need misc
+        # cs 373's 'Students must register for one lecture and one discussion section.'
         try:
              misc = subject_infos[1].find_all("p", class_="portlet-padtop10")
              descendants = subject_infos[1].find_all("p", class_="portlet-padtop10")
              print misc[0].contents[0].strip()
         except:
-            print "Misc Not Found"
+            pass
+            # print "Misc Not Found"
 
+        # This course satisfies the General Education Criteria in SPRING 2014 for a
+        # UIUC: Quant Reasoning II course
         try:
             extra = subject_infos[1].find_next_sibling("p", class_="portlet-padtop10")
             print extra.contents[1].contents[0].strip()
             print extra.contents[1].contents[1].contents[0].strip()
             print extra.contents[4].strip()
         except:
-            print "Extra Not Found"
+            pass
+            # print "Extra Not Found"
 
+        # the schedule
         try:
             table_struct = subject_infos[1].find_next_sibling("div", class_="portlet-container-flex")
             table = table_struct.find_all("tbody")
@@ -106,7 +118,8 @@ class parser:
                 location = entry.find_all("td", class_="w120")[0]
                 print location.contents[1].contents[0].strip()
         except:
-            print "Course Details Not Found"
+            pass
+            # print "Course Details Not Found"
 
         # sys.stdout = orig_stdout
         # f.close()
