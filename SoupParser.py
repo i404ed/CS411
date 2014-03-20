@@ -105,7 +105,7 @@ class parser:
             for entry, info in izip(table_entrys, table_entrys_info):
                 icon0 = entry.find_all("td", class_="w50")[0]
                 crn = entry.find_all("td", class_="w50")[1]
-                print crn.contents[1].contents[0].strip().encode('utf-8')
+                print "CRN: " + crn.contents[1].contents[0].strip().encode('utf-8')
 
                 types = entry.find_all("td", class_="w80")[0]
                 section = entry.find_all("td", class_="w55")[0]
@@ -127,18 +127,18 @@ class parser:
                 try:
                     for blocks in xrange(len(types)):
                         if blocks % 2 == 0:
-                            print types.contents[blocks+1].contents[0].strip().encode('utf-8')
-                            print section.contents[blocks+2].strip().encode('utf-8')
-                            print time.contents[blocks+1].contents[0].strip().encode('utf-8')
-                            print days.contents[blocks+1].contents[0].strip().encode('utf-8')
-                            print location.contents[blocks+1].contents[0].strip().encode('utf-8')
+                            print "Type: " + types.contents[blocks+1].contents[0].strip().encode('utf-8')
+                            print "Section: " + section.contents[blocks+2].strip().encode('utf-8')
+                            print "Time: " + time.contents[blocks+1].contents[0].strip().encode('utf-8')
+                            print "Day: " + days.contents[blocks+1].contents[0].strip().encode('utf-8')
+                            print "Location: " + location.contents[blocks+1].contents[0].strip().encode('utf-8')
                             # takes care of multiple teachers
                             for n in xrange(len(instructors.contents[blocks+1].contents)):
                                 if n % 2 == 0:
                                     try:
                                         # ignore blank lines
                                         if instructors.contents[1].contents[n].strip() != "":
-                                            print instructors.contents[1].contents[n].strip()
+                                            print "Instructor: " + instructors.contents[1].contents[n].strip()
                                     except:
                                         pass
                 except:
