@@ -1,0 +1,11 @@
+You'll need the python extension ,BeautifulSoup 4.1.2, or higher
+as it supports searching html's class tags
+
+1. To run, save a page as "HTML ONLY" to the same directory as main.py.
+2. Edit the 'file' variable in main.py for the html file you would like to parse
+    I could probably write something so it takes in urls or files
+    but that comes later
+3. Then just run python ./main.py
+    the script will generate a pretty printed version of the html
+    (if it was a file) with suffix _pretty
+    it will also save output to a text file with suffix _parsed.txt

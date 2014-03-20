@@ -138,7 +138,7 @@ class parser:
                                     try:
                                         # ignore blank lines
                                         if instructors.contents[1].contents[n].strip() != "":
-                                            print "Instructor: " + instructors.contents[1].contents[n].strip()
+                                            print "Instructor: " + instructors.contents[1].contents[n].strip().encode('utf-8')
                                     except:
                                         pass
                 except:
