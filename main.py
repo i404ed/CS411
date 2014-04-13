@@ -1,28 +1,27 @@
-import os
-import bs4
-
-__author__ = 'ext'
-import SoupParser
+#!/usr/bin/python
+import requests
 import sys
-# python -c "import bs4 as bs; print(bs.__version__)"
+
+__author__ = 'hcao7'
+import SoupParser
+
 
 def main():
-    file = "cs411.html"
-    # file_name, file_ext = os.path.splitext(file)
-    # orig_stdout = sys.stdout
-    # new_file = file_name + "_parsed" + ".txt"
-    # p = open(new_file, 'w')
-    # sys.stdout = p
-    scrap = SoupParser.parser(file)
-    # sys.stdout = orig_stdout
-    # p.close()
+    html = "cs398.html"
+    link = "https://courses.illinois.edu/cisapp/dispatcher/schedule/2014/spring/CS/398"
+    link2 = "https://my.illinois.edu/uPortal/render.userLayoutRootNode.uP?uP_sparam=activeTabTag&activeTabTag=Academics&uP_fname=illinois-ssdt-courseinformationsuite&pltp_action=classView&pltp_year=2014&pltp_term=spring&pltp_course=CS&pltp_classNumber=398"
+    # print requests.get(link)
+    # print requests.get(link2)
+    # sys.exit(0)
 
-    # scrap.get_links()
-    # scrap.get_course()
-    # scrap.get_text("CS 411")
-    # scrap.print_data()
-    # scrap.print_text()
+    # scrape = SoupParser.Parser(html, 0, "test")
+    scrape = SoupParser.Parser(link, 1, "testURL")
 
+    # scrape.get_links()
+    # scrape.get_course()
+    # scrape.get_text("CS 411")
+    # scrape.print_data()
+    # scrape.print_text()
 
 if __name__ == "__main__":
     main()
