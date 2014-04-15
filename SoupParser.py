@@ -1,9 +1,25 @@
 __author__ = 'hcao7'
 import re
-from bs4 import BeautifulSoup
-import requests
 import sys
 from itertools import izip
+import os
+import errno
+import urllib2
+
+from bs4 import BeautifulSoup
+import requests
+
+BASE_DIR = os.path.dirname(__file__)
+
+
+def mkdir_p(path):
+    try:
+        os.makedirs(path)
+    except OSError as exc:  # Python >2.5
+        if exc.errno == errno.EEXIST and os.path.isdir(path):
+            pass
+        else:
+            raise
 
 
 # noinspection PyBroadException
@@ -14,8 +30,9 @@ class Parser:
             self.soup = BeautifulSoup(f.read())
             f.close()
         elif type == 1:
-            r = requests.get(src)
-            data = r.text
+            data = urllib2.urlopen(src).read()
+            # r = requests.get(src)
+            # data = r.text
             self.soup = BeautifulSoup(data)
         else:
             print "type has to be a .html file or a URL"
@@ -28,8 +45,10 @@ class Parser:
         pretty prints the html as (name)_pretty.html
         :param file_name: name
         """
+        path = os.path.join(BASE_DIR, 'pretty_html')
+        mkdir_p(path)
         orig_stdout = sys.stdout
-        new_file = file_name + "_pretty.html"
+        new_file = os.path.join(path, file_name + "_pretty.html")
         f = open(new_file, 'w')
         sys.stdout = f
         print(self.soup.prettify().encode('utf-8'))
@@ -44,8 +63,10 @@ class Parser:
         prases the html and save to file as (name)_parsed.txt
         :param file_name: name
         """
+        path = os.path.join(BASE_DIR, 'parsed_txt')
+        mkdir_p(path)
         orig_stdout = sys.stdout
-        new_file = file_name + "_parsed.txt"
+        new_file = os.path.join(path, file_name + "_parsed.txt")
         f = open(new_file, 'w')
         sys.stdout = f
 
@@ -72,40 +93,55 @@ class Parser:
             # print credit_hr.contents[1].contents[0].strip().encode('utf-8')
             # print credit_hr.contents[2].strip().encode('utf-8')
             description = descendants[1]
-            print description.get_text(strip=True).encode('utf-8')
+            print "Description: " + description.get_text(strip=True).encode('utf-8')
             # print descript.contents[0].strip().encode('utf-8')
 
-            # descendants 2 doesnt exist? template is sort of messed up. 373 vs 125 + 473
+            # template is sort of messed up. 373 vs 125 + 473
+            # descendants 2 doesnt exist?
             # sometimes prereq is build into description
-            # cross list is built into description
-            prereq = descendants[2]
-            print prereq.get_text(strip=True).encode('utf-8')
-            # print prereq.contents[0].strip().encode('utf-8')
+            # sometimes, prereqs and etc are in here. if they are not in here, they are in crosslink
+            try:
+                prereq = descendants[2]
+                print prereq.get_text(strip=True).encode('utf-8')
+                # print prereq.contents[0].strip().encode('utf-8')
+            except:
+                pass
+                # print "Prereqs Not Found"
+
+            # sometimes, Same as and prereqs are in this tag instead
+            try:
+                cross_link = root.find_all("div", id=re.compile("^schedule-crosslink"))
+                cross = cross_link[0]
+                print cross.get_text("|", strip=True).encode('utf-8')
+            except:
+                pass
+                # print "Crosslink Not Found"
+
+            # cs 373's 'Students must register for one lecture and one discussion section.'
+            try:
+                misc = subject_infos[1].find_all("p", class_="portlet-padtop10")
+                print misc.get_text(strip=True).encode('utf-8')
+                # print misc[0].contents[0].strip().encode('utf-8')
+            except:
+                pass
+                # print "Misc Not Found"
+
+            # finds the next sibling if it exists
+            # This course satisfies the General Education Criteria in SPRING 2014 for a
+            # UIUC: Quant Reasoning II course
+            try:
+                extra = subject_infos[0].find_next_sibling("p", class_="portlet-padtop10")
+                print extra.get_text(" ", strip=True).encode('utf-8')
+                # print extra.contents[1].contents[0].strip().encode('utf-8')
+                # print extra.contents[1].contents[1].contents[0].strip().encode('utf-8')
+                # print extra.contents[4].strip().encode('utf-8')
+            except:
+                pass
+                # print "Extra Not Found"
+
         except:
             pass
             # print "Course Not Found"
-
-        # might not need misc
-        # cs 373's 'Students must register for one lecture and one discussion section.'
-        try:
-            misc = subject_infos[0].find_all("p", class_="portlet-padtop10")
-            print misc.get_text(strip=True).encode('utf-8')
-            # print misc[0].contents[0].strip().encode('utf-8')
-        except:
-            pass
-            # print "Misc Not Found"
-
-        # This course satisfies the General Education Criteria in SPRING 2014 for a
-        # UIUC: Quant Reasoning II course
-        try:
-            extra = subject_infos[0].find_next_sibling("p", class_="portlet-padtop10")
-            print extra.get_text(" ", strip=True).encode('utf-8')
-            # print extra.contents[1].contents[0].strip().encode('utf-8')
-            # print extra.contents[1].contents[1].contents[0].strip().encode('utf-8')
-            # print extra.contents[4].strip().encode('utf-8')
-        except:
-            pass
-            # print "Extra Not Found"
 
         # the schedule
         # only crn is guaranteed to be single
@@ -151,18 +187,19 @@ class Parser:
                 try:
                     for blocks in xrange(len(types)):
                         if blocks % 2 == 0:
-                            print "Type: " + types.contents[blocks+1].contents[0].strip().encode('utf-8')
-                            print "Section: " + section.contents[blocks+2].strip().encode('utf-8')
-                            print "Time: " + time.contents[blocks+1].contents[0].strip().encode('utf-8')
-                            print "Day: " + days.contents[blocks+1].contents[0].strip().encode('utf-8')
-                            print "Location: " + location.contents[blocks+1].contents[0].strip().encode('utf-8')
+                            print "Type: " + types.contents[blocks + 1].contents[0].strip().encode('utf-8')
+                            print "Section: " + section.contents[blocks + 2].strip().encode('utf-8')
+                            print "Time: " + time.contents[blocks + 1].contents[0].strip().encode('utf-8')
+                            print "Day: " + days.contents[blocks + 1].contents[0].strip().encode('utf-8')
+                            print "Location: " + location.contents[blocks + 1].contents[0].strip().encode('utf-8')
                             # takes care of multiple teachers per row
-                            for n in xrange(len(instructors.contents[blocks+1].contents)):
+                            for n in xrange(len(instructors.contents[blocks + 1].contents)):
                                 if n % 2 == 0:
                                     try:
                                         # ignore blank lines
                                         if instructors.contents[1].contents[n].strip() != "":
-                                            print "Instructor: " + instructors.contents[1].contents[n].strip().encode('utf-8')
+                                            print "Instructor: " + instructors.contents[1].contents[n].strip().encode(
+                                                'utf-8')
                                     except:
                                         pass
                 except:
@@ -178,7 +215,7 @@ class Parser:
                     print details.get_text(" ", strip=True).encode('utf-8')
                     # print details.contents[1].contents[0].strip().encode('utf-8')
                     # print details.contents[3].contents[0].strip().encode('utf-8')
-            # deciphering ends here
+                    # deciphering ends here
         except:
             pass
             # print "Course Details Not Found"
