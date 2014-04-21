@@ -2,45 +2,155 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
-        <title>iCouSchelper! | Schedule</title>
+        <title>Bootply.com - Bootstrap Login Form</title>
+        <script type='text/javascript' src="trigger.js"></script>
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+
+
+        <!--Bootstrap-->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
-        <link href="bootstrap-editable.css" rel="stylesheet">
-        <script src="bootstrap-editable.js"></script>
-        <link href="customize.css" rel="stylesheet">
+        <!--Jquery-->
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
-        <link rel='stylesheet' type='text/css' href='fullcalendar.css' />
+        <!--JqueryUI-->
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script> 
+
+		<!--Our css-->
+		<link href="customize.css" rel="stylesheet">
+
+		<!--Calendar-->
+		<link rel='stylesheet' type='text/css' href='fullcalendar.css' />
         <script type='text/javascript' src='fullcalendar.js'></script>
         <script type='text/javascript' src='calendar.js'></script>
 
-    <link href="./datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
-    <script type="text/javascript" src="./datetimepicker/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-    <script type="text/javascript" src="./datetimepicker/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+        <!--Datetimepicker-->
+        <link href="./datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    	<script type="text/javascript" src="./datetimepicker/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+    	<script type="text/javascript" src="./datetimepicker/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+		
+		<script>
+			var hidel = true;
+			$(document).ready(function(){
+			$( "#arrow_div" ).click(function() {
+				if(hidel == false){
+					$( ".right_container" ).toggleClass( "show_right", 1000, "easeOutSine",true );
+					$( ".left_container" ).delay(50).toggleClass( "hide_left", 1000, "easeOutSine",true );
+					
+					$(this).fadeTo('slow', 0.3, function()
+					{
+					    $(this).css({'position': 'fixed', 'left': '', 'right':'1%'});
+					    $(this).html('To See Events<span class="glyphicon glyphicon-chevron-right"></span>');
+					}).fadeTo('slow', 1);
+					
 
-<style>
 
-  body {
-    margin-top: 40px;
-    text-align: center;
-    font-size: 14px;
-    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-    }
 
-  #calendar {
-    width: 900px;
-    margin: 0 auto;
-    }
+				}
+				else{
+					$( ".left_container" ).toggleClass( "hide_left", 1000, "easeOutSine",true );
+					$( ".right_container" ).delay(50).toggleClass( "show_right", 1000, "easeOutSine",true );
+					$(this).fadeTo('slow', 0.3, function()
+					{
+					    $(this).css({'position': 'fixed', 'left': '', 'left':'1%'});
+					    $(this).html('<span class="glyphicon glyphicon-chevron-left"></span>To Add Courses'); 
+					}).fadeTo('slow', 1);
 
-</style>
+				}
+				hidel = !hidel;
+
+			});
+			});
+		</script>
+		
+		<style>
+		.left_container{ width:25%; background-color:#DDDDDD;  height:800px; float:left;}						
+		.middle_container{ width:75%; background-color:White; float:left; height:800px; }						
+		.right_container{ width:0%; background-color:#DDDDDD; float:left; height:800px; }						
+		.header{ background-color:White; width:100%; height:80px;}	
+
+		.hide_left{
+			width: 0%;
+			overflow:hidden;
+		}
+
+		.show_right{
+			width: 25%;
+			overflow:hidden;
+		}
+
+		#calendar {
+		    width: 75%;
+		    margin: 0 auto;
+		    margin-top: 70px;
+	    }
+
+	    #arrow_div{
+	    	position: fixed; top: 50%; right: 1%;
+	    }
+		</style>
 
     </head>
+    
     <body>
+
+	<div class=header>
+	    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	      <div class="container">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="login.html">iCouSchelper!</a>
+	        </div>
+	        <div class="navbar-collapse collapse">
+	          <ul class="nav navbar-nav">
+	            <li class="active"><a href="#">Home</a></li>
+	            <li><a href="#classinfo">Class Information</a></li>
+	            <li><a href="#schedule">Schedule Classes</a></li>
+	            <li class="dropdown">
+	              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
+	              <ul class="dropdown-menu">
+	                <li><a href="#" style = "height: 30px">Edit Account</a></li>
+	                <li><a href="#" style = "height: 30px">Edit My Classes</a></li>
+	                <li class="divider"></li>
+	                <li><a href="#" style = "height: 30px">Log out</a></li>
+
+	              </ul>
+	            </li>
+	             <i class="icon-user icon-white" id ="username"></i>
+
+	          </ul>
+	        </div><!--/.nav-collapse -->
+	      </div>
+	    </div>
+	</div>
+
+
+	<div class=left_container>
+		<p>Adding Courses</p>
+	</div>
+
+	<div class=middle_container>
+		<div id= "arrow_div">
+		To See Events<span class="glyphicon glyphicon-chevron-right"></span>
+		</div>
+
         <div id='calendar'></div>
-        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#add_event_model">Add Event</button>
+        
+        <button type="button" class="btn btn-primary" id ="add_classes_button">Test</button>
+  
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#add_event_model">Add Eventbb</button>
         <div class="modal fade" id="add_event_model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -73,16 +183,16 @@
 
                                 <fieldset>
                                     <div class="form-group">
-                                        <label for="dtp_input1" class="col-md-2 control-label">End Date/Time</label>
-                                        <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1" id="enddate_field">
+                                        <label for="dtp_input2" class="col-md-2 control-label">End Date/Time</label>
+                                        <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input2" id="enddate_field">
                                             <input class="form-control" size="16" type="text" value="" readonly>
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                         </div>
-                                        <input type="hidden" id="dtp_input2" value="" /><br/>
+                                        <input type="hidden" id="dtp_input1" value="" /><br/>
                                     </div>
                                 </fieldset>
-                                <button type="button" class="btn btn-primary" id ="add_event_button">Add Event</button>
+                                <button type="button" class="btn btn-primary" id ="add_event_button">Add Eventaaa</button>
                             </form>
 
                         </div>
@@ -91,13 +201,24 @@
 
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                
               </div>
 
             </div>
           </div>
         </div>
-        <button type="button" class="btn btn-primary" id ="add_classes_button">Test</button>
+</div>
+
+	<div class=right_container>
+		<p>Events</p>
+	</div>
+        
     </body>
 </html>
+
+
+
+
+
+
+
 
