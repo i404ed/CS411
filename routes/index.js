@@ -127,7 +127,7 @@ module.exports = function(app) {
         var data = req.body;
         var conn = connfun.dbconn();
 
-        var query_string = "update cs411horse_iCouSchelper.Users set"+data[name]+"='"+data[value]+"' where Email='"+data[pkn]+"';";
+        var query_string = "update cs411horse_iCouSchelper.Users set "+data['name']+"='"+data['value']+"' where Email='"+data['pkn']+"';";
 
         conn.connect(function (err) {
             if (err == null) {
