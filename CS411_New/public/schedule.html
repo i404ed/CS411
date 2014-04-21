@@ -40,7 +40,6 @@
     </head>
     <body>
         <div id='calendar'></div>
-
         <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#add_event_model">Add Event</button>
         <div class="modal fade" id="add_event_model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -51,17 +50,18 @@
               </div>
               <div class="modal-body">
 
-                    <form class = "new_event_form" method="post" action="">
-                    <p><label for="title">Title:</label>
-                       <input name = "name" type="text" placeholder="Enter event title"/>
-                    </p>
-                    <p>
                         <div class="container">
-                            <form action="" class="form-horizontal"  role="form">
+
+
+
+                            <form action="" class=""  role="form" style = "width: 80%; text-align: left;">
+                                <label for="event_title" class="col-md-2 control-label">Title</label>
+                                <input name = "name" type="text" id="event_title" placeholder="Enter event title"/><br/>
+
                                 <fieldset>
                                     <div class="form-group">
                                         <label for="dtp_input1" class="col-md-2 control-label">Start Date/Time</label>
-                                        <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+                                        <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1" id="startdate_field">
                                             <input class="form-control" size="16" type="text" value="" readonly>
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
@@ -69,16 +69,12 @@
                                         <input type="hidden" id="dtp_input1" value="" /><br/>
                                     </div>
                                 </fieldset>
-                            </form>
-                        </div>
-                    </p>
-                    <p>
-                        <div class="container">
-                            <form action="" class="form-horizontal"  role="form">
+
+
                                 <fieldset>
                                     <div class="form-group">
                                         <label for="dtp_input1" class="col-md-2 control-label">End Date/Time</label>
-                                        <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+                                        <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1" id="enddate_field">
                                             <input class="form-control" size="16" type="text" value="" readonly>
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
@@ -86,22 +82,22 @@
                                         <input type="hidden" id="dtp_input1" value="" /><br/>
                                     </div>
                                 </fieldset>
+                                <button type="button" class="btn btn-primary" id ="add_event_button">Add Event</button>
                             </form>
+
                         </div>
-                    </p>
-                    </form>
 
               </div>
 
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Add Event</button>
+                
               </div>
 
             </div>
           </div>
         </div>
-
+        <button type="button" class="btn btn-primary" id ="add_classes_button">Test</button>
     </body>
 </html>
 

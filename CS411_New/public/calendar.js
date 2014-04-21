@@ -1,4 +1,7 @@
-
+var sdate = null;
+var edate = null;
+var stimestamp = 1398026463;
+var etimestamp = stimestamp + (75 * 60);
 function AddEvent(title, StartDate, EndDate) {
     $('#calendar').fullCalendar('renderEvent', {
         id: StartDate,
@@ -20,6 +23,19 @@ function AddEvent(title, StartDate, EndDate) {
             forceParse: 0,
             showMeridian: 1
         });
+
+        $('#startdate_field').datetimepicker().on('changeDate', function(ev){
+            sdate = (ev.date.getUTCFullYear() + "-" + 
+                ("0" + (ev.date.getUTCMonth()+1)).slice(-2) + "-" + ("0" + (ev.date.getUTCDate())).slice(-2) + " " + 
+                ("0" + (ev.date.getUTCHours())).slice(-2) + ":" + ("0" + (ev.date.getUTCMinutes())).slice(-2) + ":" + "00");
+        });
+
+        $('#enddate_field').datetimepicker().on('changeDate', function(ev){
+            edate = (ev.date.getUTCFullYear() + "-" + 
+                ("0" + (ev.date.getUTCMonth()+1)).slice(-2) + "-" + ("0" + (ev.date.getUTCDate())).slice(-2) + " " + 
+                ("0" + (ev.date.getUTCHours())).slice(-2) + ":" + ("0" + (ev.date.getUTCMinutes())).slice(-2) + ":" + "00");
+        });
+
 });
 
 $(document).ready(function() {
@@ -29,9 +45,17 @@ $(document).ready(function() {
     var y = date.getFullYear();
 
     $('#add_event_button').click(function() {
+        AddEvent('s', sdate , edate);
+    });
 
-        //AddEvent('2014-04-07T00:00:00Z', '2014-04-08T00:00:00Z');
-        AddEvent('s','2014-04-07 12:00:00', '2014-04-07 14:00:00');
+    $('#add_classes_button').click(function() {
+
+        for (var i=0;i<6;i++)
+        {
+            AddEvent('c',stimestamp,etimestamp);
+            etimestamp += (10080 * 60);
+            stimestamp += (10080 * 60);
+        }
     });
 
     var events_array = [
@@ -47,8 +71,6 @@ $(document).ready(function() {
 
     $('#calendar').fullCalendar({
         // put your options and callbacks here
-
-
         defaultView: 'agendaWeek',
         firstHour: 7,
         //allDaySlot: false,
