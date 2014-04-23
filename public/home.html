@@ -2,15 +2,13 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
-        <title>Bootply.com - Bootstrap Login Form</title>
+        <title>iCouSchelper!</title>
         <script type='text/javascript' src="trigger.js"></script>
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
-
 
         <!--Bootstrap-->
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
@@ -39,34 +37,28 @@
 		<script>
 			var hidel = true;
 			$(document).ready(function(){
-			$( "#arrow_div" ).click(function() {
-				if(hidel == false){
-					$( ".right_container" ).toggleClass( "show_right", 1000, "easeOutSine",true );
-					$( ".left_container" ).delay(50).toggleClass( "hide_left", 1000, "easeOutSine",true );
-					
-					$(this).fadeTo('slow', 0.3, function()
-					{
-					    $(this).css({'position': 'fixed', 'left': '', 'right':'1%'});
-					    $(this).html('To See Events<span class="glyphicon glyphicon-chevron-right"></span>');
-					}).fadeTo('slow', 1);
-					
+
+				$( "#event_nav" ).click(function() {
+					if(hidel == true){
+						$( ".left_container" ).toggleClass( "hide_left", 1000, "easeOutSine",true );
+						$( ".right_container" ).delay(50).toggleClass( "show_right", 1000, "easeOutSine",true );
+						$(this).addClass("active");
+						$("#class_nav").removeClass("active");
+						hidel = !hidel;
+					}
+				});
+
+				$( "#class_nav" ).click(function() {
+					if(hidel == false){
+						$( ".right_container" ).toggleClass( "show_right", 1000, "easeOutSine",true );
+						$( ".left_container" ).delay(50).toggleClass( "hide_left", 1000, "easeOutSine",true );
+						$(this).addClass("active");
+						$("#event_nav").removeClass("active");
+						hidel = !hidel;
+					}
+				});
 
 
-
-				}
-				else{
-					$( ".left_container" ).toggleClass( "hide_left", 1000, "easeOutSine",true );
-					$( ".right_container" ).delay(50).toggleClass( "show_right", 1000, "easeOutSine",true );
-					$(this).fadeTo('slow', 0.3, function()
-					{
-					    $(this).css({'position': 'fixed', 'left': '', 'left':'1%'});
-					    $(this).html('<span class="glyphicon glyphicon-chevron-left"></span>To Add Courses'); 
-					}).fadeTo('slow', 1);
-
-				}
-				hidel = !hidel;
-
-			});
 			});
 		</script>
 		
@@ -114,10 +106,9 @@
 	          <a class="navbar-brand" href="login.html">iCouSchelper!</a>
 	        </div>
 	        <div class="navbar-collapse collapse">
-	          <ul class="nav navbar-nav">
-	            <li class="active"><a href="#">Home</a></li>
-	            <li><a href="#classinfo">Class Information</a></li>
-	            <li><a href="#schedule">Schedule Classes</a></li>
+	          <ul class="nav navbar-nav" id = "menubar_option">
+	            <li class="active" id = "class_nav"><a href="#">Classes</a></li>
+	            <li  id = "event_nav"><a href="#">Events</a></li>
 	            <li class="dropdown">
 	              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
 	              <ul class="dropdown-menu">
@@ -125,11 +116,9 @@
 	                <li><a href="#" style = "height: 30px">Edit My Classes</a></li>
 	                <li class="divider"></li>
 	                <li><a href="#" style = "height: 30px">Log out</a></li>
-
 	              </ul>
 	            </li>
 	             <i class="icon-user icon-white" id ="username"></i>
-
 	          </ul>
 	        </div><!--/.nav-collapse -->
 	      </div>
@@ -142,9 +131,11 @@
 	</div>
 
 	<div class=middle_container>
+		<!--
 		<div id= "arrow_div">
 		To See Events<span class="glyphicon glyphicon-chevron-right"></span>
 		</div>
+		-->
 
         <div id='calendar'></div>
         

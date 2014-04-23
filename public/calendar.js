@@ -3,6 +3,7 @@ var edate = null;
 var stimestamp = 1398026463;
 var etimestamp = stimestamp + (75 * 60);
 function AddEvent(title, StartDate, EndDate) {
+    /*
     $('#calendar').fullCalendar('renderEvent', {
         id: StartDate,
         title: title,
@@ -10,11 +11,31 @@ function AddEvent(title, StartDate, EndDate) {
         end: EndDate,
         allDay: false
     }, true);
+    */
+
+    $.ajax({
+        url: 'http://localhost:2014/add_event',
+        dataType: 'json',
+        type: 'get',
+        data: {
+            'title': title,
+            'start': StartDate,
+            'end': EndDate,
+            'allDay': false
+        },
+        success: function (email, pwd) {
+        }
+        ,
+        error: function (err,status) {
+           alert("can't add event");
+        }
+    });
+
+
 }
 
  $(document).ready(function() {
         $('.form_datetime').datetimepicker({
-            //language:  'fr',
             weekStart: 1,
             todayBtn:  1,
             autoclose: 1,
@@ -25,15 +46,22 @@ function AddEvent(title, StartDate, EndDate) {
         });
 
         $('#startdate_field').datetimepicker().on('changeDate', function(ev){
+            var offset = (new Date()).getTimezoneOffset();
+            sdate = (ev.date.valueOf()/1000) + (offset*60);
+            //alert(sdate);
+            /*
             sdate = (ev.date.getUTCFullYear() + "-" + 
                 ("0" + (ev.date.getUTCMonth()+1)).slice(-2) + "-" + ("0" + (ev.date.getUTCDate())).slice(-2) + " " + 
-                ("0" + (ev.date.getUTCHours())).slice(-2) + ":" + ("0" + (ev.date.getUTCMinutes())).slice(-2) + ":" + "00");
+                ("0" + (ev.date.getUTCHours())).slice(-2) + ":" + ("0" + (ev.date.getUTCMinutes())).slice(-2) + ":" + "00");*/
         });
 
         $('#enddate_field').datetimepicker().on('changeDate', function(ev){
+            var offset = (new Date()).getTimezoneOffset();
+            edate = (ev.date.valueOf()/1000) + (offset*60);
+            /*
             edate = (ev.date.getUTCFullYear() + "-" + 
                 ("0" + (ev.date.getUTCMonth()+1)).slice(-2) + "-" + ("0" + (ev.date.getUTCDate())).slice(-2) + " " + 
-                ("0" + (ev.date.getUTCHours())).slice(-2) + ":" + ("0" + (ev.date.getUTCMinutes())).slice(-2) + ":" + "00");
+                ("0" + (ev.date.getUTCHours())).slice(-2) + ":" + ("0" + (ev.date.getUTCMinutes())).slice(-2) + ":" + "00");*/
         });
 
 });
@@ -45,7 +73,9 @@ $(document).ready(function() {
     var y = date.getFullYear();
 
     $('#add_event_button').click(function() {
-        AddEvent('s', sdate , edate);
+        var etitle = $('#event_title').val();
+        alert(etitle)
+        AddEvent(etitle, sdate, edate);
     });
 
     $('#add_classes_button').click(function() {
@@ -74,14 +104,7 @@ $(document).ready(function() {
         defaultView: 'agendaWeek',
         firstHour: 7,
         //allDaySlot: false,
-        events: [
-            {
-                title: 'Lunch',
-                start: new Date(y, m, d, 12, 0),
-                end: new Date(y, m, d, 14, 0),
-                allDay: false
-            }
-        ],
+        events: 'eventsJason.json',
 
         dayClick: function(date, allDay, jsEvent, view) {
 
