@@ -38,16 +38,25 @@
       <file leaf-file-name="SoupParser.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webparser/scripts/SoupParser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="385" column="20" selection-start="17684" selection-end="17684" vertical-scroll-proportion="0.0" vertical-offset="6672" max-vertical-offset="7074">
+            <state line="376" column="10" selection-start="17312" selection-end="17312" vertical-scroll-proportion="0.0" vertical-offset="6644" max-vertical-offset="7056">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="requirements.txt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/requirements.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="24" selection-start="109" selection-end="109" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webparser/scripts/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="15" selection-start="689" selection-end="689" vertical-scroll-proportion="0.60679615" vertical-offset="128" max-vertical-offset="540">
+            <state line="12" column="10" selection-start="324" selection-end="324" vertical-scroll-proportion="0.0" vertical-offset="92" max-vertical-offset="522">
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -58,19 +67,28 @@
       <file leaf-file-name="DeptParser.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webparser/scripts/DeptParser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="34" selection-start="1304" selection-end="1304" vertical-scroll-proportion="0.0" vertical-offset="774" max-vertical-offset="936">
+            <state line="43" column="34" selection-start="1304" selection-end="1304" vertical-scroll-proportion="0.0" vertical-offset="506" max-vertical-offset="918">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="README" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/webparser/scripts/README">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="26" selection-start="303" selection-end="303" vertical-scroll-proportion="0.28198433" vertical-offset="0" max-vertical-offset="576">
+              <folding />
+            </state>
+          </provider>
           <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
             <state />
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webscraper/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="0" selection-start="898" selection-end="898" vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="558">
+            <state line="86" column="52" selection-start="2446" selection-end="2446" vertical-scroll-proportion="0.0" vertical-offset="1524" max-vertical-offset="2088">
               <folding />
             </state>
           </provider>
@@ -104,10 +122,11 @@
         <option value="$PROJECT_DIR$/webparser/models.py" />
         <option value="$PROJECT_DIR$/webscraper/settings.py" />
         <option value="$PROJECT_DIR$/README" />
-        <option value="$PROJECT_DIR$/webparser/scripts/README" />
-        <option value="$PROJECT_DIR$/webparser/scripts/SoupParser.py" />
         <option value="$PROJECT_DIR$/webparser/scripts/DeptParser.py" />
+        <option value="$PROJECT_DIR$/webparser/scripts/SoupParser.py" />
         <option value="$PROJECT_DIR$/webparser/scripts/main.py" />
+        <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/webparser/scripts/README" />
       </list>
     </option>
   </component>
@@ -142,6 +161,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -194,7 +214,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -328,27 +347,7 @@
       <option name="PARAMETERS" value="" />
       <method />
     </configuration>
-    <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="webscraper" />
-      <option name="launchJavascriptDebuger" value="false" />
-      <option name="port" value="8000" />
-      <option name="host" value="" />
-      <option name="additionalOptions" value="" />
-      <option name="browserUrl" value="" />
-      <option name="runTestServer" value="false" />
-      <option name="runNoReload" value="false" />
-      <option name="useCustomRunCommand" value="false" />
-      <option name="customRunCommand" value="" />
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
@@ -374,7 +373,27 @@
       <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+    <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="webscraper" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -513,20 +532,25 @@
       <created>1398208727800</created>
       <updated>1398208727800</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="comments and readme, pip, etc">
+      <created>1398217061015</created>
+      <updated>1398217061015</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1366" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Regex Tester" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31790122" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31790122" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17045455" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17272727" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39969134" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
@@ -534,12 +558,11 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -563,7 +586,8 @@
     <MESSAGE value="auto parse courses from another link" />
     <MESSAGE value="readme" />
     <MESSAGE value="comments and readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="comments and readme" />
+    <MESSAGE value="comments and readme, pip, etc" />
+    <option name="LAST_COMMIT_MESSAGE" value="comments and readme, pip, etc" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -574,13 +598,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/webparser/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="28" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="594">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/webscraper/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="17" column="0" selection-start="522" selection-end="522" vertical-scroll-proportion="0.0" vertical-offset="1140" max-vertical-offset="1620">
@@ -852,18 +869,6 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="702" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webscraper/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="0" selection-start="2006" selection-end="2006" vertical-scroll-proportion="0.0" vertical-offset="1200" max-vertical-offset="2088">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="34" selection-start="34" selection-end="34" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="402" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/webparser/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="44" column="23" selection-start="1227" selection-end="1227" vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="1008">
@@ -871,37 +876,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webparser/scripts/SoupParser.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="385" column="20" selection-start="17684" selection-end="17684" vertical-scroll-proportion="0.0" vertical-offset="6672" max-vertical-offset="7074">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webparser/scripts/README">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="0" selection-start="898" selection-end="898" vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="558">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/webparser/scripts/DeptParser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="34" selection-start="1304" selection-end="1304" vertical-scroll-proportion="0.0" vertical-offset="480" max-vertical-offset="936">
+        <state line="43" column="34" selection-start="1304" selection-end="1304" vertical-scroll-proportion="0.0" vertical-offset="506" max-vertical-offset="918">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="34" selection-start="34" selection-end="34" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="412">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webscraper/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="86" column="52" selection-start="2446" selection-end="2446" vertical-scroll-proportion="0.0" vertical-offset="1524" max-vertical-offset="2088">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webparser/scripts/SoupParser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="376" column="10" selection-start="17312" selection-end="17312" vertical-scroll-proportion="0.0" vertical-offset="6644" max-vertical-offset="7056">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webparser/scripts/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="15" selection-start="689" selection-end="689" vertical-scroll-proportion="0.60679615" vertical-offset="128" max-vertical-offset="540">
+        <state line="12" column="10" selection-start="324" selection-end="324" vertical-scroll-proportion="0.0" vertical-offset="92" max-vertical-offset="522">
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="24" selection-start="109" selection-end="109" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webparser/scripts/README">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="26" selection-start="303" selection-end="303" vertical-scroll-proportion="0.28198433" vertical-offset="0" max-vertical-offset="576">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
   </component>
