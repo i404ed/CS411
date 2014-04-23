@@ -12,6 +12,16 @@
   background-size: cover;
 }
 
+#menubar_option{
+	position:absolute;
+	right: 10%;
+}
+
+#menubar_option li a{
+	padding-left: 5em;
+	padding-right: 5em;
+}
+
 body {
 
 }
