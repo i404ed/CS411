@@ -15,7 +15,6 @@ function AddEvent(title, StartDate, EndDate) {
         allDay: false
     }, true);
 
-
     $.ajax({
         url: 'http://'+oururl+':2014/add_event',
         dataType: 'json',
@@ -28,6 +27,7 @@ function AddEvent(title, StartDate, EndDate) {
         },
         success: function (data, status,jqxhr) {
             var eventid = data['eventid'];
+
         }
         ,
         error: function (err,status) {
@@ -46,27 +46,32 @@ function AddEvent(title, StartDate, EndDate) {
             todayHighlight: 1,
             startView: 2,
             forceParse: 0,
-            showMeridian: 1
+            showMeridian: 1,
+            startDate: new Date(),
         });
 
         $('#startdate_field').datetimepicker().on('changeDate', function(ev){
             var offset = (new Date()).getTimezoneOffset();
             sdate = (ev.date.valueOf()/1000) + (offset*60);
-            //alert(sdate);
-            /*
-            sdate = (ev.date.getUTCFullYear() + "-" + 
-                ("0" + (ev.date.getUTCMonth()+1)).slice(-2) + "-" + ("0" + (ev.date.getUTCDate())).slice(-2) + " " + 
-                ("0" + (ev.date.getUTCHours())).slice(-2) + ":" + ("0" + (ev.date.getUTCMinutes())).slice(-2) + ":" + "00");*/
         });
 
         $('#enddate_field').datetimepicker().on('changeDate', function(ev){
             var offset = (new Date()).getTimezoneOffset();
             edate = (ev.date.valueOf()/1000) + (offset*60);
-            /*
-            edate = (ev.date.getUTCFullYear() + "-" + 
-                ("0" + (ev.date.getUTCMonth()+1)).slice(-2) + "-" + ("0" + (ev.date.getUTCDate())).slice(-2) + " " + 
-                ("0" + (ev.date.getUTCHours())).slice(-2) + ":" + ("0" + (ev.date.getUTCMinutes())).slice(-2) + ":" + "00");*/
         });
+
+        $('#edit_startdate_field').datetimepicker().on('changeDate', function(ev){
+            var offset = (new Date()).getTimezoneOffset();
+            edit_sdate = (ev.date.valueOf()/1000) + (offset*60);
+            alert('ss');
+        });
+
+        $('#edit_enddate_field').datetimepicker().on('changeDate', function(ev){
+            var offset = (new Date()).getTimezoneOffset();
+            edit_edate = (ev.date.valueOf()/1000) + (offset*60);
+            alert('ss');
+        });
+
 
 });
 
@@ -92,22 +97,11 @@ $(document).ready(function() {
         }
     });
 
-    var events_array = [
-        {
-        title: 'Test1',
-        start: new Date(2012, 10, 1),
-        allDay: false},
-    {
-        title: 'Test2',
-        start: new Date(2012, 10, 2),
-        allDay: true}
-    ];
-
     $('#calendar').fullCalendar({
         // put your options and callbacks here
         defaultView: 'agendaWeek',
         firstHour: 7,
-        //allDaySlot: false,
+        allDaySlot: false,
         events: 'eventsJason.json',
 
         dayClick: function(date, allDay, jsEvent, view) {
@@ -118,10 +112,41 @@ $(document).ready(function() {
             }
         },
 
-        eventClick: function(calEvent, jsEvent, view) {
+       eventClick: function(calEvent, jsEvent, view) {
+            
+            $("#edit_event_title").attr('value',calEvent.title);
+            $("#edit_start_time").attr('value',calEvent.start);
+            $("#edit_end_time").attr('value',calEvent.end);
 
-            alert('Event: ' + calEvent.title);
-            alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+           jq = jQuery.noConflict();
+           
+            $("#edit_event_modal").modal('show');
+            $('#edit_event_button').click(function() {
+                
+                temp_sdate = null;
+                temp_edate = null;
+                $ = jQuery.noConflict();
+                calEvent.title = $('#edit_event_title').val();
+                if (edit_sdate != null)
+                    calEvent.start = edit_sdate;
+                if (edit_edate != null)
+                    calEvent.end = edit_edate;
+
+                if (calEvent.start<calEvent.end){
+                    $('#calendar').fullCalendar('updateEvent', calEvent);
+                    jq = jQuery.noConflict();
+                    $("#edit_event_modal").modal('hide');
+                    $ = jQuery.noConflict();
+                }
+                else if (calEvent.start>calEvent.end){
+                    alert("check the date!!");
+                }
+                else{
+                    //delete
+                    $('#calendar').fullCalendar('removeEvents');
+                }
+                
+            });
         }
 
     });

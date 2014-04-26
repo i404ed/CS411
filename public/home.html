@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
         <title>iCouSchelper!</title>
-
+        <script type='text/javascript' src="trigger.js"></script>
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -12,7 +12,7 @@
 
         <!--Bootstrap-->
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
 
         <!--Jquery-->
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -28,9 +28,6 @@
 		<link rel='stylesheet' type='text/css' href='fullcalendar.css' />
         <script type='text/javascript' src='fullcalendar.js'></script>
         <script type='text/javascript' src='calendar.js'></script>
-
-        <!--triggle file to load everything to the main page-->
-        <script type='text/javascript' src="trigger.js"></script>
 
         <!--Datetimepicker-->
         <link href="./datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
@@ -113,7 +110,7 @@
 	            <li class="active" id = "class_nav"><a href="#">Classes</a></li>
 	            <li  id = "event_nav"><a href="#">Events</a></li>
 	            <li class="dropdown">
-	              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
+	              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user" style = "color:#999"></span>&nbsp&nbspAccount <b class="caret"></b></a>
 	              <ul class="dropdown-menu">
 	                <li><a href="#" style = "height: 30px">Edit Account</a></li>
 	                <li><a href="#" style = "height: 30px">Edit My Classes</a></li>
@@ -121,8 +118,6 @@
 	                <li><a href="#" style = "height: 30px">Log out</a></li>
 	              </ul>
 	            </li>
-	            <li id="username"></li>
-
 	          </ul>
 	        </div><!--/.nav-collapse -->
 	      </div>
@@ -131,7 +126,8 @@
 
 
 	<div class=left_container>
-		<p>Adding Courses</p>
+		<p id='pp'>Adding Courses</p>
+		<button type="button" class="btn btn-primary" id ="add_classes_button">Test</button>
 	</div>
 
 	<div class=middle_container>
@@ -142,11 +138,8 @@
 		-->
 
         <div id='calendar'></div>
-        
-        <button type="button" class="btn btn-primary" id ="add_classes_button">Test</button>
-  
-        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#add_event_model">Add Eventbb</button>
-        <div class="modal fade" id="add_event_model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+        <div class="modal fade" id="edit_event_modal" tabindex="-1" role="dialog" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -156,14 +149,67 @@
               <div class="modal-body">
 
                         <div class="container">
-
-
-
                             <form action="" class=""  role="form" style = "width: 80%; text-align: left;">
-                                <label for="event_title" class="col-md-2 control-label">Title</label>
-                                <input name = "name" type="text" id="event_title" placeholder="Enter event title"/><br/>
-
                                 <fieldset>
+                                    <label for="event_title" class="col-md-2 control-label">Title</label>
+                                    <input name = "name" type="text" class="form-control" id="edit_event_title" size="16" style = "width: 42%" value = "sdsd"/><br/>
+                               
+                                    <div class="form-group">
+                                        <label for="dtp_input1" class="col-md-2 control-label" id ="ppp">Start Date/Time</label>
+                                        <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1" id="edit_startdate_field">
+                                            <input class="form-control" size="16" type="text" value="" id="edit_start_time" readonly>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                        </div>
+                                        <input type="hidden" id="dtp_input1" value="" /><br/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="dtp_input2" class="col-md-2 control-label">End Date/Time</label>
+                                        <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input2" id="edit_enddate_field">
+                                            <input class="form-control" size="16" type="text" value="" id="edit_end_time" readonly>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                        </div>
+                                        <input type="hidden" id="dtp_input2" value="" /><br/>
+                                    </div>
+                                </fieldset>
+                                
+                            </form>
+                        </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id ="edit_event_button">Edit Event</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+</div>
+
+	<div class=right_container>
+		<p>Events</p>
+		<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#add_event_model">Add New Event</button>
+
+		<div class="modal fade" id="add_event_model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Adding Event</h4>
+              </div>
+              <div class="modal-body">
+
+                        <div class="container">
+                            <form action="" class=""  role="form" style = "width: 80%; text-align: left;">
+                            	<fieldset>
+                                	<label for="event_title" class="col-md-2 control-label">Title</label>
+                                	<input name = "name" type="text" class="form-control" id="event_title" placeholder="Enter event title"  size="16" style = "width: 42%" /><br/>
+                               
                                     <div class="form-group">
                                         <label for="dtp_input1" class="col-md-2 control-label">Start Date/Time</label>
                                         <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1" id="startdate_field">
@@ -173,10 +219,7 @@
                                         </div>
                                         <input type="hidden" id="dtp_input1" value="" /><br/>
                                     </div>
-                                </fieldset>
 
-
-                                <fieldset>
                                     <div class="form-group">
                                         <label for="dtp_input2" class="col-md-2 control-label">End Date/Time</label>
                                         <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input2" id="enddate_field">
@@ -187,24 +230,18 @@
                                         <input type="hidden" id="dtp_input2" value="" /><br/>
                                     </div>
                                 </fieldset>
-                                <button type="button" class="btn btn-primary" id ="add_event_button">Add Eventaaa</button>
+                                
                             </form>
-
                         </div>
-
               </div>
-
               <div class="modal-footer">
+              	<button type="button" class="btn btn-primary" id ="add_event_button">Add Event</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               </div>
-
             </div>
           </div>
         </div>
-</div>
 
-	<div class=right_container>
-		<p>Events</p>
 	</div>
         
     </body>
