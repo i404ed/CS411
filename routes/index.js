@@ -22,7 +22,8 @@ module.exports = function(app) {
 
                             if(result.length!=0){
                                 var resp = {};
-                                resp["email"] = obj.email;
+                                resp["success"] = "success";
+
                                 res.status(200).send(JSON.stringify(resp));
 
                             }
@@ -111,7 +112,7 @@ module.exports = function(app) {
                                 res.status(200).send(JSON.stringify(resp));
                             }
                             else{
-                                res.status(404).send("user doesn't exist!");
+                                res.status(404).send("fail to sign up!");
                             }
 
 
@@ -167,11 +168,19 @@ module.exports = function(app) {
     });
 
 
+
     app.post('/add_event',function(req,res){
         var data = req.body;
         var conn = connfun.dbconn();
+        var event = new Array(
+            "'" + data['email'] + "'",
+            "'" + data['start'] + "'",
+            "'" + data['end'] + "'",
+            "'" + data['title'] + "'"
 
-        var query_string = "update cs411horse_iCouSchelper.Users set "+data['name']+"='"+data['value']+"' where Email='"+data['pkn']+"';";
+        )
+
+        var query_string = "insert into cs411horse_iCouSchelper.Events(Email,Start,End,Title)  values ("+event+")" ;
 
         conn.connect(function (err) {
             if (err == null) {
@@ -180,16 +189,20 @@ module.exports = function(app) {
                     function (err, result) {
                         // Neat!
                         if (err != null || result == null) {
-                            res.status(404).send("user doesn't exist!");
+                            res.status(404).send("fail to add event!");
                         }
                         else {
                             if(result.affectedRows>0){
-                                var resp = {};
-                                resp["info"] = "ok";
-                                res.status(200).send(JSON.stringify(resp));
+                                var query = conn.query("select max(eventid) from cs411horse_iCouSchelper.Events",
+                                    function (err, result) {
+                                        var dict_event={};
+                                        dict_event['eventid'] = result[0]['max(eventid)'];
+                                        res.status(200).send(JSON.stringify(dict_event));
+                                    });
+
                             }
                             else{
-                                res.status(404).send("user doesn't exist!");
+                                res.status(404).send("fail to add event!");
                             }
 
 

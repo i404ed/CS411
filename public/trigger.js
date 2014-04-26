@@ -2,12 +2,12 @@
  * Created by ztx on 3/20/14.
  */
 $(document).ready(function () {
-    var email = sessionStorage.getItem('user');
+    var email = sessionStorage.getItem('email');
     var pwd = sessionStorage.getItem('pwd');
-    if (email != "" && email != null) {
+    if (email != "" && pwd != null) {
 
         //call when user info is confirmed by response and then update log info and private info on website.
-        $('#username')[0].innerHTML = "<i class=\"icon-user icon-white\"></i>" + email;
+        $('#username')[0].innerHTML = "<span class=\"glyphicon glyphicon-user\"></span>" + email;
 
     }
 });

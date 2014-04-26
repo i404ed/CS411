@@ -24,9 +24,10 @@ function AddEvent(title, StartDate, EndDate) {
             'title': title,
             'start': StartDate,
             'end': EndDate,
-            'allDay': false
+            'email': sessionStorage.getItem('email')
         },
-        success: function (email, pwd) {
+        success: function (data, status,jqxhr) {
+            var eventid = data['eventid'];
         }
         ,
         error: function (err,status) {

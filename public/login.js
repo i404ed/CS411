@@ -21,8 +21,8 @@ $('#signIn').click(function () {
             'email': email,
             'pwd': pwd
         },
-        success: function (email, pwd) {
-            sessionStorage.setItem('email', email.email);
+        success: function (data, status) {
+            sessionStorage.setItem('email', email);
             sessionStorage.setItem('pwd', pwd);
             window.location.href = "http://"+oururl+":2014/home.html";
         }
