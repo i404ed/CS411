@@ -31,7 +31,7 @@ $(function () {
                         data: $form.serialize(),
                         success: function () {
                             alert("register succesfully!");
-                            window.location.href = "http://localhost:2014/index.html";
+                            window.location.href = "http://"+oururl+":2014/index.html";
 
                         },error: function (err) {
                               alert("the email already existed, try to a new one!");
