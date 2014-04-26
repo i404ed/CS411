@@ -5,13 +5,28 @@ var connfun = require("./dbconnect");
 var crypto = require('crypto');
 
 module.exports = function(app) {
+    function encrypt(text){
+        var cipher = crypto.createCipher('aes-256-cbc','d6F3Efeq')
+        var crypted = cipher.update(text,'utf8','hex')
+        crypted += cipher.final('hex');
+        return crypted;
+    }
+
+    function decrypt(text){
+        var decipher = crypto.createDecipher('aes-256-cbc','d6F3Efeq')
+        var dec = decipher.update(text,'hex','utf8')
+        dec += decipher.final('utf8');
+        return dec;
+    }
+
     app.get('/login', function (req, res) {
         var obj = req.query;
         var conn = connfun.dbconn()
         conn.connect(function (err) {
             if (err == null) {
                 var query_string = "select * from cs411horse_iCouSchelper.Users where Email =";
-                query_string += "'"+obj.email+"' and Password='"+obj.pwd+"';";
+                var encrpty_pwd = encrypt(obj.pwd)
+                query_string += "'"+obj.email+"' and Password='"+encrpty_pwd+"';";
                 var query = conn.query(query_string,
                     function (err, result) {
                         // Neat!
@@ -43,7 +58,6 @@ module.exports = function(app) {
         });
 
     });
-
 
     app.get('/getusrinfo', function (req, res) {
         var obj = req.query;
@@ -84,7 +98,8 @@ module.exports = function(app) {
         var data = req.body;
         var conn = connfun.dbconn();
         var text=data['form_password'];
-        var cipher = crypto.createCiper('aes-128-cbc','so')
+
+        var encrypt_pwd = encrypt(text);
 
 
         var usr=new Array(
@@ -92,7 +107,7 @@ module.exports = function(app) {
             "'" + data['form_major'] + "'",
             "'" + data['form_choice'] + "'",
             "'" + data['form_username'] + "'",
-            data['form_password']
+            "'" +encrypt_pwd+ "'"
         )
         var query_string = "insert into cs411horse_iCouSchelper.Users values ("+usr+")";
 
@@ -126,9 +141,6 @@ module.exports = function(app) {
             }
         });
     });
-
-
-
 
     app.post('/update',function(req,res){
         var data = req.body;
@@ -166,8 +178,6 @@ module.exports = function(app) {
             }
         });
     });
-
-
 
     app.post('/add_event',function(req,res){
         var data = req.body;
@@ -216,6 +226,10 @@ module.exports = function(app) {
             }
         });
     });
+
+
+
+
 
 };
 

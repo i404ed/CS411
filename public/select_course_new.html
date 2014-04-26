@@ -1,26 +1,39 @@
 <!DOCTYPE html >
 <html>
 <head>
- 
-<style>
-div.scroll
-{
-background-color:#00FFFF;
-width:500px;
-height500px;
-overflow:scroll;
-}
 
-</style>
+<!--<style>-->
+<!--div.scroll-->
+<!--{-->
+<!--background-color:#00FFFF;-->
+<!--width:500px;-->
+<!--height:500px;-->
+<!--overflow:scroll;-->
+<!--}-->
 
-
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
-<script src="select_course.js"></script>
+<!--</style>-->
 
 
 
+
+ <script>
+        function myFunction()
+        {
+            alert("hhh");
+            var searchvalue = document.getElementById('search_courses').value;
+            var from_s = document.getElementById('select_course');
+            for(var i =0; i<from_s.options.length;i++)
+            {
+                var temp = from_s.options[i].text;
+                var exist = temp.search(searchvalue);
+                if(exist >=1)
+                {
+                    alert("add course");
+                }
+
+            }
+        }
+    </script>
 
 </head>
 <body>
@@ -31,69 +44,76 @@ overflow:scroll;
  <input type = 'submit' id = 'submit' value = 'search'>
   -->
 
-<h1> Welcome to the course registration page. </h1>
-<div id = "semester" > Schedule course for the semester: <br>
-<select id = "first_select" style = "width:400px">
-<option value = "Spring 2013"> spring13</option>
-<option value = "Summer 2013"> summer13</option>
-<option value = "Fall 2013"> fall13</option>
-<option value = "Spring 2014"> spring14</option>
+<!--<h1> Welcome to the course registration page. </h1>-->
+<!--<div id = "semester" > Schedule course for the semester: <br>-->
+<!--<select id = "first_select" style = "width:400px">-->
+<!--<option value = "Spring 2013"> spring13</option>-->
+<!--<option value = "Summer 2013"> summer13</option>-->
+<!--<option value = "Fall 2013"> fall13</option>-->
+<!--<option value = "Spring 2014"> spring14</option>-->
 
-</select>
-</div>
-<br>
-<br>
+<!--</select>-->
+<!--</div>-->
+<!--<br>-->
+<!--<br>-->
 
-<!-- second part for adding the course -->
-<div id = "add_course"> Add a course for the specific major: <br>
-<form action="demo_form.asp">
-  <input type="text" name="major" placeholder="cs"><br>
-  <div class = "scroll"> 
-  <select id = "second_select style = "width:300px height:400px"> 
-  <option value = "computer science"> cs </option>
-  <option value = "mathematics"> maths </option>
-  <option value = "astronomy"> astr </option>
-  <option value = "mechinical engineering"> ME </option>
-  <option value = "material science "> MSE </option>
+<!--&lt;!&ndash; second part for adding the course &ndash;&gt;-->
+<!--<div > Add a course for the specific major: <br>-->
+<!--<form action="demo_form.asp">-->
+  <!--<input type="text" name="major" placeholder="cs"><br>-->
+  <!--<div class = "scroll">-->
+  <!--<select id = "second_select style = width:300px height:400px">-->
+  <!--<option value = "computer science"> cs </option>-->
+  <!--<option value = "mathematics"> maths </option>-->
+  <!--<option value = "astronomy"> astr </option>-->
+  <!--<option value = "mechinical engineering"> ME </option>-->
+  <!--<option value = "material science "> MSE </option>-->
 
-  <option value = "eletrical and computer engineering"> ece </option>
-  </select>
-  </div>
-<br>
-<br>
-<button type = "button" id = "add_course"> add </button>
- 
-
-<!-- -->
-<div id = "first_class"  style = "width:400px;height:300px;">
-<p> cs242(3units) </p>
-<input type="button" value="Click Me to add or drop first class" style="float: right;"  id = "flip1">
-</div>
+  <!--<option value = "eletrical and computer engineering"> ece </option>-->
+  <!--</select>-->
+  <!--</div>-->
+<!--<br>-->
+<!--<br>-->
+<!--<button type = "button" id = "add_course"> add </button>-->
 
 
-<div id= "second_class" style ="width:400px;height:300px">
-<p> cs373(3units)</p>
-<input type ="button" value ="Click Me to add or drop second calss " style="float: right;" id= "flip2">
+<!--&lt;!&ndash; &ndash;&gt;-->
+<!--<div id = "first_class"  style = "width:400px;height:300px;">-->
+<!--<p> cs242(3units) </p>-->
+<!--<input type="button" value="Click Me to add or drop first class" style="float: right;"  id = "flip1">-->
+<!--</div>-->
 
-</form>
+
+<!--<div id= "second_class" style ="width:400px;height:300px">-->
+<!--<p> cs373(3units)</p>-->
+<!--<input type ="button" value ="Click Me to add or drop second calss " style="float: right;" id= "flip2">-->
 
 
-<!-- show several choices of course here -->
-<form>
-<select name = "user_select_course" id = 'select_course' multiple = 'multiple' size ='1'>
- <option value = "241" title = "cs241"> cs241 </option>
- <option value = '373' title = "cs373"> cs373 </option>
- <option value = '242' title = 'cs242'> cs242 </option>
- <option value = '473' title = 'cs473'> cs473 </option>
- <option value = '421' title = 'cs421'> cs421 </option>
- <option value = '357' title = 'cs357'> cs357 </option>
- </select> <br>
- 
- Search :<input type = 'search'  id = 'search_courses' > 
- <input type = 'submit' id = 'submit' value = 'submit' onkeyup = "search_course()">
- 
-</form>
 
+<!--&lt;!&ndash; show several choices of course here &ndash;&gt;-->
+<!--<form>-->
+<!--<select name = "user_select_course" id = 'select_course' multiple = 'multiple' size ='1'>-->
+ <!--<option value = "241" title = "cs241"> cs241 </option>-->
+ <!--<option value = '373' title = "cs373"> cs373 </option>-->
+ <!--<option value = '242' title = 'cs242'> cs242 </option>-->
+ <!--<option value = '473' title = 'cs473'> cs473 </option>-->
+ <!--<option value = '421' title = 'cs421'> cs421 </option>-->
+ <!--<option value = '357' title = 'cs357'> cs357 </option>-->
+ <!--</select> <br>-->
+
+ Search :<input type = 'search'  id = 'search_courses' >
+
+<input type="text" id="fname" onkeyup="myFunction()">
+
+
+
+<!--</form>-->
+
+<!--</div>-->
+
+
+<!--</form>-->
+<!--</div>-->
 
 
 </body>

@@ -44,19 +44,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="requirements.txt" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="requirements.txt" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/requirements.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="24" selection-start="109" selection-end="109" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="225">
+            <state line="5" column="24" selection-start="109" selection-end="109" vertical-scroll-proportion="0.19788918" vertical-offset="0" max-vertical-offset="379">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="main.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webparser/scripts/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="23" selection-start="397" selection-end="397" vertical-scroll-proportion="0.42159384" vertical-offset="1" max-vertical-offset="390">
+            <state line="14" column="23" selection-start="397" selection-end="397" vertical-scroll-proportion="-6.6" vertical-offset="0" max-vertical-offset="390">
               <folding />
             </state>
           </provider>
@@ -109,10 +109,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-19" />
-    <option name="y" value="47" />
+    <option name="y" value="22" />
     <option name="width" value="1280" />
-    <option name="height" value="732" />
+    <option name="height" value="717" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -140,6 +139,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -192,18 +192,17 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="recentsLimit" value="5" />
     <property name="options.lastSelected" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
-    <property name="last_opened_file_path" value="$USER_HOME$/cs242/hcao7/Assignment3.1/django_assignment3" />
+    <property name="recentsLimit" value="5" />
+    <property name="last_opened_file_path" value="$USER_HOME$/PycharmProjects/tzhang46_assign4" />
     <property name="FullScreen" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -472,14 +471,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-19" y="47" width="1280" height="732" extended-state="0" />
+    <frame x="0" y="22" width="1280" height="717" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31862745" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31825796" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17263326" sideWeight="0.6813725" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17263326" sideWeight="0.6817421" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39969134" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
@@ -596,30 +595,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="24" selection-start="109" selection-end="109" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/webparser/scripts/README">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="26" selection-start="303" selection-end="303" vertical-scroll-proportion="0.23136246" vertical-offset="0" max-vertical-offset="480">
-          <folding />
-        </state>
+        <state line="6" column="26" selection-start="303" selection-end="303" vertical-scroll-proportion="0.23136246" vertical-offset="0" max-vertical-offset="480" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webparser/scripts/DeptParser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="34" selection-start="1304" selection-end="1304" vertical-scroll-proportion="0.6978022" vertical-offset="376" max-vertical-offset="765">
-          <folding />
-        </state>
+        <state line="43" column="34" selection-start="1304" selection-end="1304" vertical-scroll-proportion="0.6978022" vertical-offset="376" max-vertical-offset="765" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webparser/scripts/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="23" selection-start="397" selection-end="397" vertical-scroll-proportion="0.42159384" vertical-offset="1" max-vertical-offset="390">
+        <state line="14" column="23" selection-start="397" selection-end="397" vertical-scroll-proportion="-6.6" vertical-offset="0" max-vertical-offset="390">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="24" selection-start="109" selection-end="109" vertical-scroll-proportion="0.19788918" vertical-offset="0" max-vertical-offset="379">
           <folding />
         </state>
       </provider>
