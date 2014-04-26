@@ -2,21 +2,24 @@ var sdate = null;
 var edate = null;
 var stimestamp = 1398026463;
 var etimestamp = stimestamp + (75 * 60);
+var oururl="172.16.159.124";
+
+
 function AddEvent(title, StartDate, EndDate) {
-    /*
+
     $('#calendar').fullCalendar('renderEvent', {
-        id: StartDate,
+
         title: title,
         start: StartDate,
         end: EndDate,
         allDay: false
     }, true);
-    */
+
 
     $.ajax({
-        url: 'http://localhost:2014/add_event',
+        url: 'http://'+oururl+':2014/add_event',
         dataType: 'json',
-        type: 'get',
+        type: 'post',
         data: {
             'title': title,
             'start': StartDate,

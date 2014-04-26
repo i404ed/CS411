@@ -1,13 +1,18 @@
 /**
  * Created by ztx on 3/20/14.
  */
+
+
+var oururl="172.16.159.124";
+
+
 $(document).ready(function () {
     var email = sessionStorage.getItem('email');
     if(email==null){
         window.location.href = "http://localhost:2014";
     }
     $.ajax({
-        url: 'http://localhost:2014/getusrinfo',
+        url: 'http://'+oururl+':2014/getusrinfo',
         dataType: 'json',
         type: 'get',
         data: {

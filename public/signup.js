@@ -4,6 +4,9 @@
 /**
  * Created by ztx on 11/11/13.
  */
+
+var oururl="172.16.159.124";
+
 $(function () {
 
 
@@ -22,7 +25,7 @@ $(function () {
 
 
                     $.ajax({
-                        url: 'http://localhost:2014/signup',
+                        url: 'http://'+oururl+':2014/signup',
                         dataType: 'json',
                         method: 'post',
                         data: $form.serialize(),
