@@ -133,11 +133,11 @@
 	</div>
 
 	<div class=middle_container>
-		<!--
-		<div id= "arrow_div">
-		To See Events<span class="glyphicon glyphicon-chevron-right"></span>
-		</div>
-		-->
+        <!--
+        <div id= "arrow_div">
+        To See Events<span class="glyphicon glyphicon-chevron-right"></span>
+        </div>
+        -->
 
         <div id='calendar'></div>
 
@@ -146,12 +146,12 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel_2">Adding Event</h4>
+                <h4 class="modal-title">Editing Event</h4>
               </div>
               <div class="modal-body">
 
                         <div class="container">
-                            <form action="" class=""  role="form" style = "width: 80%; text-align: left;">
+                            <form action="" class=""  role="form" style = "width: 80%; text-align: left;" id ="edit_event_form">
                                 <fieldset>
                                     <label for="event_title" class="col-md-2 control-label">Title</label>
                                     <input name = "name" type="text" class="form-control" id="edit_event_title" size="16" style = "width: 42%" value = "sdsd"/><br/>
@@ -163,7 +163,7 @@
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                         </div>
-                                        <input type="hidden"  value="" /><br/>
+                                        <input type="hidden" id="dtp_input1" value="" /><br/>
                                     </div>
 
                                     <div class="form-group">
@@ -173,7 +173,7 @@
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                         </div>
-                                        <input type="hidden"  value="" /><br/>
+                                        <input type="hidden" id="dtp_input2" value="" /><br/>
                                     </div>
                                 </fieldset>
                                 
@@ -193,24 +193,24 @@
 
 </div>
 
-	<div class=right_container>
-		<p>Events</p>
-		<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#add_event_model">Add New Event</button>
+    <div class=right_container>
+        <p>Events</p>
+        <button class="btn btn-primary btn-lg" id = "new_event_btn_2">Add New Event2</button>
 
-		<div class="modal fade" id="add_event_model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade" id="add_event_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel_1">Adding Event</h4>
+                <h4 class="modal-title">Adding Event</h4>
               </div>
               <div class="modal-body">
 
                         <div class="container">
-                            <form action="" class=""  role="form" style = "width: 80%; text-align: left;">
-                            	<fieldset>
-                                	<label for="event_title" class="col-md-2 control-label">Title</label>
-                                	<input name = "name" type="text" class="form-control" id="event_title" placeholder="Enter event title"  size="16" style = "width: 42%" /><br/>
+                            <form action="" class=""  role="form" style = "width: 80%; text-align: left;" id ="add_event_form">
+                                <fieldset>
+                                    <label for="event_title" class="col-md-2 control-label">Title</label>
+                                    <input name = "name" type="text" class="form-control" id="event_title" placeholder="Enter event title"  size="16" style = "width: 42%" /><br/>
                                
                                     <div class="form-group">
                                         <label for="dtp_input1" class="col-md-2 control-label">Start Date/Time</label>
@@ -237,22 +237,14 @@
                         </div>
               </div>
               <div class="modal-footer">
-              	<button type="button" class="btn btn-primary" id ="add_event_button">Add Event</button>
+                <button type="button" class="btn btn-primary" id ="add_event_button">Add Event</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               </div>
             </div>
           </div>
         </div>
 
-	</div>
+    </div>
         
     </body>
 </html>
-
-
-
-
-
-
-
-

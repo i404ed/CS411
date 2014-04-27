@@ -9,13 +9,35 @@ var oururl="172.16.159.124";
 
 function AddEvent(title, StartDate, EndDate) {
 
-    $('#calendar').fullCalendar('renderEvent', {
+    $.ajax({
+        url: 'http://'+oururl+':2014/add_event',
+        dataType: 'json',
+        type: 'post',
+        data: {
+            'title': title,
+            'start': StartDate,
+            'end': EndDate,
+            'email': sessionStorage.getItem('email')
+        },
+        success: function (data, status,jqxhr) {
+            var eventid = data['eventid'];
 
-        title: title,
-        start: StartDate,
-        end: EndDate,
-        allDay: false
-    }, true);
+            $('#calendar').fullCalendar('renderEvent', {
+                id: eventid,
+                title: title,
+                start: StartDate,
+                end: EndDate,
+                allDay: false,
+                className : 'custom',
+            }, true);
+
+        }
+        ,
+        error: function (err,status) {
+           alert("can't add event");
+        }
+    });
+
 
 }
 
@@ -28,7 +50,7 @@ function AddEvent(title, StartDate, EndDate) {
             startView: 2,
             forceParse: 0,
             showMeridian: 1,
-            startDate: new Date()
+            startDate: new Date(),
         });
 });
 
@@ -56,10 +78,11 @@ $(document).ready(function() {
         $ = jQuery.noConflict();
         $('#add_event_button').click(function() {
             var etitle = $('#event_title').val();
-
+            alert(etitle)
             AddEvent(etitle, sdate, edate);
             sdate = null;
             edate = null;
+            document.getElementById("add_event_form").reset();
         });
 
     });
@@ -127,10 +150,32 @@ $(document).ready(function() {
                     calEvent.end = edit_edate;
 
                 if (calEvent.start<calEvent.end){
-                    jq = jQuery.noConflict();
-                    $("#edit_event_modal").modal('hide');
-                    $ = jQuery.noConflict();
-                    $('#calendar').fullCalendar('updateEvent', calEvent);
+
+                     $.ajax({
+                        url: 'http://'+oururl+':2014/add_event',
+                        dataType: 'json',
+                        type: 'post',
+                        data: {
+                            'id': calEvent.id,
+                            'title': calEvent.title,
+                            'start': calEvent.start,
+                            'end': calEvent.end,
+                            'email': sessionStorage.getItem('email')
+                        },
+                        success: function (data, status,jqxhr) {
+                            jq = jQuery.noConflict();
+                            $("#edit_event_modal").modal('hide');
+                            $ = jQuery.noConflict();
+                            $('#calendar').fullCalendar('updateEvent', calEvent);
+                            document.getElementById("edit_event_form").reset();
+                            location.reload();
+                        }
+                        ,
+                        error: function (err,status) {
+                           alert("can't edit event");
+                        }
+                    });
+
                 }
                 else if (calEvent.start>calEvent.end){
                     alert("check the date!!");
@@ -139,11 +184,30 @@ $(document).ready(function() {
                 }
                 else if (calEvent.start==calEvent.end && calEvent.start != null && calEvent.end != null){
                     //delete
-                    $('#calendar').fullCalendar('removeEvents');
+
+                    $.ajax({
+                        url: 'http://'+oururl+':2014/add_event',
+                        dataType: 'json',
+                        type: 'post',
+                        data: {
+                            'id': calEvent.id,
+                            'email': sessionStorage.getItem('email')
+                        },
+                        success: function (data, status,jqxhr) {
+                            $('#calendar').fullCalendar('removeEvents', calEvent.id);
+                            location.reload();
+                        }
+                        ,
+                        error: function (err,status) {
+                           alert("can't delete event");
+                        }
+                    });
+                    
                 }
                 
             });
         }
 
     });
+
 });
