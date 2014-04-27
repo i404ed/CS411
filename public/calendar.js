@@ -1,5 +1,7 @@
-var sdate = null;
-var edate = null;
+//var sdate = null;
+//var edate = null;
+//var edit_sdate = null;
+//var edit_edate = null;
 var stimestamp = 1398026463;
 var etimestamp = stimestamp + (75 * 60);
 var oururl="172.16.159.124";
@@ -15,27 +17,6 @@ function AddEvent(title, StartDate, EndDate) {
         allDay: false
     }, true);
 
-    $.ajax({
-        url: 'http://'+oururl+':2014/add_event',
-        dataType: 'json',
-        type: 'post',
-        data: {
-            'title': title,
-            'start': StartDate,
-            'end': EndDate,
-            'email': sessionStorage.getItem('email')
-        },
-        success: function (data, status,jqxhr) {
-            var eventid = data['eventid'];
-
-        }
-        ,
-        error: function (err,status) {
-           alert("can't add event");
-        }
-    });
-
-
 }
 
  $(document).ready(function() {
@@ -47,8 +28,18 @@ function AddEvent(title, StartDate, EndDate) {
             startView: 2,
             forceParse: 0,
             showMeridian: 1,
-            startDate: new Date(),
+            startDate: new Date()
         });
+});
+
+$(document).ready(function() {
+    var date = new Date();
+    var d = date.getDate();
+    var m = date.getMonth();
+    var y = date.getFullYear();
+    $('#new_event_btn_2').click(function() {
+        sdate = null;
+        edate = null;
 
         $('#startdate_field').datetimepicker().on('changeDate', function(ev){
             var offset = (new Date()).getTimezoneOffset();
@@ -60,32 +51,20 @@ function AddEvent(title, StartDate, EndDate) {
             edate = (ev.date.valueOf()/1000) + (offset*60);
         });
 
-        $('#edit_startdate_field').datetimepicker().on('changeDate', function(ev){
-            var offset = (new Date()).getTimezoneOffset();
-            edit_sdate = (ev.date.valueOf()/1000) + (offset*60);
-            alert('ss');
+        jq = jQuery.noConflict();
+        $("#add_event_modal").modal('show');
+        $ = jQuery.noConflict();
+        $('#add_event_button').click(function() {
+            var etitle = $('#event_title').val();
+
+            AddEvent(etitle, sdate, edate);
+            sdate = null;
+            edate = null;
         });
 
-        $('#edit_enddate_field').datetimepicker().on('changeDate', function(ev){
-            var offset = (new Date()).getTimezoneOffset();
-            edit_edate = (ev.date.valueOf()/1000) + (offset*60);
-            alert('ss');
-        });
-
-
-});
-
-$(document).ready(function() {
-    var date = new Date();
-    var d = date.getDate();
-    var m = date.getMonth();
-    var y = date.getFullYear();
-
-    $('#add_event_button').click(function() {
-        var etitle = $('#event_title').val();
-        alert(etitle)
-        AddEvent(etitle, sdate, edate);
     });
+
+
 
     $('#add_classes_button').click(function() {
 
@@ -113,19 +92,34 @@ $(document).ready(function() {
         },
 
        eventClick: function(calEvent, jsEvent, view) {
-            
-            $("#edit_event_title").attr('value',calEvent.title);
-            $("#edit_start_time").attr('value',calEvent.start);
-            $("#edit_end_time").attr('value',calEvent.end);
+            alert(calEvent.start)
+            alert(calEvent.end)
+            edit_sdate = null;
+            edit_edate = null;
 
-           jq = jQuery.noConflict();
-           
+            $('#edit_startdate_field').datetimepicker().on('changeDate', function(ev){
+                var offset = (new Date()).getTimezoneOffset();
+                edit_sdate = (ev.date.valueOf()/1000) + (offset*60);
+                alert('ss');
+            });
+
+            $('#edit_enddate_field').datetimepicker().on('changeDate', function(ev){
+                var offset = (new Date()).getTimezoneOffset();
+                edit_edate = (ev.date.valueOf()/1000) + (offset*60);
+                alert('ss');
+            });
+
+            $("#edit_event_title").attr('value',calEvent.title);
+
+            jq = jQuery.noConflict();
             $("#edit_event_modal").modal('show');
+            $ = jQuery.noConflict();
+
             $('#edit_event_button').click(function() {
                 
-                temp_sdate = null;
-                temp_edate = null;
-                $ = jQuery.noConflict();
+                temp_sdate = calEvent.start;
+                temp_edate = calEvent.end;
+               
                 calEvent.title = $('#edit_event_title').val();
                 if (edit_sdate != null)
                     calEvent.start = edit_sdate;
@@ -133,15 +127,17 @@ $(document).ready(function() {
                     calEvent.end = edit_edate;
 
                 if (calEvent.start<calEvent.end){
-                    $('#calendar').fullCalendar('updateEvent', calEvent);
                     jq = jQuery.noConflict();
                     $("#edit_event_modal").modal('hide');
                     $ = jQuery.noConflict();
+                    $('#calendar').fullCalendar('updateEvent', calEvent);
                 }
                 else if (calEvent.start>calEvent.end){
                     alert("check the date!!");
+                    calEvent.start = temp_sdate;
+                    calEvent.end = temp_edate;
                 }
-                else{
+                else if (calEvent.start==calEvent.end && calEvent.start != null && calEvent.end != null){
                     //delete
                     $('#calendar').fullCalendar('removeEvents');
                 }

@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
         <title>iCouSchelper!</title>
-        <script type='text/javascript' src="trigger.js"></script>
+
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -28,6 +28,9 @@
 		<link rel='stylesheet' type='text/css' href='fullcalendar.css' />
         <script type='text/javascript' src='fullcalendar.js'></script>
         <script type='text/javascript' src='calendar.js'></script>
+
+        <!--triggler-->
+        <script type='text/javascript' src="trigger.js"></script>
 
         <!--Datetimepicker-->
         <link href="./datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
@@ -112,7 +115,7 @@
 	            <li class="dropdown">
 	              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user" style = "color:#999"></span>&nbsp&nbspAccount <b class="caret"></b></a>
 	              <ul class="dropdown-menu">
-	                <li><a href="#" style = "height: 30px">Edit Account</a></li>
+	                <li><a href="editAccount.html" style = "height: 30px">Edit Account</a></li>
 	                <li><a href="#" style = "height: 30px">Edit My Classes</a></li>
 	                <li class="divider"></li>
 	                <li><a href="#" style = "height: 30px">Log out</a></li>
@@ -126,8 +129,7 @@
 
 
 	<div class=left_container>
-		<p id='pp'>Adding Courses</p>
-		<button type="button" class="btn btn-primary" id ="add_classes_button">Test</button>
+        <input type = 'text' id = 'search_courses' onkeyup = "requestcourse()">
 	</div>
 
 	<div class=middle_container>
@@ -144,7 +146,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Adding Event</h4>
+                <h4 class="modal-title" id="myModalLabel_2">Adding Event</h4>
               </div>
               <div class="modal-body">
 
@@ -161,7 +163,7 @@
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                         </div>
-                                        <input type="hidden" id="dtp_input1" value="" /><br/>
+                                        <input type="hidden"  value="" /><br/>
                                     </div>
 
                                     <div class="form-group">
@@ -171,7 +173,7 @@
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                         </div>
-                                        <input type="hidden" id="dtp_input2" value="" /><br/>
+                                        <input type="hidden"  value="" /><br/>
                                     </div>
                                 </fieldset>
                                 
@@ -200,7 +202,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Adding Event</h4>
+                <h4 class="modal-title" id="myModalLabel_1">Adding Event</h4>
               </div>
               <div class="modal-body">
 
