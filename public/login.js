@@ -1,6 +1,17 @@
+
+sessionStorage.setItem('email', "");
+sessionStorage.setItem('pwd', "");
+sessionStorage.setItem('name', "");
+
+
+
+
 $('#signIn').click(function () {
 //    get the value of log in information and store them in to session. New version makes it shorter and more
 //    reasonable. page will change to main page after verifying user account.
+
+
+
     var email = $('#inputEmail').val();
     var pwd = $('#inputPassword').val();
     var oururl="172.16.159.124";
@@ -24,6 +35,8 @@ $('#signIn').click(function () {
         success: function (data, status) {
             sessionStorage.setItem('email', email);
             sessionStorage.setItem('pwd', pwd);
+            sessionStorage.setItem('name', data["name"]);
+            document.getElementById("loginform").reset();
             window.location.href = "http://"+oururl+":2014/home.html";
         }
         ,

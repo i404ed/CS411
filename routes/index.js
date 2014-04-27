@@ -21,6 +21,7 @@ module.exports = function(app) {
 
     app.get('/login', function (req, res) {
         var obj = req.query;
+        var test = decrypt("097662d985ff7be99b6b4da6bf5767aa");
         var conn = connfun.dbconn()
         conn.connect(function (err) {
             if (err == null) {
@@ -37,7 +38,7 @@ module.exports = function(app) {
 
                             if(result.length!=0){
                                 var resp = {};
-                                resp["success"] = "success";
+                                resp["name"] = result[0]["Name"];
 
                                 res.status(200).send(JSON.stringify(resp));
 
@@ -227,6 +228,49 @@ module.exports = function(app) {
         });
     });
 
+    app.post('/updateuserinfo',function(req,res){
+        var data = req.body;
+
+        var conn = connfun.dbconn();
+        if(data["name"]=="Password")
+            var value = encrypt(data["value"]);
+        else
+            var value = data["value"];
+        var query_string = "update cs411horse_iCouSchelper.Users set "+data["name"]+"='"+value+"' where Email='"+data["pkn"]+"';" ;
+
+        conn.connect(function (err) {
+            if (err == null) {
+
+                var query = conn.query(query_string,
+                    function (err, result) {
+                        // Neat!
+                        if (err != null || result == null) {
+                            res.status(404).send("fail to update user info!");
+                        }
+                        else {
+                            if(result.affectedRows>0){
+
+                                        var dict_event={};
+                                        dict_event['status'] = 'success';
+                                        res.status(200).send(JSON.stringify(dict_event));
+
+
+                            }
+                            else{
+                                res.status(404).send("fail to update user info!");
+                            }
+
+
+                        }
+                    });
+            }
+            else {
+                console.log(err);
+
+
+            }
+        });
+    });
 
 
 

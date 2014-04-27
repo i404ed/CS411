@@ -8,7 +8,9 @@ $(document).ready(function() {
             params.pkn =$('#edit_email').text();
             return params;
         },
-
+        pk:2,
+        type:'text',
+        url:'updateuserinfo',
         success: function(response, newValue) {
 //          if(response.status == 'error') return response.msg; //msg will be shown in editable form
 
@@ -21,6 +23,9 @@ $(document).ready(function() {
             params.pkn =$('#edit_email').text();
             return params;
         },
+        pk:1,
+        type:'text',
+        url:'updateuserinfo',
         success: function(response, newValue) {
             if(response.status == 'error') return response.msg; //msg will be shown in editable form
         }
@@ -31,6 +36,9 @@ $(document).ready(function() {
             params.pkn =$('#edit_email').text();
             return params;
         },
+        pk:3,
+        type:'text',
+        url:'/updateuserinfo',
         success: function(response, newValue) {
             if(response.status == 'error') return response.msg; //msg will be shown in editable form
         }
@@ -43,9 +51,11 @@ $(document).ready(function() {
             params.pkn =$('#edit_email').text();
             return params;
         },
+        pk:4,
         type: 'select',
         title: 'Select status',
         placement: 'right',
+        url: '/updateuserinfo',
         value: 0,
         source: [
             {value: 0, text: 'Freshman'},
