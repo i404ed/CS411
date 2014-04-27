@@ -110,7 +110,7 @@ module.exports = function(app) {
             "'" + data['form_username'] + "'",
             "'" +encrypt_pwd+ "'"
         )
-        var query_string = "insert into cs411horse_iCouSchelper.Users values ("+usr+")";
+        var query_string = "insert into cs411horse_iCouSchelper.Users values ("+usr+");";
 
         conn.connect(function (err) {
             if (err == null) {
@@ -191,7 +191,7 @@ module.exports = function(app) {
 
         )
 
-        var query_string = "insert into cs411horse_iCouSchelper.Events(Email,Start,End,Title)  values ("+event+")" ;
+        var query_string = "insert into cs411horse_iCouSchelper.Events(Email,Start,End,Title)  values ("+event+");" ;
 
         conn.connect(function (err) {
             if (err == null) {
@@ -258,6 +258,47 @@ module.exports = function(app) {
                             }
                             else{
                                 res.status(404).send("fail to update user info!");
+                            }
+
+
+                        }
+                    });
+            }
+            else {
+                console.log(err);
+
+
+            }
+        });
+    });
+
+    app.get('/courseinfo',function(req,res){
+        var data = req.query;
+
+        var conn = connfun.dbconn();
+
+        var query_string = "select CourseID from cs411horse_iCouSchelper.webparser_course where CourseID like '"+data["content"]+"%' ;" ;
+
+        conn.connect(function (err) {
+            if (err == null) {
+
+                var query = conn.query(query_string,
+                    function (err, result) {
+                        // Neat!
+                        if (err != null) {
+                            res.status(404).send("fail to extract course info!");
+                        }
+                        else {
+                            if(result!=null){
+                                var dict_event={};
+                                dict_event['courselist'] = result;
+                                res.status(200).send(JSON.stringify(dict_event));
+                            }
+                            else{
+                                var dict_event={};
+                                dict_event['courselist'] = result;
+                                res.status(200).send(JSON.stringify(dict_event));
+
                             }
 
 

@@ -6,9 +6,30 @@
 var oururl="172.16.159.124";
 
 function requestcourse(){
-    var searchvalue = document.getElementById('search_courses').value;
+    var searchvalue = document.getElementById('course_search').value;
+    $.ajax({
+        url: 'http://'+oururl+':2014/courseinfo',
+        dataType: 'json',
+        type: 'get',
+        data: {
+            'content': searchvalue.toUpperCase()
+        },
 
-    alert(searchvalue);
+        success: function (data, status,jqxhr) {
+            var courselist = data['courselist'];
+
+            $( "#course_search" ).autocomplete(
+                {
+                    source: courselist
+                })
+
+        }
+        ,
+        error: function (err,status) {
+            alert("can't search course");
+        }
+    });
+
 
 }
 
@@ -30,26 +51,7 @@ $(document).ready(function () {
     }
 
 
-    $.ajax({
-        url: 'http://'+oururl+':2014/courseinfo',
-        dataType: 'json',
-        type: 'get',
-        data: {
-            'content': $('#course_search').val();
-        },
-        success: function (data, status,jqxhr) {
-            var courselist = data['courselist'];
 
-            $( "#course_search" ).autocomplete(
-            {
-                 source: courselist
-            })
 
-        }
-        ,
-        error: function (err,status) {
-           alert("can't search course");
-        }
-    });
 
 });
