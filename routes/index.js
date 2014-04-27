@@ -95,6 +95,47 @@ module.exports = function(app) {
 
     });
 
+    app.get('/courseinfo',function(req,res){
+        var data = req.query;
+
+        var conn = connfun.dbconn();
+
+        var query_string = "select CourseID from cs411horse_iCouSchelper.webparser_course where CourseID like '"+data["content"]+"%' ;" ;
+
+        conn.connect(function (err) {
+            if (err == null) {
+
+                var query = conn.query(query_string,
+                    function (err, result) {
+                        // Neat!
+                        if (err != null) {
+                            res.status(404).send("fail to extract course info!");
+                        }
+                        else {
+                            if(result!=null){
+                                var dict_event={};
+                                dict_event['courselist'] = result;
+                                res.status(200).send(JSON.stringify(dict_event));
+                            }
+                            else{
+                                var dict_event={};
+                                dict_event['courselist'] = result;
+                                res.status(200).send(JSON.stringify(dict_event));
+
+                            }
+
+
+                        }
+                    });
+            }
+            else {
+                console.log(err);
+
+
+            }
+        });
+    });
+
     app.post('/signup',function(req,res){
         var data = req.body;
         var conn = connfun.dbconn();
@@ -272,45 +313,12 @@ module.exports = function(app) {
         });
     });
 
-    app.get('/courseinfo',function(req,res){
-        var data = req.query;
+
+
+    app.post('/addcourse',function(req,res){
+        var data = req.body;
 
         var conn = connfun.dbconn();
-
-        var query_string = "select CourseID from cs411horse_iCouSchelper.webparser_course where CourseID like '"+data["content"]+"%' ;" ;
-
-        conn.connect(function (err) {
-            if (err == null) {
-
-                var query = conn.query(query_string,
-                    function (err, result) {
-                        // Neat!
-                        if (err != null) {
-                            res.status(404).send("fail to extract course info!");
-                        }
-                        else {
-                            if(result!=null){
-                                var dict_event={};
-                                dict_event['courselist'] = result;
-                                res.status(200).send(JSON.stringify(dict_event));
-                            }
-                            else{
-                                var dict_event={};
-                                dict_event['courselist'] = result;
-                                res.status(200).send(JSON.stringify(dict_event));
-
-                            }
-
-
-                        }
-                    });
-            }
-            else {
-                console.log(err);
-
-
-            }
-        });
     });
 
 

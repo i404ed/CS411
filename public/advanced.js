@@ -83,7 +83,7 @@ function timeConflict(List, elem){
 			{
 				if (isSameTime(elem.time, List[i].time))
 				{
-
+                    return true
 				}
 			}
 		}

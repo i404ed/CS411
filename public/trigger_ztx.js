@@ -4,7 +4,6 @@
 
 
 var oururl="172.16.159.124";
-var courselist_json = [{"label":"CS 242"}];
 
 function requestcourse(){
     var searchvalue = document.getElementById('course_search').value;
@@ -18,14 +17,10 @@ function requestcourse(){
 
         success: function (data, status,jqxhr) {
             var courselist = data['courselist'];
-              
-            var jsonstr = JSON.stringify(courselist);
-            var new_jsonstr = jsonstr.replace(/"CourseID"/g, '"label"');
-            courselist_json = JSON.parse(new_jsonstr);
 
             $( "#course_search" ).autocomplete(
                 {
-                    source: courselist_json
+                    source: courselist
                 })
 
         }
@@ -54,6 +49,8 @@ $(document).ready(function () {
     else{
         window.location.href = "http://"+oururl+":2014/home.html";
     }
+
+
 
 
 
