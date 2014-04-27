@@ -28,4 +28,28 @@ $(document).ready(function () {
     else{
         window.location.href = "http://"+oururl+":2014/home.html";
     }
+
+
+    $.ajax({
+        url: 'http://'+oururl+':2014/courseinfo',
+        dataType: 'json',
+        type: 'get',
+        data: {
+            'content': $('#course_search').val();
+        },
+        success: function (data, status,jqxhr) {
+            var courselist = data['courselist'];
+
+            $( "#course_search" ).autocomplete(
+            {
+                 source: courselist
+            })
+
+        }
+        ,
+        error: function (err,status) {
+           alert("can't search course");
+        }
+    });
+
 });

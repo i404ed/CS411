@@ -66,10 +66,10 @@
 		</script>
 		
 		<style>
-		.left_container{ width:25%; background-color:#DDDDDD;  height:800px; float:left;}						
-		.middle_container{ width:75%; background-color:White; float:left; height:800px; }						
-		.right_container{ width:0%; background-color:#DDDDDD; float:left; height:800px; }						
-		.header{ background-color:White; width:100%; height:80px;}	
+        .left_container{ width:25%; background-color:#DDDDDD;  height:800px; float:left; padding: 20px}                     
+        .middle_container{ width:75%; background-color:White; float:left; height:800px; }                       
+        .right_container{ width:0%; background-color:#DDDDDD; float:left; height:800px; }                       
+        .header{ background-color:White; width:100%; height:80px;}  
 
 		.hide_left{
 			width: 0%;
@@ -129,7 +129,8 @@
 
 
 	<div class=left_container>
-        <input type = 'text' id = 'search_courses' onkeyup = "requestcourse()">
+        <label for="course_search" class="col-md-2 control-label" style = "text-align: left; margin-right: 40px">Course: </label>
+        <input class="form-control" type="text" id="course_search" style = "width: 50%;"/>
 	</div>
 
 	<div class=middle_container>
