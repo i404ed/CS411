@@ -102,38 +102,34 @@ module.exports = function(app) {
 
         var query_string = "select CourseID from cs411horse_iCouSchelper.webparser_course where CourseID like '"+data["content"]+"%' ;" ;
 
-        conn.connect(function (err) {
-            if (err == null) {
+        conn.connect();
+        conn.query(query_string,
+            function (err, result) {
+                // Neat!
+                if (err != null) {
+                    res.status(404).send("fail to extract course info!");
+                }
+                else {
+                    if(result!=null){
+                        var dict_event={};
+                        dict_event['courselist'] = result;
+                        res.status(200).send(JSON.stringify(dict_event));
+                    }
+                    else{
+                        var dict_event={};
+                        dict_event['courselist'] = result;
+                        res.status(200).send(JSON.stringify(dict_event));
 
-                var query = conn.query(query_string,
-                    function (err, result) {
-                        // Neat!
-                        if (err != null) {
-                            res.status(404).send("fail to extract course info!");
-                        }
-                        else {
-                            if(result!=null){
-                                var dict_event={};
-                                dict_event['courselist'] = result;
-                                res.status(200).send(JSON.stringify(dict_event));
-                            }
-                            else{
-                                var dict_event={};
-                                dict_event['courselist'] = result;
-                                res.status(200).send(JSON.stringify(dict_event));
-
-                            }
+                    }
 
 
-                        }
-                    });
-            }
-            else {
-                console.log(err);
+                }
+
+                conn.end();
+            });
 
 
-            }
-        });
+
     });
 
     app.post('/signup',function(req,res){
@@ -279,38 +275,43 @@ module.exports = function(app) {
             var value = data["value"];
         var query_string = "update cs411horse_iCouSchelper.Users set "+data["name"]+"='"+value+"' where Email='"+data["pkn"]+"';" ;
 
-        conn.connect(function (err) {
-            if (err == null) {
+        conn.connect();
 
-                var query = conn.query(query_string,
-                    function (err, result) {
-                        // Neat!
-                        if (err != null || result == null) {
-                            res.status(404).send("fail to update user info!");
-                        }
-                        else {
-                            if(result.affectedRows>0){
+        conn.query(query_string,
+            function (err, result) {
+                // Neat!
+                if (err != null || result == null) {
+                    res.status(404).send("fail to update user info!");
+                }
+                else {
+                    if(result.affectedRows>0){
 
-                                        var dict_event={};
-                                        dict_event['status'] = 'success';
-                                        res.status(200).send(JSON.stringify(dict_event));
-
-
-                            }
-                            else{
-                                res.status(404).send("fail to update user info!");
-                            }
+                        var dict_event={};
+                        dict_event['status'] = 'success';
+                        res.status(200).send(JSON.stringify(dict_event));
 
 
-                        }
-                    });
-            }
-            else {
-                console.log(err);
+                    }
+                    else{
+                        res.status(404).send("fail to update user info!");
+                    }
 
 
-            }
-        });
+                }
+                conn.end();
+            });
+
+
+
+
+
+
+
+
+
+
+
+
     });
 
 
