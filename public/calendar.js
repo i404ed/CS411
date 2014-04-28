@@ -55,6 +55,11 @@ function AddEvent(title, StartDate, EndDate) {
 });
 
 $(document).ready(function() {
+    
+    $(document).on('click', ".section_table tr",function() {
+        alert("sasa");
+    });
+
     var date = new Date();
     var d = date.getDate();
     var m = date.getMonth();
@@ -211,3 +216,4 @@ $(document).ready(function() {
     });
 
 });
+
