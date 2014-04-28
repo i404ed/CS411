@@ -26,17 +26,20 @@
       <file leaf-file-name="index.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="180" column="7" selection-start="5541" selection-end="5541" vertical-scroll-proportion="0.64285713" vertical-offset="46" max-vertical-offset="782">
+            <state line="407" column="35" selection-start="12192" selection-end="12192" vertical-scroll-proportion="0.47945204" vertical-offset="1115" max-vertical-offset="1815">
               <folding>
-                <element signature="e#168#361#0" expanded="false" />
-                <element signature="e#389#579#0" expanded="false" />
-                <element signature="e#623#1913#0" expanded="false" />
-                <element signature="e#1964#2998#0" expanded="false" />
-                <element signature="e#3045#4058#0" expanded="false" />
-                <element signature="e#4102#5539#0" expanded="false" />
-                <element signature="e#5583#6738#0" expanded="false" />
-                <element signature="e#6785#8392#0" expanded="false" />
-                <element signature="e#8444#9519#0" expanded="false" />
+                <element signature="e#459#649#0" expanded="false" />
+                <element signature="e#1756#2759#0" expanded="false" />
+                <element signature="e#2810#3880#0" expanded="false" />
+                <element signature="e#3927#4940#0" expanded="false" />
+                <element signature="e#4984#6445#0" expanded="false" />
+                <element signature="e#5514#6437#0" expanded="false" />
+                <element signature="e#6489#7668#0" expanded="false" />
+                <element signature="e#7715#9346#0" expanded="false" />
+                <element signature="e#9398#10462#0" expanded="false" />
+                <element signature="e#9830#10453#0" expanded="false" />
+                <element signature="e#10504#11756#0" expanded="false" />
+                <element signature="e#11408#11606#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -72,13 +75,14 @@
         <option value="$PROJECT_DIR$/public/editAccount.html" />
         <option value="$PROJECT_DIR$/public/home.html" />
         <option value="$PROJECT_DIR$/public/advanced.js" />
-        <option value="$PROJECT_DIR$/public/trigger.js" />
         <option value="$PROJECT_DIR$/routes/index.js" />
+        <option value="$PROJECT_DIR$/public/trigger.js" />
+        <option value="$PROJECT_DIR$/public/trigger_ztx.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="123" />
+    <option name="x" value="276" />
     <option name="y" value="22" />
     <option name="width" value="1139" />
     <option name="height" value="700" />
@@ -132,6 +136,10 @@
               <option name="myItemId" value="CS411" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -171,6 +179,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CS411" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CS411_local" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="node_modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -189,8 +211,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/node_modules" />
+      <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/routes" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -214,14 +236,6 @@
       <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
       <method />
     </configuration>
-    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
-      <option name="VMOptions" />
-      <option name="arguments" />
-      <option name="filePath" />
-      <option name="scope" value="ALL" />
-      <option name="testName" />
-      <method />
-    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -232,15 +246,23 @@
       <option name="showConsoleOnStdOut" value="false" />
       <method />
     </configuration>
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="">
+      <envs />
+      <method />
+    </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
       <setting name="configLocationType" value="CONFIG_FILE" />
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="CHROME" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="">
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
@@ -287,16 +309,36 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView" selected-index="2">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="123" y="22" width="1139" height="700" extended-state="0" />
-    <editor active="true" />
+    <frame x="276" y="22" width="1139" height="700" extended-state="1" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32894737" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31746033" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32894737" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20483005" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46381578" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17620751" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5180921" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291592" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33223686" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -305,15 +347,15 @@
     </layout>
     <layout-to-restore>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32894737" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32894737" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20483005" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46381578" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17620751" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2944079" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33223686" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291592" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
@@ -335,15 +377,10 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="105" />
+      <option name="time" value="123" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="6" selection-start="46" selection-end="46" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="1110" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/editAccount.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="3" column="26" selection-start="68" selection-end="68" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1980" />
@@ -373,15 +410,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="17" column="11" selection-start="711" selection-end="711" vertical-scroll-proportion="0.0" vertical-offset="2036" max-vertical-offset="2580">
           <folding>
-            <element signature="e#168#361#0" expanded="false" />
-            <element signature="e#389#579#0" expanded="false" />
-            <element signature="e#623#1913#0" expanded="false" />
-            <element signature="e#1964#2998#0" expanded="false" />
-            <element signature="e#3045#4058#0" expanded="false" />
-            <element signature="e#4102#5539#0" expanded="false" />
-            <element signature="e#5583#6738#0" expanded="false" />
-            <element signature="e#6785#8392#0" expanded="false" />
-            <element signature="e#8444#9519#0" expanded="false" />
+            <element signature="e#459#649#0" expanded="false" />
+            <element signature="e#1756#2759#0" expanded="false" />
+            <element signature="e#2810#3880#0" expanded="false" />
+            <element signature="e#3927#4940#0" expanded="false" />
+            <element signature="e#4984#6445#0" expanded="false" />
+            <element signature="e#5514#6437#0" expanded="false" />
+            <element signature="e#6489#7668#0" expanded="false" />
+            <element signature="e#7715#9346#0" expanded="false" />
+            <element signature="e#9398#10462#0" expanded="false" />
+            <element signature="e#9830#10453#0" expanded="false" />
+            <element signature="e#10504#11756#0" expanded="false" />
+            <element signature="e#11408#11606#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -430,15 +470,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="131" column="28" selection-start="4083" selection-end="4083" vertical-scroll-proportion="0.0" vertical-offset="1965" max-vertical-offset="2580">
           <folding>
-            <element signature="e#168#361#0" expanded="false" />
-            <element signature="e#389#579#0" expanded="false" />
-            <element signature="e#623#1913#0" expanded="false" />
-            <element signature="e#1964#2998#0" expanded="false" />
-            <element signature="e#3045#4058#0" expanded="false" />
-            <element signature="e#4102#5539#0" expanded="false" />
-            <element signature="e#5583#6738#0" expanded="false" />
-            <element signature="e#6785#8392#0" expanded="false" />
-            <element signature="e#8444#9519#0" expanded="false" />
+            <element signature="e#459#649#0" expanded="false" />
+            <element signature="e#1756#2759#0" expanded="false" />
+            <element signature="e#2810#3880#0" expanded="false" />
+            <element signature="e#3927#4940#0" expanded="false" />
+            <element signature="e#4984#6445#0" expanded="false" />
+            <element signature="e#5514#6437#0" expanded="false" />
+            <element signature="e#6489#7668#0" expanded="false" />
+            <element signature="e#7715#9346#0" expanded="false" />
+            <element signature="e#9398#10462#0" expanded="false" />
+            <element signature="e#9830#10453#0" expanded="false" />
+            <element signature="e#10504#11756#0" expanded="false" />
+            <element signature="e#11408#11606#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -472,15 +515,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="70" column="18" selection-start="2331" selection-end="2331" vertical-scroll-proportion="0.0" vertical-offset="1050" max-vertical-offset="2580">
           <folding>
-            <element signature="e#168#361#0" expanded="false" />
-            <element signature="e#389#579#0" expanded="false" />
-            <element signature="e#623#1913#0" expanded="false" />
-            <element signature="e#1964#2998#0" expanded="false" />
-            <element signature="e#3045#4058#0" expanded="false" />
-            <element signature="e#4102#5539#0" expanded="false" />
-            <element signature="e#5583#6738#0" expanded="false" />
-            <element signature="e#6785#8392#0" expanded="false" />
-            <element signature="e#8444#9519#0" expanded="false" />
+            <element signature="e#459#649#0" expanded="false" />
+            <element signature="e#1756#2759#0" expanded="false" />
+            <element signature="e#2810#3880#0" expanded="false" />
+            <element signature="e#3927#4940#0" expanded="false" />
+            <element signature="e#4984#6445#0" expanded="false" />
+            <element signature="e#5514#6437#0" expanded="false" />
+            <element signature="e#6489#7668#0" expanded="false" />
+            <element signature="e#7715#9346#0" expanded="false" />
+            <element signature="e#9398#10462#0" expanded="false" />
+            <element signature="e#9830#10453#0" expanded="false" />
+            <element signature="e#10504#11756#0" expanded="false" />
+            <element signature="e#11408#11606#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -527,62 +573,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="19" selection-start="240" selection-end="240" vertical-scroll-proportion="0.0" vertical-offset="125" max-vertical-offset="705">
-          <folding />
-        </state>
+        <state line="14" column="19" selection-start="240" selection-end="240" vertical-scroll-proportion="0.0" vertical-offset="125" max-vertical-offset="705" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/displayaccount.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="17" selection-start="797" selection-end="797" vertical-scroll-proportion="1.1111112" vertical-offset="0" max-vertical-offset="765">
-          <folding />
-        </state>
+        <state line="28" column="17" selection-start="797" selection-end="797" vertical-scroll-proportion="1.1111112" vertical-offset="0" max-vertical-offset="765" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/jqBootstrapValidation.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="13620">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="13620" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/fullcalendar.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="17" selection-start="683" selection-end="687" vertical-scroll-proportion="0.33333334" vertical-offset="487" max-vertical-offset="91725">
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
+        <state line="40" column="17" selection-start="683" selection-end="687" vertical-scroll-proportion="0.33333334" vertical-offset="487" max-vertical-offset="91725" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/TestPythonServer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="3" selection-start="256" selection-end="256" vertical-scroll-proportion="0.3968254" vertical-offset="0" max-vertical-offset="378">
-          <folding />
-        </state>
+        <state line="10" column="3" selection-start="256" selection-end="256" vertical-scroll-proportion="0.3968254" vertical-offset="0" max-vertical-offset="378" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/signup.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="0" selection-start="642" selection-end="642" vertical-scroll-proportion="0.47619048" vertical-offset="150" max-vertical-offset="810">
-          <folding />
-        </state>
+        <state line="24" column="0" selection-start="642" selection-end="642" vertical-scroll-proportion="0.47619048" vertical-offset="150" max-vertical-offset="810" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/select_course_new.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="15" selection-start="197" selection-end="197" vertical-scroll-proportion="-8.125" vertical-offset="0" max-vertical-offset="1830">
-          <folding>
-            <element signature="e#761#956#0" expanded="false" />
-          </folding>
-        </state>
+        <state line="13" column="15" selection-start="197" selection-end="197" vertical-scroll-proportion="-8.125" vertical-offset="0" max-vertical-offset="1830" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/select_course.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="42" selection-start="581" selection-end="581" vertical-scroll-proportion="0.5689655" vertical-offset="0" max-vertical-offset="580">
-          <folding />
-        </state>
+        <state line="22" column="42" selection-start="581" selection-end="581" vertical-scroll-proportion="0.5689655" vertical-offset="0" max-vertical-offset="580" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/calendar.js">
@@ -591,13 +617,6 @@
           <folding>
             <element signature="n#!!doc" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Caches/WebStorm7/extLibs/nodejs-v0.10.24-src/core-modules-sources/lib/events.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="0" selection-start="2753" selection-end="2753" vertical-scroll-proportion="0.33221477" vertical-offset="681" max-vertical-offset="4245">
-          <folding />
         </state>
       </provider>
     </entry>
@@ -610,96 +629,86 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/editAccount.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="19" selection-start="19" selection-end="19" vertical-scroll-proportion="-1.5100671" vertical-offset="450" max-vertical-offset="1125">
-          <folding />
-        </state>
+        <state line="0" column="19" selection-start="19" selection-end="19" vertical-scroll-proportion="-1.5100671" vertical-offset="450" max-vertical-offset="1125" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/editAccount.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="29" selection-start="1036" selection-end="1036" vertical-scroll-proportion="-5.625" vertical-offset="195" max-vertical-offset="1950">
-          <folding>
-            <element signature="n#style#0;n#p#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
+        <state line="22" column="29" selection-start="1036" selection-end="1036" vertical-scroll-proportion="-5.625" vertical-offset="195" max-vertical-offset="1950" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="62" selection-start="762" selection-end="762" vertical-scroll-proportion="0.6598241" vertical-offset="0" max-vertical-offset="1065">
-          <folding />
-        </state>
+        <state line="15" column="62" selection-start="762" selection-end="762" vertical-scroll-proportion="0.6598241" vertical-offset="0" max-vertical-offset="1065" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/home.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="134" column="0" selection-start="5008" selection-end="5008" vertical-scroll-proportion="0.61904764" vertical-offset="1815" max-vertical-offset="3855">
           <folding>
-            <element signature="n#style#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/advanced.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="21" selection-start="836" selection-end="836" vertical-scroll-proportion="0.3968254" vertical-offset="0" max-vertical-offset="1305">
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="n#!!block;n#permutate#0" expanded="false" />
-            <element signature="e#638#814#0" expanded="false" />
-            <element signature="n#!!block;n#genPermutation#0" expanded="false" />
-            <element signature="e#1202#1346#0" expanded="false" />
-            <element signature="n#!!block;n#timeConflict#0" expanded="false" />
-          </folding>
+        <state line="35" column="21" selection-start="836" selection-end="836" vertical-scroll-proportion="0.3968254" vertical-offset="0" max-vertical-offset="1305" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/dbconnect.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="3" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/express/lib/router/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="171" column="0" selection-start="3765" selection-end="3765" vertical-scroll-proportion="0.0" vertical-offset="2466" max-vertical-offset="4905" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/cheerio/lib/api/css.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="17" selection-start="134" selection-end="134" vertical-scroll-proportion="0.25083613" vertical-offset="0" max-vertical-offset="1860" />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Caches/WebStorm7/extLibs/nodejs-v0.10.24-src/core-modules-sources/lib/events.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="71" column="0" selection-start="2753" selection-end="2753" vertical-scroll-proportion="0.33110368" vertical-offset="681" max-vertical-offset="4245">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/trigger_ztx.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="25" selection-start="543" selection-end="543" vertical-scroll-proportion="0.515873" vertical-offset="135" max-vertical-offset="870">
-          <folding>
-            <element signature="e#913#1089#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/dbconnect.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="3" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/express/lib/router/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="171" column="0" selection-start="3765" selection-end="3765" vertical-scroll-proportion="0.0" vertical-offset="2466" max-vertical-offset="4905">
+        <state line="65" column="3" selection-start="1589" selection-end="1589" vertical-scroll-proportion="0.94827586" vertical-offset="425" max-vertical-offset="1065">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/trigger.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="0" selection-start="1105" selection-end="1105" vertical-scroll-proportion="0.41379312" vertical-offset="0" max-vertical-offset="660">
-          <folding>
-            <element signature="e#275#1063#0" expanded="false" />
-          </folding>
+        <state line="1" column="20" selection-start="24" selection-end="24" vertical-scroll-proportion="0.02586207" vertical-offset="0" max-vertical-offset="1065">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="180" column="7" selection-start="5541" selection-end="5541" vertical-scroll-proportion="0.64285713" vertical-offset="46" max-vertical-offset="782">
+        <state line="407" column="35" selection-start="12192" selection-end="12192" vertical-scroll-proportion="0.47945204" vertical-offset="1115" max-vertical-offset="1815">
           <folding>
-            <element signature="e#168#361#0" expanded="false" />
-            <element signature="e#389#579#0" expanded="false" />
-            <element signature="e#623#1913#0" expanded="false" />
-            <element signature="e#1964#2998#0" expanded="false" />
-            <element signature="e#3045#4058#0" expanded="false" />
-            <element signature="e#4102#5539#0" expanded="false" />
-            <element signature="e#5583#6738#0" expanded="false" />
-            <element signature="e#6785#8392#0" expanded="false" />
-            <element signature="e#8444#9519#0" expanded="false" />
+            <element signature="e#459#649#0" expanded="false" />
+            <element signature="e#1756#2759#0" expanded="false" />
+            <element signature="e#2810#3880#0" expanded="false" />
+            <element signature="e#3927#4940#0" expanded="false" />
+            <element signature="e#4984#6445#0" expanded="false" />
+            <element signature="e#5514#6437#0" expanded="false" />
+            <element signature="e#6489#7668#0" expanded="false" />
+            <element signature="e#7715#9346#0" expanded="false" />
+            <element signature="e#9398#10462#0" expanded="false" />
+            <element signature="e#9830#10453#0" expanded="false" />
+            <element signature="e#10504#11756#0" expanded="false" />
+            <element signature="e#11408#11606#0" expanded="false" />
           </folding>
         </state>
       </provider>

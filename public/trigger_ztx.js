@@ -4,31 +4,40 @@
 
 
 var oururl="172.16.159.124";
+var courselist_json = [{"label":"CS 242"}];
+var lasttime = "";
 
 function requestcourse(){
     var searchvalue = document.getElementById('course_search').value;
-    $.ajax({
-        url: 'http://'+oururl+':2014/courseinfo',
-        dataType: 'json',
-        type: 'get',
-        data: {
-            'content': searchvalue.toUpperCase()
-        },
+    if(searchvalue!=lasttime){
+        $.ajax({
+            url: 'http://'+oururl+':2014/courseinfo',
+            dataType: 'json',
+            type: 'get',
+            data: {
+                'content': searchvalue.toUpperCase()
+            },
 
-        success: function (data, status,jqxhr) {
-            var courselist = data['courselist'];
+            success: function (data, status,jqxhr) {
+                var courselist = data['courselist'];
 
-            $( "#course_search" ).autocomplete(
-                {
-                    source: courselist
-                })
+                var jsonstr = JSON.stringify(courselist);
+                var new_jsonstr = jsonstr.replace(/"CourseID"/g, '"label"');
+                courselist_json = JSON.parse(new_jsonstr);
 
-        }
-        ,
-        error: function (err,status) {
-            alert("can't search course");
-        }
-    });
+                $( "#course_search" ).autocomplete(
+                    {
+                        source: courselist_json
+                    })
+
+            }
+            ,
+            error: function (err,status) {
+                alert("can't search course");
+            }
+        });
+        lasttime = searchvalue;
+    }
 
 
 }

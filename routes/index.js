@@ -3,6 +3,10 @@
  */
 var connfun = require("./dbconnect");
 var crypto = require('crypto');
+var request = require('request');
+var cheerio = require('cheerio');
+
+
 
 module.exports = function(app) {
     function encrypt(text){
@@ -19,44 +23,82 @@ module.exports = function(app) {
         return dec;
     }
 
+
+    app.get('/getallinfo', function (req, res) {
+        var obj = req.query;
+        var test = decrypt("097662d985ff7be99b6b4da6bf5767aa");
+        var conn = connfun.dbconn()
+        conn.connect();
+
+        var query_string = "select * from cs411horse_iCouSchelper.Users where Email =";
+        var encrpty_pwd = encrypt(obj.pwd)
+        query_string += "'"+obj.email+"' and Password='"+encrpty_pwd+"';";
+
+        conn.query(query_string,
+            function (err, result) {
+                // Neat!
+                if (err != null || result == null) {
+                    console.log(err);
+                }
+                else {
+
+                    if(result.length!=0){
+                        var resp = {};
+                        resp["name"] = result[0]["Name"];
+
+                        res.status(200).send(JSON.stringify(resp));
+
+                    }
+                    else{
+                        res.status(404).send("user doesn't exist!")
+                    }
+
+
+
+                }
+                conn.end();
+            });
+
+
+
+    });
+
     app.get('/login', function (req, res) {
         var obj = req.query;
         var test = decrypt("097662d985ff7be99b6b4da6bf5767aa");
         var conn = connfun.dbconn()
-        conn.connect(function (err) {
-            if (err == null) {
-                var query_string = "select * from cs411horse_iCouSchelper.Users where Email =";
-                var encrpty_pwd = encrypt(obj.pwd)
-                query_string += "'"+obj.email+"' and Password='"+encrpty_pwd+"';";
-                var query = conn.query(query_string,
-                    function (err, result) {
-                        // Neat!
-                        if (err != null || result == null) {
-                            console.log(err);
-                        }
-                        else {
+        conn.connect();
 
-                            if(result.length!=0){
-                                var resp = {};
-                                resp["name"] = result[0]["Name"];
+        var query_string = "select * from cs411horse_iCouSchelper.Users where Email =";
+        var encrpty_pwd = encrypt(obj.pwd)
+        query_string += "'"+obj.email+"' and Password='"+encrpty_pwd+"';";
 
-                                res.status(200).send(JSON.stringify(resp));
+        conn.query(query_string,
+            function (err, result) {
+                // Neat!
+                if (err != null || result == null) {
+                    console.log(err);
+                }
+                else {
 
-                            }
-                            else{
-                                res.status(404).send("user doesn't exist!")
-                            }
+                    if(result.length!=0){
+                        var resp = {};
+                        resp["name"] = result[0]["Name"];
 
+                        res.status(200).send(JSON.stringify(resp));
 
-                        }
-                    });
-            }
-            else {
-                console.log(err);
+                    }
+                    else{
+                        res.status(404).send("user doesn't exist!")
+                    }
 
 
-            }
+
+                }
+            conn.end();
         });
+
+
 
     });
 
@@ -84,6 +126,7 @@ module.exports = function(app) {
 
 
                         }
+                        conn.end();
                     });
             }
             else {
@@ -177,6 +220,7 @@ module.exports = function(app) {
 
 
             }
+            conn.end();
         });
     });
 
@@ -214,6 +258,7 @@ module.exports = function(app) {
 
 
             }
+            conn.end();
         });
     });
 
@@ -262,6 +307,7 @@ module.exports = function(app) {
 
 
             }
+            conn.end();
         });
     });
 
@@ -301,25 +347,84 @@ module.exports = function(app) {
                 conn.end();
             });
 
-
-
-
-
-
-
-
-
-
-
-
     });
 
 
+    function checkavaliable(courseid){
+        var dep=courseid.split(" ");
+//        var url_str = "https://courses.illinois.edu/cisapp/dispatcher/schedule/2014/spring/CS/373";
+        var url_str = "https://courses.illinois.edu/cisapp/dispatcher/schedule/2014/spring/"+dep[0]+"/"+dep[1];
 
-    app.post('/addcourse',function(req,res){
-        var data = req.body;
 
+
+        request({
+            "uri": url_str
+        }, function(err, resp, body){
+            var $ = cheerio.load(body);
+
+            var sec_list = [];
+            var avab_list = [];
+            var i=1;
+            $('.table-item .w55').each(function(index,item){
+                if(index>=0)
+                {
+                    if(i%2!=0){
+                       var text=item.children[1].children[0].data;
+                       sec_list.push(text.trim().replace("\n",""));
+                    }
+                    i=i+1;
+
+                }
+            });
+
+            $('.table-item .w50 .fl-offScreen-hidden').each(function(index,item){
+
+                if(index>=0)
+                {
+                    var text=item.children[0].data;
+                    avab_list.push(text.replace("section ",""));
+                }
+            });
+
+            var result =[];
+            result.push(sec_list);
+            result.push(avab_list);
+            return result;
+
+
+        });
+
+    }
+    app.get('/addcourse',function(req,res){
+        var data = req.query;
         var conn = connfun.dbconn();
+        var courseid = "CS 473";
+        var query_string = "select Days,Section,Time,Type from cs411horse_iCouSchelper.webparser_slots where CourseID= '"+courseid+"';"
+        conn.connect();
+
+        conn.query(query_string,
+            function (err, result) {
+                // Neat!
+                if (err != null ) {
+                    res.status(404).send("fail to extract course info!");
+                }
+                else {
+                    if(result>0){
+                        var result =checkavaliable(courseid);
+                        var dict_course={};
+                        dict_course[courseid] = result;
+                        res.status(200).send(JSON.stringify(dict_course));
+
+
+                    }
+                    else{
+                        res.status(200).send("no info for this course!");
+                    }
+
+
+                }
+                conn.end();
+            });
     });
 
 
