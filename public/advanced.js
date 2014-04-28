@@ -5,16 +5,42 @@ function Course(crn, time, days, type) {
     this.type = type
 }
 
-var a = new Course(1, "10:00 AM - 10:50 AM", "MWF", "Lec")
-var b = new Course(2, "01:00 PM - 01:50 PM\n02:00 PM - 02:50 PM", "M\nM", "Discussion/Recitation\nLaboratory")
-var c = new Course(3, "02:00 PM - 02:50 PM\n03:00 PM - 03:50 PM", "M\nM", "Discussion/Recitation\nLaboratory")
-var courses = []
-courses.push(a)
-courses.push(b)
-courses.push(c)
-permutate(courses)
+// var a = new Course(1, "10:00 AM - 10:50 AM", "MWF", "Lec")
+// var b = new Course(2, "01:00 PM - 01:50 PM\n02:00 PM - 02:50 PM", "M\nM", "Discussion/Recitation\nLaboratory")
+// var c = new Course(3, "02:00 PM - 02:50 PM\n03:00 PM - 03:50 PM", "M\nM", "Discussion/Recitation\nLaboratory")
+// var e = [Course1, Course2, Course3]
+// var d = e[0].sections
+// var f = e[1].sections
+// d[0] = a
+// d[1] = b
+// d[2] = c
+var a = {crn:"1", time:"10:00 AM - 10:50 AM", day:"MWF", type:"Lec", availbility:"open"}
+var b = {crn:"2", time:"01:00 PM - 01:50 PM\n02:00 PM - 02:50 PM", day:"M\nM", type:"Discussion/Recitation\nLaboratory", availbility:"open"}
+var c = {crn:"3", time:"02:00 PM - 02:50 PM\n03:00 PM - 03:50 PM", day:"M\nM", type:"Discussion/Recitation\nLaboratory", availbility:"open"}
+var cs411 = []
+cs411.push(a)
+cs411.push(b)
+cs411.push(c)
+var schedule1 = genClass(cs411)
+// console.log(schedule1)
+var d = {crn:"4", time:"11:00 AM - 11:50 AM", day:"MWF", type:"Lec", availbility:"open"}
+var e = {crn:"5", time:"03:00 PM - 04:50 PM", day:"M", type:"Discussion/Recitation", availbility:"open"}
+var f = {crn:"6", time:"05:00 PM - 06:50 PM", day:"M", type:"Discussion/Recitation", availbility:"open"}
+var cs421 = []
+cs421.push(d)
+cs421.push(e)
+cs421.push(f)
+var schedule2 = genClass(cs421)
+// console.log(schedule2)
+var final = genPermutation(schedule1, schedule2)
+// console.log()
+console.log(final)
 
-function permutate(CourseList) {
+/*
+ CourseList = list of sections
+ requires time, day, availbility attributes
+ */
+function genClass(CourseList) {
     // finds out different types and split into bins
     var type = {}
     for (var i=0; i<CourseList.length; i++)
@@ -26,84 +52,147 @@ function permutate(CourseList) {
         }
         type[Course.type].push(Course)
     }
-    var results = type[Object.keys(type)[0]]
+    // checks if there is atleast 1 of each type open
+    for (var o = 0; o < Object.keys(type).length; ++o)
+    {
+        var possible = false
+        var checkAvail = type[Object.keys(type)[o]]
+        // console.log(checkAvail.length)
+        for (var u = 0; u < checkAvail.length; ++u)
+        {
+            if((checkAvail[u].availbility).match(/OPEN/i))
+            {
+                // one of this type is open, check next type
+                possible = true
+            }
+        }
+        if (!possible)
+        {
+            return [[]]
+        }
+    }
+
+    var results = [type[Object.keys(type)[0]]]
+    // console.log(results)
     for (var j = 1; j < Object.keys(type).length; ++j)
     {
         //reset list to empty
         var tempSoln = []
         for(var l = 0; l < type[Object.keys(type)[j]].length; ++l)
         {
-            tempSoln.push(genPermutation(results, [type[Object.keys(type)[j]][l] ]))
+            var listPermutes = genPermutation(results, [[type[Object.keys(type)[j]][l] ]])
+            for (var p = 0; p < listPermutes.length; ++p)
+            {
+                // ignores permutations that are not available
+                var ignore = false
+                for (var y = 0; y < listPermutes[p].length; ++y)
+                {
+                    if (!listPermutes[p][y].availbility.match(/OPEN/i))
+                    {
+                        //ignore this permutation
+                        ignore = true
+                    }
+                }
+                // listPermutes[p]
+                if (!ignore)
+                {
+                    tempSoln.push(listPermutes[p])
+                }
+            }
+
         }
         // swap out list with permutated list
         results = tempSoln
     }
+    // console.log(results)
     return results
     // check and see if these permuataions intersect with schedule
 }
 
 /*
- soln is a list of permutations to try to add an elem to
- elem is an element(s) to add
+ requires atleast time, day attributes
+ soln is [[lec1, dis1],[lec1, dis2]]
+ add is [[elem1, elem2],[elem3, elem4]]
+ returns [[lec1, dis1, elem1,elem2], [lec1, dis1, elem3,elem4] ..... ]
  */
-function genPermutation(soln, elem){
+function genPermutation(soln, add){
+    // console.log(add)
+    // [[course1, lec1],[course1, lec2]]
     var permutations = []
     if (soln.length == 0)
     {
-        return elem
+        return add
     }
-    if (elem.length == 0)
+    if (add.length == 0)
     {
         return soln
     }
     for (var i = 0; i < soln.length; ++i)
     {
-        for (var j = 0; j < elem.length; ++j)
+        for (var j = 0; j < add.length; ++j)
         {
-            if (!timeConflict([soln[i]], elem[j]))
+            if (!timeConflict(soln[i], add[j]))
             {
-                console.log(soln[i])
-                console.log(elem[j])
-
-                permutations.push([soln[i]].push(elem[j]))
-                console.log(permutations)
+                var deep = []
+                for (var l = 0; l < soln[i].length; ++l)
+                {
+                    deep.push(soln[i][l])
+                }
+                for (var k = 0; k < add[j].length; ++k)
+                {
+                    deep.push(add[j][k])
+                }
+                permutations.push(deep)
+                // console.log(deep)
             }
         }
+
     }
+    // console.log(permutations)
     return permutations
 }
 
 
 /*
- [event1, event2...], event
- List is a list of events known to not have conflicts
- elem is a event to check if we have a time conflict or not
+ schedule = [event1, event2...]
+ schedule is a list of events known to not have conflicts
+ addlist = [event, event, event]
+ addlist is a list of event to check if we have a time conflict or not
+
  one crn might have more than 1 slot (block classes/schedules)
  */
-function timeConflict(List, elem){
-    if (List.length == 0)
+function timeConflict(schedule, addlist){
+    // console.log(schedule)
+    if (schedule.length == 0)
     {
         return false
     }
-    var elemDays = elem.days.split("\n")
-    var elemTime = elem.time.split("\n")
-    for (var i = 0; i < elemDays.length; ++i)
+    if (addlist.length == 0)
     {
-        if (elemDays[i] != "n.a." && elemTime[i] != "ARRANGED")
+        return false
+    }
+    for (var l = 0; l < addlist.length; ++l)
+    {
+        var elemDays = addlist[l].day.split("\n")
+        var elemTime = addlist[l].time.split("\n")
+        for (var i = 0; i < elemDays.length; ++i)
         {
-            for (var j = 0; j < List.length; ++j)
+            if (elemDays[i] != "n.a." && elemTime[i] != "ARRANGED")
             {
-                var listDays = List[j].days.split("\n")
-                var listTime = List[j].time.split("\n")
-                for (var k = 0; k < listDays.length; ++k)
+                for (var j = 0; j < schedule.length; ++j)
                 {
-                    if (listDays[k] != "n.a." && listTime[k] != "ARRANGED")
+                    var listDays = schedule[j].day.split("\n")
+                    var listTime = schedule[j].time.split("\n")
+                    for (var k = 0; k < listDays.length; ++k)
                     {
-                        if (isSameDays(elemDays[i], listDays[k]))
+                        if (listDays[k] != "n.a." && listTime[k] != "ARRANGED")
                         {
-                            if (isSameTime(elemTime[i], listTime[k]))
+                            if (isSameDays(elemDays[i], listDays[k]))
                             {
-                                return true
+                                if (isSameTime(elemTime[i], listTime[k]))
+                                {
+                                    return true
+                                }
                             }
                         }
                     }
