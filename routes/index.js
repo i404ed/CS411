@@ -350,10 +350,10 @@ module.exports = function(app) {
     });
 
 
-    function checkavaliable(courseid){
+    function checkavaliable(courseid,query_result,res){
         var dep=courseid.split(" ");
 //        var url_str = "https://courses.illinois.edu/cisapp/dispatcher/schedule/2014/spring/CS/373";
-        var url_str = "https://courses.illinois.edu/cisapp/dispatcher/schedule/2014/spring/"+dep[0]+"/"+dep[1];
+        var url_str = "https://courses.illinois.edu/cisapp/dispatcher/schedule/2014/fall/"+dep[0]+"/"+dep[1];
 
 
 
@@ -386,10 +386,28 @@ module.exports = function(app) {
                 }
             });
 
-            var result =[];
-            result.push(sec_list);
-            result.push(avab_list);
-            return result;
+
+            var samplecoursedetail = {
+                "CourseID":"cs411",
+                "Sections": [
+                    {"Section" : "AL1", "CRN" : "2", "Time" : "01:00 PM - 01:50 PM\n02:00 PM - 02:50 PM", "Days":"M\nM", "Type":"Discussion/Recitation\nLaboratory", "Availability" : "close"},
+                    {"Section" : "AL2", "CRN" : "3", "Time" : "01:00 PM - 01:50 PM\n02:00 PM - 02:50 PM", "Days":"M\nM", "Type":"Discussion/Recitation\nLaboratory", "Availability" : "close"},
+                    {"Section" : "AL3", "CRN" : "4", "Time" : "01:00 PM - 01:50 PM\n02:00 PM - 02:50 PM", "Days":"M\nM", "Type":"Discussion/Recitation\nLaboratory", "Availability" : "close"}
+                ]
+            };
+
+            for(var i=0;i<query_result.length;i++){
+               for (var j=0; j<sec_list.length; j++){
+                   if(query_result[i]["Section"]==sec_list[j]){
+                       query_result[i]["Availability"]=avab_list[j];
+
+                   }
+               }
+            }
+            var dict_course={};
+            dict_course["CourseID"]=courseid;
+            dict_course["Sections"]=query_result;
+            res.status(200).send(JSON.stringify(dict_course));
 
 
         });
@@ -398,7 +416,7 @@ module.exports = function(app) {
     app.get('/addcourse',function(req,res){
         var data = req.query;
         var conn = connfun.dbconn();
-        var courseid = "CS 473";
+        var courseid = data['content'];
         var query_string = "select Days,Section,Time,Type from cs411horse_iCouSchelper.webparser_slots where CourseID= '"+courseid+"';"
         conn.connect();
 
@@ -409,11 +427,9 @@ module.exports = function(app) {
                     res.status(404).send("fail to extract course info!");
                 }
                 else {
-                    if(result>0){
-                        var result =checkavaliable(courseid);
-                        var dict_course={};
-                        dict_course[courseid] = result;
-                        res.status(200).send(JSON.stringify(dict_course));
+                    if(result.length>0){
+                        var result =checkavaliable(courseid,result,res);
+
 
 
                     }

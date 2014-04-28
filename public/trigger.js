@@ -12,7 +12,7 @@ var samplecoursedetail = {
         "Sections": [
             {"Section" : "AL1", "CRN" : "2", "Time" : "01:00 PM - 01:50 PM\n02:00 PM - 02:50 PM", "Days":"M\nM", "Type":"Discussion/Recitation\nLaboratory", "Availability" : "close"},
             {"Section" : "AL2", "CRN" : "3", "Time" : "01:00 PM - 01:50 PM\n02:00 PM - 02:50 PM", "Days":"M\nM", "Type":"Discussion/Recitation\nLaboratory", "Availability" : "close"},
-            {"Section" : "AL3", "CRN" : "4", "Time" : "01:00 PM - 01:50 PM\n02:00 PM - 02:50 PM", "Days":"M\nM", "Type":"Discussion/Recitation\nLaboratory", "Availability" : "close"},
+            {"Section" : "AL3", "CRN" : "4", "Time" : "01:00 PM - 01:50 PM\n02:00 PM - 02:50 PM", "Days":"M\nM", "Type":"Discussion/Recitation\nLaboratory", "Availability" : "close"}
         ]
 };
 
@@ -21,7 +21,7 @@ var samplecoursedetail2 = {
         "Sections": [
             {"Section" : "AL4", "CRN" : "5", "Time" : "01:00 PM - 01:50 PM\n02:00 PM - 02:50 PM", "Days":"M\nM", "Type":"Discussion/Recitation\nLaboratory", "Availability" : "close"},
             {"Section" : "AL5", "CRN" : "6", "Time" : "01:00 PM - 01:50 PM\n02:00 PM - 02:50 PM", "Days":"M\nM", "Type":"Discussion/Recitation\nLaboratory", "Availability" : "close"},
-            {"Section" : "AL6", "CRN" : "7", "Time" : "01:00 PM - 01:50 PM\n02:00 PM - 02:50 PM", "Days":"M\nM", "Type":"Discussion/Recitation\nLaboratory", "Availability" : "close"},
+            {"Section" : "AL6", "CRN" : "7", "Time" : "01:00 PM - 01:50 PM\n02:00 PM - 02:50 PM", "Days":"M\nM", "Type":"Discussion/Recitation\nLaboratory", "Availability" : "close"}
         ]
 };
 
@@ -89,7 +89,7 @@ $(document).ready(function () {
 
     });
     $(document).on('click', "#add_course_button",function() {
-        inputvalue = $( '#course_search').value;
+        inputvalue = $( '#course_search')[0].value;
         var found = false;
         for(var i = 0; i<courselist_json.length; i++ ){
             if (courselist_json[i].label == inputvalue){
@@ -101,7 +101,7 @@ $(document).ready(function () {
         if (found == true){
 
             $.ajax({
-                url: 'http://'+oururl+':2014/courseinfo',
+                url: 'http://'+oururl+':2014/addcourse',
                 dataType: 'json',
                 type: 'get',
                 data: {
@@ -109,7 +109,23 @@ $(document).ready(function () {
                 },
 
                 success: function (data, status,jqxhr) {
-                    
+                    course_obj = data;
+
+                    selectedcourses.push(course_obj);
+
+                    var courseid = course_obj["CourseID"];
+                    var sections = course_obj.Sections;
+                    var currhtml = '<li id =' + courseid + '> <h5>' + courseid +'</h5>';
+                    currhtml += '<button type="button" class = "coursedelete" id = '+ courseid + '_deletebutton' +'>Delete</button>';
+
+                    currhtml += '<table style="width:100%;" class = "section_table" id ='+ courseid + '_table>' ;
+                    for (var i = 0; i < sections.length; i++) {
+                        currhtml += '<tr class = "coursedeletess" id ='+ sections[i].Section +'><td>' + sections[i].Section + '</td><td>' + sections[i].Days.replace("\n","/") + '</td><td>'+ sections[i].Time.replace("\n","/") + '</td><td>'+ sections[i].Availability + '</td></tr>';
+                    }
+                    currhtml += '</table>';
+                    currhtml += '</li>';
+                    $("#course_detail_list").append(currhtml);
+
                 }
                 ,
                 error: function (err,status) {
