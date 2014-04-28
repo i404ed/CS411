@@ -65,32 +65,60 @@
 			});
 		</script>
 		
-		<style>
-        .left_container{ width:25%; background-color:#DDDDDD;  height:800px; float:left; padding: 20px}                     
+        <style>
+        .left_container{ width:25%; background-color:#DDDDDD;  height:800px; float:left; padding: 0px}                      
         .middle_container{ width:75%; background-color:White; float:left; height:800px; }                       
         .right_container{ width:0%; background-color:#DDDDDD; float:left; height:800px; }                       
         .header{ background-color:White; width:100%; height:80px;}  
 
-		.hide_left{
-			width: 0%;
-			overflow:hidden;
-		}
+        .hide_left{
+            width: 0%;
+            padding: 0;
+            overflow:hidden;
+        }
 
-		.show_right{
-			width: 25%;
-			overflow:hidden;
-		}
+        .show_right{
+            width: 25%;
+            overflow:hidden;
+        }
 
-		#calendar {
-		    width: 75%;
-		    margin: 0 auto;
-		    margin-top: 70px;
-	    }
+        #calendar {
+            width: 75%;
+            margin: 0 auto;
+            margin-top: 70px;
+        }
 
-	    #arrow_div{
-	    	position: fixed; top: 50%; right: 1%;
-	    }
-		</style>
+        #arrow_div{
+            position: fixed; top: 50%; right: 1%;
+        }
+
+        #course_detail_list{
+            margin:0;
+            padding:10px;
+        }
+
+        #course_detail_list li{
+            border-top: 1px solid #757575;
+            list-style: none;
+            margin:0;
+            padding:0;
+        }
+        .ui-autocomplete { max-height: 200px; overflow-y: scroll; overflow-x: hidden;}
+
+        #course_detail_list li h5{
+            display: inline-block;
+        }
+
+        .coursedelete{
+            margin-left: 150px;
+        }
+        .section_table td{
+            white-space : wrap;
+            font-size: 13px;
+            padding: 5px;
+        }
+
+        </style>
 
     </head>
     
@@ -128,17 +156,20 @@
 	</div>
 
 
-	<div class=left_container>
-        <label for="course_search" class="col-md-2 control-label" style = "text-align: left; margin-right: 40px" >Course: </label>
-        <input class="form-control" type="text" id="course_search" style = "width: 50%;" onkeyup="requestcourse()"/>
-	</div>
+    <div class=left_container>
+        <div id = "search_div" style = "margin-bottom: 30px;">
+            <label for="course_search" class="col-md-2 control-label" style = "text-align: left; margin-right: 40px; line-height:33px">Course: </label>
+            <input class="form-control" type="text" id="course_search" style = "width: 40%; display: inline-block"/>
+            <button type="button" class="btn btn-primary btn-sm" id ="add_course_button">Add</button>
 
-	<div class=middle_container>
-        <!--
-        <div id= "arrow_div">
-        To See Events<span class="glyphicon glyphicon-chevron-right"></span>
         </div>
-        -->
+        <ul id = "course_detail_list"></ul>
+        <button type="button" class="btn btn-primary" id ="generate" style = "margin: 0px auto; text-align: center; display: block;">Generate Schedule</button>
+
+
+    </div>
+
+    <div class=middle_container>
 
         <div id='calendar'></div>
 
