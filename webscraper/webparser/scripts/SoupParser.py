@@ -1,5 +1,4 @@
 from webparser import models
-from webparser.scripts import DataStruct
 
 __author__ = 'hcao7'
 import re
@@ -33,8 +32,6 @@ class Parser:
             f.close()
         elif mode == 1:
             data = urllib2.urlopen(src).read()
-            # r = requests.get(src)
-            # data = r.text
             self.soup = BeautifulSoup(data, "lxml")
         else:
             print "mode has to be a .html file or a URL"
@@ -191,7 +188,6 @@ class Parser:
             print "Processing Course Data:"
             # gets all Course2Group tuples
             course2id_entries = models.Course2Group.objects.all()
-
             # finds current course's GroupID if course is in the list
             # might as well calculate the max too
             currID = 0
@@ -201,7 +197,7 @@ class Parser:
                     maxID = tuples.GroupID
                 if tuples.CourseID == title_text:
                     currID = tuples.GroupID
-                    # should not have more than one occurance since CourseID is a key
+                    # should not have more than one occurrence since CourseID is a key
                     # continue running to let maxID do its thing even though it does nothing
             # list is empty OR course is not in the list.
             # increase max, set cur to max for unique ID
@@ -211,21 +207,38 @@ class Parser:
             # increase max again for next unique number
             maxID += 1
             # make/update the tuple and save
-            course2id_model, course2id_bool = models.Course2Group.objects.get_or_create(
-                CourseID=title_text, defaults={'GroupID': currID})
+            try:
+                course2id_model, course2id_bool = models.Course2Group.objects.get_or_create(
+                    CourseID=title_text)
+                # course2id_model, course2id_bool = models.Course2Group.objects.get_or_create(
+                #     CourseID=title_text, defaults={'GroupID': currID})
+            except:
+                print "failed to get max group2id " + title_text
             # override and save
-            course2id_model.GroupID = currID
-            course2id_model.save()
+            try:
+                course2id_model.GroupID = currID
+                course2id_model.save()
+            except:
+                print "failed to save max group2id " + title_text
             # make/update the tuple and save
-            course_model, course_bool = models.Course.objects.get_or_create(
-                CourseID=title_text, defaults={'CourseName': course_text, 'Description': description_text,
-                          'SameAS': find_sameas, 'PreReq': find_prereq})
-            course_model.CourseName = course_text
-            course_model.Description = description_text
-            course_model.SameAS = find_sameas
-            course_model.PreReq = find_prereq
-            # override and save
-            course_model.save()
+            try:
+                course_model, course_bool = models.Course.objects.get_or_create(
+                    CourseID=title_text)
+                # course_model, course_bool = models.Course.objects.get_or_create(
+                #     CourseID=title_text, defaults={'CourseName': course_text, 'Description': description_text,
+                #               'SameAS': find_sameas, 'PreReq': find_prereq})
+            except:
+                print "failed to get course " + title_text
+
+            try:
+                course_model.CourseName = course_text
+                course_model.Description = description_text
+                course_model.SameAS = find_sameas
+                course_model.PreReq = find_prereq
+                # override and save
+                course_model.save()
+            except:
+                print "failed to save course " + title_text
 
             # print course_obj.title
             # print course_obj.course
@@ -243,14 +256,21 @@ class Parser:
             for blocks in xrange(len(split)):
                 if blocks % 2 == 1:
                     for tuples in course2id_entries:
-                        course2id_model, course2id_bool = models.Course2Group.objects.get_or_create(
-                            CourseID=split[blocks], defaults={'GroupID': currID})
-                        course2id_model.GroupID = currID
-                        # override and save
-                        course2id_model.save()
+                        try:
+                            course2id_model, course2id_bool = models.Course2Group.objects.get_or_create(
+                                CourseID=split[blocks])
+                            # course2id_model, course2id_bool = models.Course2Group.objects.get_or_create(
+                            #     CourseID=split[blocks], defaults={'GroupID': currID})
+                        except:
+                            print "failed to get sameas course2id " + split[blocks]
+                        try:
+                            course2id_model.GroupID = currID
+                            # override and save
+                            course2id_model.save()
+                        except:
+                            print "failed to save sameas course2id " + split[blocks]
 
-            print "Processing Course Data: COMPLETED"
-            # prerequisite too complex. cs357: Prereqs are A or B; C. A and B are not cross listed (same as)
+                        # prerequisite too complex. cs357: Prereqs are A or B; C. A and B are not cross listed (same as)
             # # get new copy of course2group
             # all_entries = models.Course2Group.objects.all()
             # # find_prereq
@@ -263,7 +283,7 @@ class Parser:
             #                 prereqID = tuples.GroupID
             #         # split[blocks] was not in the all entries table
             #         # if prereqID == 0:
-
+            print "Processing Course Data: COMPLETED"
         except:
             # no course, no point getting slots
             return
@@ -348,27 +368,33 @@ class Parser:
                 # deciphering ends here
 
                 print "Processing Section Information Data"
-                # section_obj = DataStruct.Section(crn_text, type_text, section_text, time_text, day_text, location_text,
-                #                                  instructor_text, detail_text)
-                section_model, section_bool = models.Slots.objects.get_or_create(
-                    CRN=crn_text, defaults={'Type': type_text, 'Time': time_text, 'Section': section_text,
-                    'Days': day_text, 'Location': location_text, 'Professor': instructor_text, 'CourseID': title_text})
-                section_model.Type = type_text
-                section_model.Time = time_text
-                section_model.Section = section_text
-                section_model.Days = day_text
-                section_model.Location = location_text
-                section_model.Professor = instructor_text
-                section_model.CourseID = title_text
+                try:
+                    # section_model, section_bool = models.Slots.objects.get_or_create(
+                    #     CRN=crn_text, defaults={'Type': type_text, 'Time': time_text, 'Section': section_text,
+                    #     'Days': day_text, 'Location': location_text, 'Professor': instructor_text, 'CourseID': title_text})
+                    section_model, section_bool = models.Slots.objects.get_or_create(
+                        CRN=crn_text)
+                except:
+                    print "failed to get section " + crn_text
                 # override
-                section_model.save()
-                # print "CRN: " + section_obj.crn
-                # print "Type: " + section_obj.type
-                # print "Section: " + section_obj.section
-                # print "Time: " + section_obj.time
-                # print "Day: " + section_obj.day
-                # print "Location: " + section_obj.location
-                # print "Instructor: " + section_obj.instructor
+                try:
+                    section_model.Type = type_text
+                    section_model.Time = time_text
+                    section_model.Section = section_text
+                    section_model.Days = day_text
+                    section_model.Location = location_text
+                    section_model.Professor = instructor_text
+                    section_model.CourseID = title_text
+                    section_model.save()
+                except:
+                    # print "CRN: " + crn_text
+                    # print "Type: " + type_text
+                    # print "Section: " + section_text
+                    # print "Time: " + time_text
+                    # print "Day: " + day_text
+                    # print "Location: " + location_text
+                    # print "Instructor: " + instructor_text
+                    print "failed to save section " + crn_text
                 # print "CRN: " + crn_text
                 # print "Type: " + type_text
                 # print "Section: " + section_text
