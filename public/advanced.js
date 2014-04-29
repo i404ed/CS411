@@ -10,7 +10,26 @@
 //         ]
 //     }
 // ]
-// var json = processJSON(sampleharlenoutput)
+
+// var sampleharleninput2 = [
+//         {
+//         "CourseID":"cs411", 
+//         "Sections": [
+//             {"Section" : "AL1", "Time" : "01:00 PM - 01:50 PM\n02:00 PM - 02:50 PM", "Days":"M\nM", "Type":"Discussion/Recitation\nLaboratory", "Availability" : "open"},
+//             {"Section" : "AL2", "Time" : "01:00 PM - 01:50 PM\n02:00 PM - 02:50 PM", "Days":"M\nM", "Type":"Discussion/Recitation\nLaboratory", "Availability" : "open"},
+//             {"Section" : "AL3", "Time" : "01:00 PM - 01:50 PM\n02:00 PM - 02:50 PM", "Days":"M\nM", "Type":"Discussion/Recitation\nLaboratory", "Availability" : "open"},
+//         ]
+// },
+
+//         {
+//         "CourseID":"cs421", 
+//         "Sections": [
+//             {"Section" : "AL6", "Time" : "03:00 PM - 03:50 PM", "Days":"F", "Type":"Lecture", "Availability" : "open"},
+//             {"Section" : "AL5", "Time" : "10:00 AM - 01:50 PM", "Days":"TR", "Type":"Discussion/Recitation", "Availability" : "open"}
+//         ]
+// }
+// ];
+// var json = processJSON(sampleharleninput2)
 // console.log()
 // console.log(json)
 
@@ -88,9 +107,10 @@ function genClass(CourseList) {
 
     // initialize results as first type and start looping at +1
     // should not need that as genPermutation takes care of it
-    var results = [type[Object.keys(type)[0]]]
+    // var results = [type[Object.keys(type)[0]]]
+    var results = [[]]
     // console.log(results)
-    for (var j = 1; j < Object.keys(type).length; ++j)
+    for (var j = 0; j < Object.keys(type).length; ++j)
     {
         //reset list to empty
         var tempSoln = []
