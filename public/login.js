@@ -3,7 +3,7 @@ sessionStorage.setItem('email', "");
 sessionStorage.setItem('pwd', "");
 sessionStorage.setItem('name', "");
 
-
+var oururl="172.16.219.137";
 
 
 $('#signIn').click(function () {
@@ -14,7 +14,7 @@ $('#signIn').click(function () {
 
     var email = $('#inputEmail').val();
     var pwd = $('#inputPassword').val();
-    var oururl="172.16.159.124";
+
 
 
 

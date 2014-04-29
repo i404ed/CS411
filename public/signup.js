@@ -5,7 +5,7 @@
  * Created by ztx on 11/11/13.
  */
 
-var oururl="172.16.159.124";
+var oururl="172.16.219.137";
 
 $(function () {
 

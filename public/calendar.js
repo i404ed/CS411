@@ -2,9 +2,12 @@
 //var edate = null;
 //var edit_sdate = null;
 //var edit_edate = null;
+
+var oururl="172.16.219.137";
+
+
 var stimestamp = 1398026463;
 var etimestamp = stimestamp + (75 * 60);
-var oururl="172.16.159.124";
 var offset = (new Date()).getTimezoneOffset();
 var semester_start = (1408924800) + (offset*60);
 var semester_end = (1418212740) + (offset*60);
@@ -37,7 +40,7 @@ function AddEvent(title, StartDate, EndDate) {
                 start: StartDate,
                 end: EndDate,
                 allDay: false,
-                className : 'custom',
+                className : 'custom'
             }, true);
 
         }
@@ -59,7 +62,7 @@ function AddCourseEvent(title, StartDate, EndDate, id) {
         end: EndDate,
         allDay: false,
         className : 'custom',
-        eventtype: 'course',
+        eventtype: 'course'
     }, true);
 }
 
@@ -72,7 +75,7 @@ $(document).ready(function() {
             startView: 2,
             forceParse: 0,
             showMeridian: 1,
-            startDate: new Date(),
+            startDate: new Date()
         });
 });
 
@@ -255,7 +258,7 @@ $(document).ready(function() {
                     if (calEvent.start<calEvent.end){
 
                          $.ajax({
-                            url: 'http://'+oururl+':2014/add_event',
+                            url: 'http://'+oururl+':2014/editEvent',
                             dataType: 'json',
                             type: 'post',
                             data: {
@@ -280,33 +283,33 @@ $(document).ready(function() {
                         });
 
                     }
-                    else if (calEvent.start>calEvent.end){
+                    else {
                         alert("check the date!!");
                         calEvent.start = temp_sdate;
                         calEvent.end = temp_edate;
                     }
-                    else if (calEvent.start==calEvent.end && calEvent.start != null && calEvent.end != null){
-                        //delete
-
-                        $.ajax({
-                            url: 'http://'+oururl+':2014/add_event',
-                            dataType: 'json',
-                            type: 'post',
-                            data: {
-                                'id': calEvent.id,
-                                'email': sessionStorage.getItem('email')
-                            },
-                            success: function (data, status,jqxhr) {
-                                $('#calendar').fullCalendar('removeEvents', calEvent.id);
-                                location.reload();
-                            }
-                            ,
-                            error: function (err,status) {
-                               alert("can't delete event");
-                            }
-                        });
-                        
-                    }
+//                    else if (calEvent.start==calEvent.end && calEvent.start != null && calEvent.end != null){
+//                        //delete
+//
+//                        $.ajax({
+//                            url: 'http://'+oururl+':2014/delete_event',
+//                            dataType: 'json',
+//                            type: 'post',
+//                            data: {
+//                                'id': calEvent.id,
+//                                'email': sessionStorage.getItem('email')
+//                            },
+//                            success: function (data, status,jqxhr) {
+//                                $('#calendar').fullCalendar('removeEvents', calEvent.id);
+//                                location.reload();
+//                            }
+//                            ,
+//                            error: function (err,status) {
+//                               alert("can't delete event");
+//                            }
+//                        });
+//
+//                    }
                     
                 });
             }

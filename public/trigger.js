@@ -2,7 +2,7 @@
  * Created by ztx on 3/20/14.
  */
 
-var oururl="172.16.159.124";
+var oururl="172.16.219.137";
 var courselist_json = [{"label":"CS 242"}];
 var lasttime = "";
 var selectedcourses = [];

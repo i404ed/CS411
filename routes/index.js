@@ -283,6 +283,7 @@ module.exports = function(app) {
                         // Neat!
                         if (err != null || result == null) {
                             res.status(404).send("fail to add event!");
+                            conn.end();
                         }
                         else {
                             if(result.affectedRows>0){
@@ -291,11 +292,13 @@ module.exports = function(app) {
                                         var dict_event={};
                                         dict_event['eventid'] = result[0]['max(eventid)'];
                                         res.status(200).send(JSON.stringify(dict_event));
+                                        conn.end();
                                     });
 
                             }
                             else{
                                 res.status(404).send("fail to add event!");
+                                conn.end();
                             }
 
 
@@ -307,7 +310,58 @@ module.exports = function(app) {
 
 
             }
-            conn.end();
+
+        });
+    });
+    app.post('/editEvent',function(req,res){
+        var data = req.body;
+        var conn = connfun.dbconn();
+        var query_string ="";
+
+        if(data['start']==data['end']){
+            query_string = "delete * from cs411horse_iCouSchelper.Events where  Email='"+data['pkn']+"';"
+        }
+        else{
+             query_string = "update cs411horse_iCouSchelper.Events set Start='"+data['start'] +"', End='"+
+                data['end']+"', Title='"+data['title']+"' where Email='"+data['email']+"';";
+        }
+
+
+        conn.connect(function (err) {
+            if (err == null) {
+
+                var query = conn.query(query_string,
+                    function (err, result) {
+                        // Neat!
+                        if (err != null || result == null) {
+                            res.status(404).send("fail to edit event!");
+                            conn.end();
+                        }
+                        else {
+                            if(result.affectedRows>0){
+
+                                        var dict_event={};
+                                        dict_event['status'] = "success";
+                                        res.status(200).send(JSON.stringify(dict_event));
+                                        conn.end();
+
+
+                            }
+                            else{
+                                res.status(404).send("fail to edit event!");
+                                conn.end();
+                            }
+
+
+                        }
+                    });
+            }
+            else {
+                console.log(err);
+
+
+            }
+
         });
     });
 

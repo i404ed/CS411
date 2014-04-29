@@ -3,7 +3,7 @@
  */
 
 
-var oururl="172.16.159.124";
+var oururl="172.16.219.137";
 
 
 $(document).ready(function () {
