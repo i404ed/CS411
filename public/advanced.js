@@ -64,7 +64,8 @@ function processJSON(input){
         final = genPermutation(final,list[j])
     }
     // console.log(final)
-    return final
+    return final[Math.floor((Math.random()*final.length))]
+    // return final
 }
 
 /*
