@@ -1,58 +1,92 @@
-function Course(crn, time, days, type) {
-    this.crn = crn
-    this.time = time
-    this.days = days
-    this.type = type
-}
+// var sampleharlenoutput = [
+//     {"CourseID":"cs411",
+//         "Sections": [
+//             {"Section" : "AL1", "Time" : "01:00 PM - 01:50 PM\n02:00 PM - 02:50 PM", "Days":"M\nM", "Type":"Discussion/Recitation\nLaboratory", "Availability" : "open"}
+//         ]},
+//     {"CourseID":"cs421",
+//         "Sections": [
+//             {"Section" : "AL6", "Time" : "03:00 PM - 03:50 PM", "Days":"F", "Type":"Lecture", "Availability" : "open"},
+//             {"Section" : "AL5", "Time" : "10:00 AM - 01:50 PM", "Days":"TR", "Type":"Discussion/Recitation", "Availability" : "open"}
+//         ]
+//     }
+// ]
 
-// var a = new Course(1, "10:00 AM - 10:50 AM", "MWF", "Lec")
-// var b = new Course(2, "01:00 PM - 01:50 PM\n02:00 PM - 02:50 PM", "M\nM", "Discussion/Recitation\nLaboratory")
-// var c = new Course(3, "02:00 PM - 02:50 PM\n03:00 PM - 03:50 PM", "M\nM", "Discussion/Recitation\nLaboratory")
-// var e = [Course1, Course2, Course3]
-// var d = e[0].sections
-// var f = e[1].sections
-// d[0] = a
-// d[1] = b
-// d[2] = c
-var a = {crn:"1", time:"10:00 AM - 10:50 AM", day:"MWF", type:"Lec", availbility:"open"}
-var b = {crn:"2", time:"01:00 PM - 01:50 PM\n02:00 PM - 02:50 PM", day:"M\nM", type:"Discussion/Recitation\nLaboratory", availbility:"open"}
-var c = {crn:"3", time:"02:00 PM - 02:50 PM\n03:00 PM - 03:50 PM", day:"M\nM", type:"Discussion/Recitation\nLaboratory", availbility:"open"}
-var cs411 = []
-cs411.push(a)
-cs411.push(b)
-cs411.push(c)
-var schedule1 = genClass(cs411)
-// console.log(schedule1)
-var d = {crn:"4", time:"11:00 AM - 11:50 AM", day:"MWF", type:"Lec", availbility:"open"}
-var e = {crn:"5", time:"03:00 PM - 04:50 PM", day:"M", type:"Discussion/Recitation", availbility:"open"}
-var f = {crn:"6", time:"05:00 PM - 06:50 PM", day:"M", type:"Discussion/Recitation", availbility:"open"}
-var cs421 = []
-cs421.push(d)
-cs421.push(e)
-cs421.push(f)
-var schedule2 = genClass(cs421)
-// console.log(schedule2)
-var final = genPermutation(schedule1, schedule2)
+// var sampleharleninput2 = [
+//         {
+//         "CourseID":"cs411", 
+//         "Sections": [
+//             {"Section" : "AL1", "Time" : "01:00 PM - 01:50 PM\n02:00 PM - 02:50 PM", "Days":"M\nM", "Type":"Discussion/Recitation\nLaboratory", "Availability" : "open"},
+//             {"Section" : "AL2", "Time" : "01:00 PM - 01:50 PM\n02:00 PM - 02:50 PM", "Days":"M\nM", "Type":"Discussion/Recitation\nLaboratory", "Availability" : "open"},
+//             {"Section" : "AL3", "Time" : "01:00 PM - 01:50 PM\n02:00 PM - 02:50 PM", "Days":"M\nM", "Type":"Discussion/Recitation\nLaboratory", "Availability" : "open"},
+//         ]
+// },
+
+//         {
+//         "CourseID":"cs421", 
+//         "Sections": [
+//             {"Section" : "AL6", "Time" : "03:00 PM - 03:50 PM", "Days":"F", "Type":"Lecture", "Availability" : "open"},
+//             {"Section" : "AL5", "Time" : "10:00 AM - 01:50 PM", "Days":"TR", "Type":"Discussion/Recitation", "Availability" : "open"}
+//         ]
+// }
+// ];
+// var json = processJSON(sampleharleninput2)
 // console.log()
-console.log(final)
+// console.log(json)
+
+
+/*
+ input = list of courses [course1, course2,...]
+ */
+function processJSON(input){
+    var list = []
+    // generates the permutations within each class
+    for (var i = 0; i < input.length; ++i)
+    {
+        // add courseID field to section
+        for (var k = 0; k < input[i].Sections.length; ++k)
+        {
+            input[i].Sections[k]["CourseID"] = input[i].CourseID
+        }
+        var sections = genClass(input[i].Sections)
+        // console.log(sections)
+        list.push(sections)
+        // for (var j = 0; j < sections.length; ++j)
+        // {
+        //     input[j].Sections = sections
+        //     list.push(input[j])
+        // }
+    }
+    // console.log(list)
+
+    // combines the permutations from each class
+    var final = [[]]
+    for (var j = 0; j < list.length; ++j){
+        final = genPermutation(final,list[j])
+    }
+    // console.log(final)
+    return final[Math.floor((Math.random()*final.length))]
+    // return final
+}
 
 /*
  CourseList = list of sections
- requires time, day, availbility attributes
+ requires Time, Day, Availability attributes
+ generates permutations within a class
  */
 function genClass(CourseList) {
+    // console.log(CourseList)
     // finds out different types and split into bins
     var type = {}
     for (var i=0; i<CourseList.length; i++)
     {
         var Course = CourseList[i]
-        if (!(Course.type in type))
+        if (!(Course.Type in type))
         {
-            type[Course.type] = []
+            type[Course.Type] = []
         }
-        type[Course.type].push(Course)
+        type[Course.Type].push(Course)
     }
-    // checks if there is atleast 1 of each type open
+    // checks if there is atleast 1 of each Type open
     for (var o = 0; o < Object.keys(type).length; ++o)
     {
         var possible = false
@@ -60,9 +94,9 @@ function genClass(CourseList) {
         // console.log(checkAvail.length)
         for (var u = 0; u < checkAvail.length; ++u)
         {
-            if((checkAvail[u].availbility).match(/OPEN/i))
+            if((checkAvail[u].Availability).match(/OPEN/i))
             {
-                // one of this type is open, check next type
+                // one of this Type is open, check next Type
                 possible = true
             }
         }
@@ -72,9 +106,12 @@ function genClass(CourseList) {
         }
     }
 
-    var results = [type[Object.keys(type)[0]]]
+    // initialize results as first type and start looping at +1
+    // should not need that as genPermutation takes care of it
+    // var results = [type[Object.keys(type)[0]]]
+    var results = [[]]
     // console.log(results)
-    for (var j = 1; j < Object.keys(type).length; ++j)
+    for (var j = 0; j < Object.keys(type).length; ++j)
     {
         //reset list to empty
         var tempSoln = []
@@ -87,7 +124,7 @@ function genClass(CourseList) {
                 var ignore = false
                 for (var y = 0; y < listPermutes[p].length; ++y)
                 {
-                    if (!listPermutes[p][y].availbility.match(/OPEN/i))
+                    if (!listPermutes[p][y].Availability.match(/OPEN/i))
                     {
                         //ignore this permutation
                         ignore = true
@@ -110,7 +147,7 @@ function genClass(CourseList) {
 }
 
 /*
- requires atleast time, day attributes
+ requires Time, Day attributes
  soln is [[lec1, dis1],[lec1, dis2]]
  add is [[elem1, elem2],[elem3, elem4]]
  returns [[lec1, dis1, elem1,elem2], [lec1, dis1, elem3,elem4] ..... ]
@@ -154,11 +191,11 @@ function genPermutation(soln, add){
 
 
 /*
+ requires Time, Day, Availability attributes
  schedule = [event1, event2...]
  schedule is a list of events known to not have conflicts
  addlist = [event, event, event]
  addlist is a list of event to check if we have a time conflict or not
-
  one crn might have more than 1 slot (block classes/schedules)
  */
 function timeConflict(schedule, addlist){
@@ -173,16 +210,16 @@ function timeConflict(schedule, addlist){
     }
     for (var l = 0; l < addlist.length; ++l)
     {
-        var elemDays = addlist[l].day.split("\n")
-        var elemTime = addlist[l].time.split("\n")
+        var elemDays = addlist[l].Days.split("\n")
+        var elemTime = addlist[l].Time.split("\n")
         for (var i = 0; i < elemDays.length; ++i)
         {
             if (elemDays[i] != "n.a." && elemTime[i] != "ARRANGED")
             {
                 for (var j = 0; j < schedule.length; ++j)
                 {
-                    var listDays = schedule[j].day.split("\n")
-                    var listTime = schedule[j].time.split("\n")
+                    var listDays = schedule[j].Days.split("\n")
+                    var listTime = schedule[j].Time.split("\n")
                     for (var k = 0; k < listDays.length; ++k)
                     {
                         if (listDays[k] != "n.a." && listTime[k] != "ARRANGED")
@@ -204,7 +241,7 @@ function timeConflict(schedule, addlist){
 }
 
 /*
- Needs string format
+ Needs Day as string format
  "MTWRF"
  needle, the days to check
  haystack, the days to check against
@@ -223,7 +260,7 @@ function isSameDays(needleStr, haystackStr){
     return false
 }
 /*
- needs times as strings
+ needs Times as strings
  "02:00 PM - 03:50 PM"
  [1]:[2] [3] - [4]:[5] [6]
  /^ *(\d+):(\d+) *(AM|PM) *- *(\d+):(\d+) *(AM|PM)/i
