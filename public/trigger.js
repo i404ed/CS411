@@ -7,6 +7,9 @@ var courselist_json = [{"label":"CS 242"}];
 var lasttime = "";
 var selectedcourses = [];
 var selectedsections = [];
+var initial_event_list = [];
+var initial_course_list = [];
+
 var samplecoursedetail = {
         "CourseID":"cs411", 
         "Sections": [
@@ -78,6 +81,47 @@ function requestcourse(){
 
 $(document).ready(function () {
 
+    $.ajax({
+        url: 'http://'+oururl+':2014/getallinfo',
+        dataType: 'json',
+        type: 'get',
+        data: {
+            'email': sessionStorage.getItem('email')
+        },
+        success: function (data, status,jqxhr) {
+            initial_event_list = data['event'] ;
+            initial_course_list = data['course'];
+
+            for (var k = 0; k < initial_course_list.length; k++){
+                var courseid = initial_course_list[k].CourseID;
+                var section = initial_course_list[k].Section;
+                var days = initial_course_list[k].Days.replace("\n","/");
+                var time = initial_course_list[k].Time.replace("\n","/");
+                convert_time_add_calendar(courseid, section, days, time);
+                selectedsections.push(initial_course_list[k]);
+            }
+
+            for (var i = 0; i < initial_event_list.length; i++){
+
+                $('#calendar').fullCalendar('renderEvent', {
+                    id: initial_event_list[i].EventId,
+                    title: initial_event_list[i].Title,
+                    start: initial_event_list[i].Start,
+                    end: initial_event_list[i].End,
+                    allDay: false,
+                    className : 'user_event'
+                }, true);
+                AddEventList(initial_event_list[i].Title, initial_event_list[i].Start, initial_event_list[i].End, initial_event_list[i].EventId);
+            }
+
+        }
+        ,
+        error: function (err,status) {
+            alert("can't add event");
+        }
+    });
+
+
     var email = sessionStorage.getItem('email');
     var pwd = sessionStorage.getItem('pwd');
     var name = sessionStorage.getItem('name');
@@ -128,10 +172,10 @@ $(document).ready(function () {
 
                     var courseid = course_obj["CourseID"];
                     var sections = course_obj.Sections;
-                    var currhtml = '<li id =' + courseid + '> <h5>' + courseid +'</h5>';
-                    currhtml += '<button type="button" class = "coursedelete" id = '+ courseid + '_deletebutton' +'>Delete</button>';
+                    var currhtml = '<li id = ' + courseid.replace(" ", "_") + '_list'+ '> <h5>' + courseid +'</h5>';
+                    currhtml += '<button type="button" class = "coursedelete" id = '+ courseid.replace(" ", "_") + '_deletebutton' +'>Delete</button>';
 
-                    currhtml += '<table style="width:100%;" class = "section_table" id ='+ courseid + '_table>' ;
+                    currhtml += '<table style="width:100%;" class = "section_table" id ='+ courseid.replace(" ", "_") + '_table>' ;
                     for (var i = 0; i < sections.length; i++) {
                         currhtml += '<tr class = "coursedeletess" id ='+ sections[i].Section +'><td>' + sections[i].Section + '</td><td>' + sections[i].Days.replace("\n","/") + '</td><td>'+ sections[i].Time.replace("\n","/") + '</td><td>'+ sections[i].Availability + '</td></tr>';
                     }
@@ -154,8 +198,15 @@ $(document).ready(function () {
         //send to harlen
         //alert(selectedcourses);
         //send to ztx
-        
-        var genclass_output = processJSON(selectedcourses)[0];
+
+        for(var i=0; i<selectedsections.length; i++){
+            var currEventID = selectedsections[i].CourseID + " | " + selectedsections[i].Section;
+            $('#calendar').fullCalendar('removeEvents', currEventID);
+        }
+        selectedsections = [];
+
+
+        var genclass_output = processJSON(selectedcourses);
         
         for (var k = 0; k < genclass_output.length; k++){
             var courseid = genclass_output[k].CourseID;
@@ -208,7 +259,7 @@ $(document).ready(function () {
             }
             ,
             error: function (err,status) {
-               alert("can't add event");
+//               alert("can't add event");
             }
         });
     });
@@ -216,9 +267,9 @@ $(document).ready(function () {
     $(document).on('click', ".coursedelete",function() {
         var thisid = $(this).attr("id");
         var listelemid = thisid.replace('_deletebutton', '');
-        var listindex = $('#' + listelemid).index();
+        var listindex = $('#'+ listelemid + '_list').index();
         selectedcourses.splice(listindex, 1);
-        $('#' + listelemid).remove();
+        $('#'+ listelemid + '_list').remove();
     });
 
 });

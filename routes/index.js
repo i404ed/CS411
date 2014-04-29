@@ -26,37 +26,63 @@ module.exports = function(app) {
 
     app.get('/getallinfo', function (req, res) {
         var obj = req.query;
-        var test = decrypt("097662d985ff7be99b6b4da6bf5767aa");
-        var conn = connfun.dbconn()
+        var email = obj['email'];
+        var conn = connfun.dbconn();
         conn.connect();
 
-        var query_string = "select * from cs411horse_iCouSchelper.Users where Email =";
-        var encrpty_pwd = encrypt(obj.pwd)
-        query_string += "'"+obj.email+"' and Password='"+encrpty_pwd+"';";
+        var query_string_1 = "select * from cs411horse_iCouSchelper.Events where Email ='"+email+"';";
+        var query_string_2 = "select * from cs411horse_iCouSchelper.Taking where Email ='"+email+"';";
+        var resp = {};
 
-        conn.query(query_string,
+        conn.query(query_string_1,
             function (err, result) {
                 // Neat!
-                if (err != null || result == null) {
+                if (err != null ) {
                     console.log(err);
                 }
                 else {
-
                     if(result.length!=0){
-                        var resp = {};
-                        resp["name"] = result[0]["Name"];
-
-                        res.status(200).send(JSON.stringify(resp));
-
-                    }
-                    else{
-                        res.status(404).send("user doesn't exist!")
+                        resp["event"] = result;
                     }
 
 
+                        conn.query(query_string_2,
+                            function (err, result2) {
+                                // Neat!
+                                if (err != null) {
+                                    console.log(err);
 
-                }
+                                }
+                                else {
+
+                                    if(result2.length!=0){
+
+
+
+                                        resp["course"] = result2;
+
+
+
+                                    }
+                                    else{
+                                        res.status(404).send("user doesn't exist!");
+
+                                    }
+
+
+                                    res.status(200).send(JSON.stringify(resp));
+
+                                }
+
+                            });
+
+                    }
+
+
+
+
                 conn.end();
+
             });
 
 
@@ -157,6 +183,7 @@ module.exports = function(app) {
                         var dict_event={};
                         dict_event['courselist'] = result;
                         res.status(200).send(JSON.stringify(dict_event));
+
                     }
                     else{
                         var dict_event={};
@@ -497,6 +524,89 @@ module.exports = function(app) {
             });
     });
 
+
+    app.post('/add_',function(req,res){
+        var data = req.body;
+        var conn = connfun.dbconn();
+        var section=null;
+        var query_string_1 = "delete from cs411horse_iCouSchelper.Taking where Email='"+data['email']+"';";
+        var query_string = "insert into cs411horse_iCouSchelper.Taking(Email,CourseID,Days,Time,Section)  values ";
+        var section_list = data["sectionlists"];
+        for(var i in section_list){
+            query_string+="(";
+            section= new Array(
+                "'" + data['email'] + "'",
+                "'" + section_list[i]['CourseID'] + "'",
+                "'" + section_list[i]['Days'] + "'",
+                "'" + section_list[i]['Time'] + "'",
+                "'" + section_list[i]['Section'] + "'"
+
+            );
+            query_string+=section;
+            if(i < (section_list.length-1)){
+                query_string+="),";
+            }
+            else{
+                query_string+=")";
+            }
+
+        }
+
+       query_string+=";" ;
+
+        conn.connect();
+
+
+
+
+
+        conn.query(query_string_1,
+            function (err, result) {
+                // Neat!
+                if (err != null || result == null) {
+                    console.log(err);
+                }
+                else {
+
+
+
+                        conn.query(query_string,
+                            function (err, result2) {
+                                // Neat!
+                                if (err != null || result2 == null) {
+                                    console.log(err);
+                                    conn.end();
+                                }
+                                else {
+
+                                    if(result2.length!=0){
+
+                                        var dict_event={};
+                                        dict_event['status'] = "success";
+                                        res.status(200).send(JSON.stringify(dict_event));
+                                        conn.end();
+
+                                    }
+                                    else{
+                                        res.status(404).send("user doesn't exist!");
+                                        conn.end();
+                                    }
+
+
+
+                                }
+
+                            });
+
+                    }
+
+
+
+
+
+            });
+
+    });
 
 
 

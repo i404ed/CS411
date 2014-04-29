@@ -94,7 +94,7 @@ function genClass(CourseList) {
         // console.log(checkAvail.length)
         for (var u = 0; u < checkAvail.length; ++u)
         {
-            if((checkAvail[u].Availability).match(/OPEN/i))
+            if((checkAvail[u].Availability).match(/OPEN|"unknown availability"/i))
             {
                 // one of this Type is open, check next Type
                 possible = true

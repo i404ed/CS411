@@ -42,7 +42,7 @@ function AddEvent(title, StartDate, EndDate) {
                 start: StartDate,
                 end: EndDate,
                 allDay: false,
-                className : 'custom'
+                className : 'user_event'
             }, true);
             AddEventList(title, StartDate, EndDate, eventid);
         }
@@ -146,9 +146,9 @@ function formatDateString(date) {
   return strRes;
 }
 
-function AddEventList(title, StartDate, EndDate){
+function AddEventList(title, StartDate, EndDate, eventid){
 
-        var currhtml = '<li>';
+        var currhtml = '<li id=' + eventid + ' >';
         currhtml += '<h5>' + title + '</h5>' + '<p>' + formatDateString(new Date(StartDate*1000)) + '</p>' + '<p>' + formatDateString(new Date(EndDate*1000)) + '</p>';
         currhtml += '</li>';
         $("#event_list").append(currhtml);
@@ -165,10 +165,10 @@ $(document).ready(function() {
         var section = rowelem.cells[0].innerHTML;
         var days = rowelem.cells[1].innerHTML;
         var time = rowelem.cells[2].innerHTML;
-        alert(time);
+
         var tableid = (rowelem.parentNode.parentNode.id);
         var courseid = (tableid.replace("_table", ""));
-
+        courseid = courseid.replace("_", " ");
         convert_time_add_calendar(courseid, section, days, time);
         selectedsections.push({ Section: section, Time: time, Days: days, CourseID: courseid });
     });
@@ -222,20 +222,17 @@ $(document).ready(function() {
        eventClick: function(calEvent, jsEvent, view) {
 
             if(calEvent.eventtype === 'course'){
-                
-                var CourseID = ((calEvent.id).split(" | "))[0];
+
+                var CourseID = (((calEvent.id).split(" | "))[0]).replace("_", " ");
                 var Section = ((calEvent.id).split(" | "))[1];
-                alert(CourseID);
-                alert(Section);
+
                 $('#calendar').fullCalendar('removeEvents', calEvent.id);
             }
             else{
-        
-                alert(calEvent.start)
-                alert(calEvent.end)
+
                 edit_sdate = null;
                 edit_edate = null;
-
+                editingEvent = calEvent;
                 $("#edit_event_title").attr('value',calEvent.title);
 
                 jq = jQuery.noConflict();
@@ -250,19 +247,20 @@ $(document).ready(function() {
     $('#edit_startdate_field').datetimepicker().on('changeDate', function(ev){
         var offset = (new Date()).getTimezoneOffset();
         edit_sdate = (ev.date.valueOf()/1000) + (offset*60);
-        alert('ss');
+
     });
 
     $('#edit_enddate_field').datetimepicker().on('changeDate', function(ev){
         var offset = (new Date()).getTimezoneOffset();
         edit_edate = (ev.date.valueOf()/1000) + (offset*60);
-        alert('ss');
+
     });
 
     $('#edit_event_button').click(function() {
         
         temp_sdate = editingEvent.start;
         temp_edate = editingEvent.end;
+        editing_id = editingEvent.id;
        
         editingEvent.title = $('#edit_event_title').val();
         if (edit_sdate != null)
@@ -289,7 +287,7 @@ $(document).ready(function() {
                     $ = jQuery.noConflict();
                     $('#calendar').fullCalendar('updateEvent', editingEvent);
                     document.getElementById("edit_event_form").reset();
-                    document.getElementById(editing_id).innerHTML = '<h5>' + editingEvent.title + '</h5>' + '<p>' + formatDateString(new Date(editing_id.start*1000)) + '</p>' + '<p>' + formatDateString(new Date(editing_id.end*1000)) + '</p>';
+                    document.getElementById(editing_id).innerHTML = '<h5>' + editingEvent.title + '</h5>' + '<p>' + formatDateString(new Date(editingEvent.start*1000)) + '</p>' + '<p>' + formatDateString(new Date(editingEvent.end*1000)) + '</p>';
                 }
                 ,
                 error: function (err,status) {
