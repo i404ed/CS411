@@ -44,7 +44,7 @@ function AddEvent(title, StartDate, EndDate) {
                 allDay: false,
                 className : 'custom'
             }, true);
-
+            AddEventList(title, StartDate, EndDate, eventid);
         }
         ,
         error: function (err,status) {
@@ -289,6 +289,7 @@ $(document).ready(function() {
                     $ = jQuery.noConflict();
                     $('#calendar').fullCalendar('updateEvent', editingEvent);
                     document.getElementById("edit_event_form").reset();
+                    document.getElementById(editing_id).innerHTML = '<h5>' + editingEvent.title + '</h5>' + '<p>' + formatDateString(new Date(editing_id.start*1000)) + '</p>' + '<p>' + formatDateString(new Date(editing_id.end*1000)) + '</p>';
                 }
                 ,
                 error: function (err,status) {
