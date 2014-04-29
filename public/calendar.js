@@ -144,6 +144,7 @@ $(document).ready(function() {
         var courseid = (tableid.replace("_table", ""));
 
         convert_time_add_calendar(courseid, section, days, time);
+        selectedsections.push({ Section: section, Time: time, Days: days, CourseID: courseid });
     });
 
 

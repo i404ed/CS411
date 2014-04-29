@@ -6,6 +6,7 @@ var oururl="172.16.159.124";
 var courselist_json = [{"label":"CS 242"}];
 var lasttime = "";
 var selectedcourses = [];
+var selectedsections = [];
 var samplecoursedetail = {
         "CourseID":"cs411", 
         "Sections": [
@@ -150,17 +151,33 @@ $(document).ready(function () {
     });
 
     $(document).on('click', "#generate",function() {
-        //call harlen function
+        //send to harlen
+        //alert(selectedcourses);
         //send to ztx
+        
+        var genclass_output = processJSON(selectedcourses)[0];
+        
+        for (var k = 0; k < genclass_output.length; k++){
+            var courseid = genclass_output[k].CourseID;
+            var section = genclass_output[k].Section;
+            var days = genclass_output[k].Days.replace("\n","/");
+            var time = genclass_output[k].Time.replace("\n","/");
+            convert_time_add_calendar(courseid, section, days, time);
+            selectedsections.push(genclass_output[k]);
+        }
+        
+        
+        /*
+        alert(sampleharlenoutput.length);
         for (var k = 0; k < sampleharlenoutput.length; k++){
             var courseid = sampleharlenoutput[k].CourseID;
             var section = sampleharlenoutput[k].Section;
             var days = sampleharlenoutput[k].Days.replace("\n","/");
             var time = sampleharlenoutput[k].Time.replace("\n","/");
-            alert(time);
             convert_time_add_calendar(courseid, section, days, time);
+            selectedsections.push(sampleharlenoutput[k]);
         }
-
+        */
         /*
         for (var k = 0; k < sampleharlenoutput.length; k++){
             var courseid = sampleharlenoutput[k].CourseID;
@@ -176,6 +193,24 @@ $(document).ready(function () {
             }
         }
         */
+    });
+
+    $(document).on('click', "#confirm_schedule_btn",function() {
+        $.ajax({
+            url: 'http://'+oururl+':2014/add_',
+            dataType: 'json',
+            type: 'post',
+            data: {
+                'sectionlists': selectedsections,
+                'email': sessionStorage.getItem('email')
+            },
+            success: function (data, status,jqxhr) {
+            }
+            ,
+            error: function (err,status) {
+               alert("can't add event");
+            }
+        });
     });
 
     $(document).on('click', ".coursedelete",function() {
