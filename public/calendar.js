@@ -16,7 +16,9 @@ var first_tue = 26;
 var first_wed = 27;
 var first_thu = 28;
 var first_fri = 29;
-
+var sdate = null;
+var edate = null;
+var editingEvent = null;
 
 
 function AddEvent(title, StartDate, EndDate) {
@@ -132,6 +134,27 @@ function convert_time_add_calendar(courseid, section, days, time){
         }
 }
 
+function formatDateString(date) {
+  var datestr = date.toDateString();
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var ampm = hours >= 12 ? 'pm' : 'am';
+  hours = hours % 12;
+  hours = hours ? hours : 12; 
+  minutes = minutes < 10 ? '0'+minutes : minutes;
+  var strRes = datestr + " " + hours + ':' + minutes + ' ' + ampm;
+  return strRes;
+}
+
+function AddEventList(title, StartDate, EndDate){
+
+        var currhtml = '<li>';
+        currhtml += '<h5>' + title + '</h5>' + '<p>' + formatDateString(new Date(StartDate*1000)) + '</p>' + '<p>' + formatDateString(new Date(EndDate*1000)) + '</p>';
+        currhtml += '</li>';
+        $("#event_list").append(currhtml);
+
+}
+
 $(document).ready(function() {
     
     $(document).on('click', ".section_table tr",function() {
@@ -156,8 +179,6 @@ $(document).ready(function() {
     var m = date.getMonth();
     var y = date.getFullYear();
     $('#new_event_btn_2').click(function() {
-        sdate = null;
-        edate = null;
 
         $('#startdate_field').datetimepicker().on('changeDate', function(ev){
             var offset = (new Date()).getTimezoneOffset();
@@ -172,27 +193,15 @@ $(document).ready(function() {
         jq = jQuery.noConflict();
         $("#add_event_modal").modal('show');
         $ = jQuery.noConflict();
-        $('#add_event_button').click(function() {
-            var etitle = $('#event_title').val();
-            alert(etitle)
-            AddEvent(etitle, sdate, edate);
-            sdate = null;
-            edate = null;
-            document.getElementById("add_event_form").reset();
-        });
-
     });
 
-
-
-    $('#add_classes_button').click(function() {
-
-        for (var i=0;i<6;i++)
-        {
-            AddEvent('c',stimestamp,etimestamp);
-            etimestamp += (10080 * 60);
-            stimestamp += (10080 * 60);
-        }
+    $('#add_event_button').click(function() {
+        var etitle = $('#event_title').val();
+        AddEvent(etitle, sdate, edate);
+        document.getElementById("add_event_form").reset();
+        jq = jQuery.noConflict();
+        $("#add_event_modal").modal('hide');
+        $ = jQuery.noConflict();
     });
 
     $('#calendar').fullCalendar({
@@ -227,68 +236,72 @@ $(document).ready(function() {
                 edit_sdate = null;
                 edit_edate = null;
 
-                $('#edit_startdate_field').datetimepicker().on('changeDate', function(ev){
-                    var offset = (new Date()).getTimezoneOffset();
-                    edit_sdate = (ev.date.valueOf()/1000) + (offset*60);
-                    alert('ss');
-                });
-
-                $('#edit_enddate_field').datetimepicker().on('changeDate', function(ev){
-                    var offset = (new Date()).getTimezoneOffset();
-                    edit_edate = (ev.date.valueOf()/1000) + (offset*60);
-                    alert('ss');
-                });
-
                 $("#edit_event_title").attr('value',calEvent.title);
 
                 jq = jQuery.noConflict();
                 $("#edit_event_modal").modal('show');
                 $ = jQuery.noConflict();
 
-                $('#edit_event_button').click(function() {
-                    
-                    temp_sdate = calEvent.start;
-                    temp_edate = calEvent.end;
-                   
-                    calEvent.title = $('#edit_event_title').val();
-                    if (edit_sdate != null)
-                        calEvent.start = edit_sdate;
-                    if (edit_edate != null)
-                        calEvent.end = edit_edate;
 
-                    if (calEvent.start<calEvent.end){
+            }
+        }
+    });
 
-                         $.ajax({
-                            url: 'http://'+oururl+':2014/editEvent',
-                            dataType: 'json',
-                            type: 'post',
-                            data: {
-                                'id': calEvent.id,
-                                'title': calEvent.title,
-                                'start': calEvent.start,
-                                'end': calEvent.end,
-                                'email': sessionStorage.getItem('email')
-                            },
-                            success: function (data, status,jqxhr) {
-                                jq = jQuery.noConflict();
-                                $("#edit_event_modal").modal('hide');
-                                $ = jQuery.noConflict();
-                                $('#calendar').fullCalendar('updateEvent', calEvent);
-                                document.getElementById("edit_event_form").reset();
-                                location.reload();
-                            }
-                            ,
-                            error: function (err,status) {
-                               alert("can't edit event");
-                            }
-                        });
+    $('#edit_startdate_field').datetimepicker().on('changeDate', function(ev){
+        var offset = (new Date()).getTimezoneOffset();
+        edit_sdate = (ev.date.valueOf()/1000) + (offset*60);
+        alert('ss');
+    });
 
-                    }
-                    else {
-                        alert("check the date!!");
-                        calEvent.start = temp_sdate;
-                        calEvent.end = temp_edate;
-                    }
+    $('#edit_enddate_field').datetimepicker().on('changeDate', function(ev){
+        var offset = (new Date()).getTimezoneOffset();
+        edit_edate = (ev.date.valueOf()/1000) + (offset*60);
+        alert('ss');
+    });
+
+    $('#edit_event_button').click(function() {
+        
+        temp_sdate = editingEvent.start;
+        temp_edate = editingEvent.end;
+       
+        editingEvent.title = $('#edit_event_title').val();
+        if (edit_sdate != null)
+            editingEvent.start = edit_sdate;
+        if (edit_edate != null)
+            editingEvent.end = edit_edate;
+
+        if (editingEvent.start<=editingEvent.end){
+
+             $.ajax({
+                url: 'http://'+oururl+':2014/editEvent',
+                dataType: 'json',
+                type: 'post',
+                data: {
+                    'id': editingEvent.id,
+                    'title': editingEvent.title,
+                    'start': editingEvent.start,
+                    'end': editingEvent.end,
+                    'email': sessionStorage.getItem('email')
+                },
+                success: function (data, status,jqxhr) {
+                    jq = jQuery.noConflict();
+                    $("#edit_event_modal").modal('hide');
+                    $ = jQuery.noConflict();
+                    $('#calendar').fullCalendar('updateEvent', editingEvent);
+                    document.getElementById("edit_event_form").reset();
+                }
+                ,
+                error: function (err,status) {
+                   alert("can't edit event");
+                }
+            });
+
+        }
+        else {
+            alert("check the date!!");
+            calEvent.start = temp_sdate;
+            calEvent.end = temp_edate;
+        }
 //                    else if (calEvent.start==calEvent.end && calEvent.start != null && calEvent.end != null){
 //                        //delete
 //
@@ -311,11 +324,7 @@ $(document).ready(function() {
 //                        });
 //
 //                    }
-                    
-                });
-            }
-        }
-
+        
     });
 
 });
